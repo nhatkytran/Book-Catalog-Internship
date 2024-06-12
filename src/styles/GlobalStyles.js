@@ -1,5 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const px1200 = '75em';
+export const px1000 = '62.5em';
+export const px400 = '25em';
+/*
+  $bp-large: 68.75em;    // 1100px
+  $bp-medium: 56.25em;   // 900px
+  $bp-small: 37.5em;     // 600px
+  $bp-smallest: 31.25em; // 500px
+*/
+
 const GlobalStyles = createGlobalStyle`
   :root {
     &, &.light-mode {
@@ -31,11 +41,11 @@ const GlobalStyles = createGlobalStyle`
     --color-orange-950: #431407;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
+    --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.17);
+    --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.3);
     }
 
-    --width-main-layout: 110rem;
+    --width-main-layout: 120rem;
 
     --font-open-sans: 'Open Sans', monospace, sans-serif;
     --font-sono: Sono, monospace, sans-serif;
@@ -45,6 +55,8 @@ const GlobalStyles = createGlobalStyle`
     --border-radius-sm: 5px;
     --border-radius-md: 7px;
     --border-radius-lg: 9px;
+
+    --line: 1px solid var(--color-neutral-100);
   }
 
   *,
@@ -62,7 +74,9 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     min-height: 100vh;
-    background-color: var(--color-neutral-100);
+    background-image: linear-gradient(to right bottom, var(--color-orange-400), var(--color-orange-600));
+    background-size: cover;
+    background-repeat: no-repeat;
     color: var(--color-grey-800);
     font-family: var(--font-open-sans);
     font-size: 1.6rem;
