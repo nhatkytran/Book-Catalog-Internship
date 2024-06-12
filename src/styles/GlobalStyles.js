@@ -16,6 +16,19 @@ const GlobalStyles = createGlobalStyle`
     --color-neutral-700: #404040;
     --color-neutral-800: #262626;
     --color-neutral-900: #171717;
+    --color-neutral-950: #0a0a0a;
+
+    --color-orange-50: #fff7ed;
+    --color-orange-100: #ffedd5;
+    --color-orange-200: #fed7aa;
+    --color-orange-300: #fdba74;
+    --color-orange-400: #fb923c;
+    --color-orange-500: #f97316;
+    --color-orange-600: #ea580c;
+    --color-orange-700: #c2410c;
+    --color-orange-800: #9a3412;
+    --color-orange-900: #7c2d12;
+    --color-orange-950: #431407;
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
@@ -24,6 +37,7 @@ const GlobalStyles = createGlobalStyle`
 
     --width-main-layout: 110rem;
 
+    --font-open-sans: 'Open Sans', monospace, sans-serif;
     --font-sono: Sono, monospace, sans-serif;
     --font-poppins: Poppins, monospace, sans-serif;
     
@@ -50,7 +64,7 @@ const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     background-color: var(--color-neutral-100);
     color: var(--color-grey-800);
-    font-family: var(--font-poppins);
+    font-family: var(--font-open-sans);
     font-size: 1.6rem;
     line-height: 1.5;
     transition: color 0.3s, background-color 0.3s;
