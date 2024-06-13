@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { px1200 } from '~/styles/GlobalStyles';
+import { px1000, px1200 } from '~/styles/GlobalStyles';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
@@ -40,10 +40,17 @@ const StyledLayout = styled.div`
 
 const ContentUI = styled.div`
   display: flex;
+
+  @media only screen and (max-width: ${px1000}) {
+    flex-direction: column;
+  }
 `;
 
 const MainViewUI = styled.main`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: var(--color-white);
   min-height: 50rem;
 `;

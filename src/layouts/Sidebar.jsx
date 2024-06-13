@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillProduct } from 'react-icons/ai';
 
 import { px1000 } from '~/styles/GlobalStyles';
+import { LegalText } from '~/components';
 
 const navItems = [
   { link: '/', icon: AiFillHome, content: 'All books' },
@@ -18,16 +19,16 @@ function Sidebar() {
 
           return (
             <ItemUI key={index}>
-              <LinkUI to={link}>
+              <NavLinkUI to={link}>
                 <Icon />
                 <p>{content}</p>
-              </LinkUI>
+              </NavLinkUI>
             </ItemUI>
           );
         })}
       </ListUI>
 
-      <LegalTextUI>© 2017 by trillo. All rights reserved.</LegalTextUI>
+      <LegalText UI={LegalTextUI} />
     </StyledSidebar>
   );
 }
@@ -43,35 +44,28 @@ const StyledSidebar = styled.nav`
 const ListUI = styled.ul`
   font-size: 1.4rem;
   margin-top: 3.5rem;
+
+  @media only screen and (max-width: ${px1000}) {
+    display: flex;
+    margin: 0;
+  }
 `;
 
 const ItemUI = styled.li`
-  position: relative;
-
-  &:hover::before {
-    transform: scaleY(1);
-    width: 100%;
+  @media only screen and (max-width: ${px1000}) {
+    flex: 1;
   }
 
   &:not(:last-child) {
     margin-bottom: 0.5rem;
-  }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background-color: var(--color-orange-500);
-    transform: scaleY(0);
-    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
-      background-color 0.1s;
+    @media only screen and (max-width: ${px1000}) {
+      margin: 0;
+    }
   }
 `;
 
-const LinkUI = styled(Link)`
+const NavLinkUI = styled(NavLink)`
   &:link,
   &:visited {
     display: flex;
@@ -82,6 +76,32 @@ const LinkUI = styled(Link)`
     letter-spacing: 1px;
     padding: 1.5rem 3rem;
     position: relative;
+    z-index: 1;
+
+    @media only screen and (max-width: ${px1000}) {
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    &:hover::before,
+    &.active::before {
+      transform: scaleY(1);
+      width: 100%;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background-color: var(--color-orange-500);
+      transform: scaleY(0);
+      transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+        background-color 0.1s;
+      z-index: -1;
+    }
 
     svg {
       width: 1.75rem;

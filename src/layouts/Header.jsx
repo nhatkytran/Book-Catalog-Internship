@@ -1,11 +1,15 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { px1000, px400 } from '~/styles/GlobalStyles';
 
 function Header() {
   return (
     <StyledHeader>
-      <LogoDesktopUI src="/images/logo-desktop.svg" alt="Saritasa logo" />
-      <LogoMobileUI src="/images/logo-mobile.svg" alt="Saritasa logo" />
+      <LinkUI to="/">
+        <LogoDesktopUI src="/images/logo-desktop.svg" alt="Saritasa logo" />
+        <LogoMobileUI src="/images/logo-mobile.svg" alt="Saritasa logo" />
+      </LinkUI>
 
       <QuoteUI>
         A <span>Book</span> a day keeps <span>Reality</span> away.
@@ -25,7 +29,16 @@ const StyledHeader = styled.header`
   border-bottom: var(--line);
 
   @media only screen and (max-width: ${px1000}) {
-    height: 5rem;
+    height: 5.4rem;
+  }
+`;
+
+const LinkUI = styled(Link)`
+  &:link,
+  &:visited {
+    color: transparent;
+    text-decoration: none;
+    text-transform: uppercase;
   }
 `;
 
