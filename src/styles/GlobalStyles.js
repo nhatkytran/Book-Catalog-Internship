@@ -92,7 +92,7 @@ const GlobalStyles = createGlobalStyle`
     background-image: linear-gradient(to right bottom, var(--color-orange-400), var(--color-orange-600));
     background-size: cover;
     background-repeat: no-repeat;
-    color: var(--color-grey-800);
+    color: var(--color-neutral-800);
     font-family: var(--font-open-sans);
     font-size: 1.6rem;
     line-height: 1.5;
@@ -131,6 +131,15 @@ const GlobalStyles = createGlobalStyle`
   h6 {
     overflow-wrap: break-word;
     hyphens: auto;
+  }
+
+  @keyframes open {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `;
 

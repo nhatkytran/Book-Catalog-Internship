@@ -6,8 +6,8 @@ import { px1000 } from '~/styles/GlobalStyles';
 import { LegalText } from '~/components';
 
 const navItems = [
-  { link: '/', icon: AiFillHome, content: 'All books' },
-  { link: '/dashboard', icon: AiFillProduct, content: 'Dashboard' },
+  { link: '/', icon: AiFillHome, content: 'Home' },
+  { link: '/books', icon: AiFillProduct, content: 'All books' },
 ];
 
 function Sidebar() {

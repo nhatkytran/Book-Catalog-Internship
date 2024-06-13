@@ -56,6 +56,7 @@ const TextUI = styled.p`
   line-height: 1;
   padding: 1rem 1.6rem;
   box-shadow: var(--shadow-md);
+  animation: 0.5s cubic-bezier(0.42, 0, 0.002, 1) 0s 1 normal none running open;
 
   @media only screen and (max-width: ${px600}) {
     font-size: 1.2rem;

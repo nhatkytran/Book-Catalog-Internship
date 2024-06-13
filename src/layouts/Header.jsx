@@ -61,6 +61,7 @@ const LogoMobileUI = styled.img`
 `;
 
 const QuoteUI = styled.p`
+  color: var(--color-black);
   font-size: 1.6rem;
   letter-spacing: 1px;
   word-spacing: 2px;
