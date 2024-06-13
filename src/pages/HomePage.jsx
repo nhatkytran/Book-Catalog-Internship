@@ -4,9 +4,6 @@ function HomePage() {
   return <StyledHomePage>Home page</StyledHomePage>;
 }
 
-const StyledHomePage = styled.div`
-  flex: 1;
-  background-color: var(--color-neutral-100);
-`;
+const StyledHomePage = styled.div``;
 
 export default HomePage;

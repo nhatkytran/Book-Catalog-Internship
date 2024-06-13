@@ -1,27 +1,25 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from '~/layouts';
-import { publicRoutes } from './routes';
+import { publicRoutes } from '~/routes';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {publicRoutes.map((route, index) => {
-          const Component = route.component;
-
-          return (
+        {publicRoutes.map(
+          ({ path, component: Component, layout, banner }, index) => (
             <Route
               key={index}
-              path={route.path}
+              path={path}
               element={
-                <Layout type={route.layout}>
+                <Layout type={layout} banner={banner}>
                   <Component />
                 </Layout>
               }
             />
-          );
-        })}
+          )
+        )}
       </Routes>
     </BrowserRouter>
   );

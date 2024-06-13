@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { MAIN_LAYOUT } from '~/config';
 import { px1000, px1200 } from '~/styles/GlobalStyles';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Footer from './Footer';
+import Header from '~/layouts/Header';
+import Sidebar from '~/layouts/Sidebar';
+import Banner from '~/layouts/Banner';
+import Footer from '~/layouts/Footer';
 
-function Layout({ children }) {
+function Layout({ children, type, banner }) {
   return (
     <StyledLayout>
       <Header />
@@ -15,7 +17,13 @@ function Layout({ children }) {
         <Sidebar />
 
         <MainViewUI>
-          {children}
+          <MainViewHeaderUI>
+            {type === MAIN_LAYOUT && (
+              <Banner url={banner.url} text={banner.text} />
+            )}
+
+            {children}
+          </MainViewHeaderUI>
 
           <Footer />
         </MainViewUI>
@@ -55,6 +63,18 @@ const MainViewUI = styled.main`
   min-height: 50rem;
 `;
 
-Layout.propTypes = { children: PropTypes.element.isRequired };
+const MainViewHeaderUI = styled.div`
+  flex: 1;
+  background-color: var(--color-neutral-100);
+`;
+
+Layout.propTypes = {
+  children: PropTypes.element.isRequired,
+  type: PropTypes.string.isRequired,
+  banner: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }),
+};
 
 export default Layout;

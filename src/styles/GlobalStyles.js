@@ -4,11 +4,11 @@ export const px1200 = '75em';
 export const px1000 = '62.5em';
 export const px700 = '43.75em';
 export const px600 = '37.5em';
+export const px500 = '31.25em';
 export const px400 = '25em';
 /*
   $bp-large: 68.75em;    // 1100px
   $bp-medium: 56.25em;   // 900px
-  $bp-smallest: 31.25em; // 500px
 */
 
 const GlobalStyles = createGlobalStyle`
@@ -41,6 +41,18 @@ const GlobalStyles = createGlobalStyle`
     --color-orange-900: #7c2d12;
     --color-orange-950: #431407;
 
+    --color-blue-50: #eff6ff;
+    --color-blue-100: #dbeafe;
+    --color-blue-200: #bfdbfe;
+    --color-blue-300: #93c5fd;
+    --color-blue-400: #60a5fa;
+    --color-blue-500: #3b82f6;
+    --color-blue-600: #2563eb;
+    --color-blue-700: #1d4ed8;
+    --color-blue-800: #1e40af;
+    --color-blue-900: #1e3a8a;
+    --color-blue-950: #172554;
+
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.17);
     --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.3);
@@ -58,6 +70,8 @@ const GlobalStyles = createGlobalStyle`
     --border-radius-lg: 9px;
 
     --line: 1px solid var(--color-neutral-100);
+
+    --shadow-modal: rgba(0, 0, 0, 0.6);
   }
 
   *,

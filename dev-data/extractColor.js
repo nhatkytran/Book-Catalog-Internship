@@ -24,29 +24,29 @@
 **/
 
 const stringColors = `50
-#fff7ed
+#eff6ff
 100
-#ffedd5
+#dbeafe
 200
-#fed7aa
+#bfdbfe
 300
-#fdba74
+#93c5fd
 400
-#fb923c
+#60a5fa
 500
-#f97316
+#3b82f6
 600
-#ea580c
+#2563eb
 700
-#c2410c
+#1d4ed8
 800
-#9a3412
+#1e40af
 900
-#7c2d12
+#1e3a8a
 950
-#431407`;
+#172554`;
 
-const colorName = 'orange';
+const colorName = 'blue';
 
 (color => {
   const variables = [];

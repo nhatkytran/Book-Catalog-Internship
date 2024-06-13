@@ -53,7 +53,7 @@ const LogoDesktopUI = styled.img`
 
 const LogoMobileUI = styled.img`
   display: none;
-  height: 3.4rem;
+  height: 3.2rem;
 
   @media only screen and (max-width: ${px1000}) {
     display: block;
@@ -71,7 +71,13 @@ const QuoteUI = styled.p`
   }
 
   span {
-    color: var(--color-orange-500);
+    &:first-child {
+      color: var(--color-orange-500);
+    }
+
+    &:last-child {
+      color: var(--color-blue-500);
+    }
   }
 `;
 
