@@ -108,14 +108,13 @@ Table.Footer = Footer;
 // PropTypes //////////
 
 const childrenProp = { children: PropTypes.node.isRequired };
+const columnsProp = { columns: PropTypes.string.isRequired };
+const dataProp = { data: PropTypes.arrayOf(PropTypes.object).isRequired };
+const renderProp = { render: PropTypes.func.isRequired };
 
-Table.propTypes = { ...childrenProp, columns: PropTypes.string.isRequired };
+Table.propTypes = { ...childrenProp, ...columnsProp };
 Header.propTypes = { ...childrenProp };
 Row.propTypes = { ...childrenProp };
-
-Body.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  render: PropTypes.func,
-};
+Body.propTypes = { ...dataProp, ...renderProp };
 
 export default Table;

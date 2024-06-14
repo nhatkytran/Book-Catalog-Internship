@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 function BooksTableRowButton({ active, onClick }) {
   return (
     <StyledBooksTableRowButton $active={active} onClick={onClick}>
-      <img src="/images/table-menu-more.svg" alt="Table menu more icon" />
+      <img
+        src="/images/table-menu-more.svg"
+        alt="Table menu more icon"
+        draggable={false}
+      />
     </StyledBooksTableRowButton>
   );
 }

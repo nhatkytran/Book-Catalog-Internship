@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { HiPencil, HiTrash } from 'react-icons/hi2';
 import PropTypes from 'prop-types';
 
-import { DashChar, Table, TableMenu } from '~/components';
+import { DashChar, Modal, Table, TableMenu } from '~/components';
 import { BooksTableRowButton, BooksTableRowMenuButton } from '~/features/books';
 
 function BooksTableRow({ book }) {
@@ -18,29 +18,42 @@ function BooksTableRow({ book }) {
       <DashChar priorityValue={rating} />
       <DashChar priorityValue={isbn} />
 
-      <TableMenu>
-        <TableMenu.Toggle
-          id={id}
-          renderButton={({ active, onClick }) => (
-            <BooksTableRowButton active={active} onClick={onClick} />
-          )}
-        />
+      <Modal>
+        <TableMenu>
+          <TableMenu.Toggle
+            id={id}
+            renderButton={({ active, onClick }) => (
+              <BooksTableRowButton active={active} onClick={onClick} />
+            )}
+          />
 
-        <TableMenu.List
-          id={id}
-          buttons={[
-            { icon: HiPencil, label: 'Edit' },
-            { icon: HiTrash, label: 'Delete' },
-          ]}
-          renderButton={({ icon, label, onClick }) => (
-            <BooksTableRowMenuButton
-              icon={icon}
-              label={label}
-              onClick={onClick}
-            />
-          )}
-        ></TableMenu.List>
-      </TableMenu>
+          <TableMenu.List
+            id={id}
+            buttons={[
+              { icon: HiPencil, label: 'Edit', value: 'edit' },
+              { icon: HiTrash, label: 'Delete', value: 'delete' },
+            ]}
+            renderButton={({ icon, label, value, onClick }) => (
+              <Modal.Open openName={value}>
+                <BooksTableRowMenuButton
+                  icon={icon}
+                  label={label}
+                  onClick={onClick}
+                />
+              </Modal.Open>
+            )}
+          ></TableMenu.List>
+
+          <Modal.Window
+            openName="edit"
+            renderWindow={() => <div>Edit modal</div>}
+          />
+          <Modal.Window
+            openName="delete"
+            renderWindow={() => <div>Delete modal</div>}
+          />
+        </TableMenu>
+      </Modal>
     </Table.Row>
   );
 }

@@ -51,16 +51,9 @@ function List({ id, buttons, renderButton }) {
 
   return createPortal(
     <StyledList ref={ref} $position={position}>
-      {buttons.map(({ icon, label }, index) => (
+      {buttons.map(({ icon, label, value }, index) => (
         <li key={index}>
-          {renderButton({
-            icon,
-            label,
-            onClick: () => {
-              console.log(123);
-              close();
-            },
-          })}
+          {renderButton({ icon, label, value, onClick: close })}
         </li>
       ))}
     </StyledList>,
@@ -86,18 +79,15 @@ TableMenu.List = List;
 
 // PropTypes //////////
 
+const buttonShape = PropTypes.shape({
+  icon: PropTypes.elementType,
+  label: PropTypes.string,
+});
+
 const childrenProp = { children: PropTypes.node.isRequired };
 const idProp = { id: PropTypes.string.isRequired };
 const renderButtonProp = { renderButton: PropTypes.func.isRequired };
-
-const buttonsProp = {
-  buttons: PropTypes.arrayOf(
-    PropTypes.shape({
-      icon: PropTypes.elementType,
-      label: PropTypes.string,
-    })
-  ).isRequired,
-};
+const buttonsProp = { buttons: PropTypes.arrayOf(buttonShape).isRequired };
 
 TableMenu.propTypes = { ...childrenProp };
 List.propTypes = { ...idProp, ...buttonsProp, ...renderButtonProp };
