@@ -21,7 +21,7 @@ const CommonDisplay = css`
 
 const StyledAllBooksPage = styled.div`
   ${CommonDisplay};
-  gap: 3.2rem;
+  gap: 2.8rem;
   width: 100%;
   height: 100%;
   padding: 2rem 2.4rem;

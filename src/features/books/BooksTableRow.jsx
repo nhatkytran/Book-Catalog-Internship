@@ -8,7 +8,7 @@ function BooksTableRow({ book }) {
 
   return (
     <Table.Row>
-      <BookImageUI src="/images/book-cover.jpeg" alt="Saritas" />
+      <BookImageUI src="/images/book-cover.jpeg" alt="Saritasa" />
       <BookNameUI>{name}</BookNameUI>
       <DashChar priorityValue={authors.join(', ')} UI={BookNameUI} />
       <DashChar priorityValue={publicationYear} />

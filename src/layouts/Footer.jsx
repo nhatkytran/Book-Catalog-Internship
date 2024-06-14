@@ -103,7 +103,7 @@ const LinkUI = styled(Link)`
     padding: 1rem;
 
     &:hover {
-      color: var(--color-orange-500);
+      color: var(--color-blue-700);
     }
 
     @media only screen and (max-width: ${px600}) {

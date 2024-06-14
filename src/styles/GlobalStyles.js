@@ -89,7 +89,7 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     min-height: 100vh;
-    background-image: linear-gradient(to right bottom, var(--color-orange-400), var(--color-orange-600));
+    background-image: linear-gradient(to right bottom, var(--color-orange-500), var(--color-blue-600));
     background-size: cover;
     background-repeat: no-repeat;
     color: var(--color-neutral-800);
@@ -103,7 +103,12 @@ const GlobalStyles = createGlobalStyle`
     cursor: not-allowed;
   }
 
-  button, input {
+  button {
+    cursor: pointer;
+    font-family: var(--font-poppins);
+  }
+
+  button, input, select {
     outline: none;
     border: none;
     background-color: transparent;

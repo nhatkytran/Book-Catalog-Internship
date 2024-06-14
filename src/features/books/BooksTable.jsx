@@ -54,13 +54,13 @@ const books = [
     rating: 9,
     isbn: '978-0132350884',
   },
-  {
-    id: 8,
-    name: 'George and the Big Bang',
-    authors: ['Hawking, Stephen', 'Hawking, Lucy'],
-    publicationYear: 2013,
-    isbn: '978-1442440067',
-  },
+  // {
+  //   id: 8,
+  //   name: 'George and the Big Bang',
+  //   authors: ['Hawking, Stephen', 'Hawking, Lucy'],
+  //   publicationYear: 2013,
+  //   isbn: '978-1442440067',
+  // },
 ];
 
 function BooksTable() {
@@ -81,10 +81,12 @@ function BooksTable() {
         render={book => <BooksTableRow book={book} key={book.id} />}
       />
 
-      <Table.Footer>
-        <div>Page Number</div>
-        <div>Pagination</div>
-      </Table.Footer>
+      {!!books.length && (
+        <Table.Footer>
+          <div>Page Number</div>
+          <div>Pagination</div>
+        </Table.Footer>
+      )}
     </Table>
   );
 }
