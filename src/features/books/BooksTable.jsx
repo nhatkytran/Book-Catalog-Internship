@@ -3,7 +3,7 @@ import { BooksTableRow } from '.';
 
 const books = [
   // {
-  //   id: 1,
+  //   id: '1',
   //   name: 'The Clean Coder: A Code of Conduct for Professional Programmers',
   //   authors: ['Martin, Robert'],
   //   publicationYear: 2011,
@@ -11,7 +11,7 @@ const books = [
   //   isbn: '978-0137081073',
   // },
   // {
-  //   id: 2,
+  //   id: '2',
   //   name: '7 Habits Of Highly Effective People',
   //   authors: ['Covey, Stephen R.'],
   //   publicationYear: 2004,
@@ -19,7 +19,7 @@ const books = [
   //   isbn: '978-1863500296',
   // },
   // {
-  //   id: 3,
+  //   id: '3',
   //   name: 'The Color of Magic',
   //   authors: ['Pratchett, Terry'],
   //   publicationYear: 2013,
@@ -27,14 +27,14 @@ const books = [
   //   isbn: '9780062225672',
   // },
   // {
-  //   id: 4,
+  //   id: '4',
   //   name: 'Press Reset: Ruin and Recovery in the Video Game Industry',
   //   authors: ['Jason Schreier'],
   //   publicationYear: 2021,
   //   rating: 10,
   // },
   // {
-  //   id: 5,
+  //   id: '5',
   //   name: 'The Inmates Are Running the Asylum',
   //   authors: ['Cooper, Alan'],
   //   publicationYear: 2004,
@@ -42,12 +42,12 @@ const books = [
   //   isbn: '978-0672326141',
   // },
   {
-    id: 6,
+    id: '6',
     name: 'The Three Musketeers',
     authors: ['Alexandre Dumas'],
   },
   {
-    id: 7,
+    id: '7',
     name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
     authors: ['Robert C. Martin'],
     publicationYear: 2008,
@@ -55,7 +55,7 @@ const books = [
     isbn: '978-0132350884',
   },
   // {
-  //   id: 8,
+  //   id: '8',
   //   name: 'George and the Big Bang',
   //   authors: ['Hawking, Stephen', 'Hawking, Lucy'],
   //   publicationYear: 2013,
