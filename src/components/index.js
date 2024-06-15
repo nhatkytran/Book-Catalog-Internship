@@ -1,5 +1,6 @@
 export { default as ButtonMain } from '~/components/ButtonMain';
 export { default as DashChar } from '~/components/DashChar';
+export { default as FeatureNotSupported } from '~/components/FeatureNotSupported';
 export { default as Filter } from '~/components/Filter';
 export { default as LegalText } from '~/components/LegalText';
 export { default as Modal } from '~/components/Modal';

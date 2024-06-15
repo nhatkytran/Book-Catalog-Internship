@@ -1,15 +1,27 @@
-import { useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
+
+import { useResize } from '~/hooks';
+import { FeatureNotSupported } from '~/components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
 function AllBooksPage() {
-  useEffect(() => {
-    console.log('Mount');
+  const [isViewportSupported, setIsViewportSupported] = useState(
+    window.innerWidth >= 800
+  );
 
-    return () => {
-      console.log('Unmount');
-    };
-  }, []);
+  useResize(
+    useCallback(() => setIsViewportSupported(window.innerWidth >= 800), [])
+  );
+
+  if (!isViewportSupported)
+    return (
+      <FeatureNotSupported
+        UI={NotSupportedUI}
+        content="This feature is available only on devices with a viewport width of 800px
+        or larger."
+      />
+    );
 
   return (
     <StyledAllBooksPage>
@@ -39,6 +51,10 @@ const StyledAllBooksPage = styled.div`
 const BoxUI = styled.div`
   ${CommonDisplay};
   gap: 1.6rem;
+`;
+
+const NotSupportedUI = css`
+  padding: 2rem;
 `;
 
 export default AllBooksPage;
