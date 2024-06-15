@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { useOutsideClick } from '~/hooks';
+import { useOutsideClick, useWindowEventListener } from '~/hooks';
 
 // Context API //////////
 
@@ -44,20 +44,43 @@ function Toggle({ id, renderButton }) {
 }
 
 function List({ id, buttons, renderButton }) {
-  const { openID, position, close } = useContext(TableMenuContext);
-  const ref = useOutsideClick({ handler: close, listenCapturing: true });
+  const { openID, position } = useContext(TableMenuContext);
 
   if (openID !== id) return null;
 
   return createPortal(
+    <ListOfItems
+      position={position}
+      buttons={buttons}
+      renderButton={renderButton}
+    />,
+    document.querySelector('#miscellaneous-item')
+  );
+}
+
+// Need to separate a ListOfItems component for performance
+/**
+ * If we use useEffect in a List component, it will run inmediately.
+ * But in this case, we only would like to run useEffect when a list is mounted to the DOM
+ */
+
+function ListOfItems({ buttons, renderButton }) {
+  const { openID, position, close } = useContext(TableMenuContext);
+  const ref = useOutsideClick({ handler: close, listenCapturing: true });
+
+  console.log('-->', openID);
+
+  useWindowEventListener({ eventName: 'resize', handler: close });
+  useWindowEventListener({ eventName: 'scroll', handler: close });
+
+  return (
     <StyledList ref={ref} $position={position}>
       {buttons.map(({ icon, label, value }, index) => (
         <li key={index}>
           {renderButton({ icon, label, value, onClick: close })}
         </li>
       ))}
-    </StyledList>,
-    document.querySelector('#miscellaneous-item')
+    </StyledList>
   );
 }
 
@@ -91,6 +114,7 @@ const buttonsProp = { buttons: PropTypes.arrayOf(buttonShape).isRequired };
 
 TableMenu.propTypes = { ...childrenProp };
 List.propTypes = { ...idProp, ...buttonsProp, ...renderButtonProp };
+ListOfItems.propTypes = { ...buttonsProp, ...renderButtonProp };
 Toggle.propTypes = { ...idProp, ...renderButtonProp };
 
 export default TableMenu;

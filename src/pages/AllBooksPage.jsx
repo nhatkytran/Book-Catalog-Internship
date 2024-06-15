@@ -1,18 +1,20 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { useResize } from '~/hooks';
+import { useWindowEventListener } from '~/hooks';
 import { FeatureNotSupported } from '~/components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
-function AllBooksPage() {
-  const [isViewportSupported, setIsViewportSupported] = useState(
-    window.innerWidth >= 800
-  );
+const checkViewPort800 = () => window.innerWidth >= 800;
 
-  useResize(
-    useCallback(() => setIsViewportSupported(window.innerWidth >= 800), [])
-  );
+function AllBooksPage() {
+  const [isViewportSupported, setIsViewportSupported] =
+    useState(checkViewPort800);
+
+  useWindowEventListener({
+    eventName: 'resize',
+    handler: () => setIsViewportSupported(checkViewPort800),
+  });
 
   if (!isViewportSupported)
     return (

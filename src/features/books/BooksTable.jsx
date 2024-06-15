@@ -65,7 +65,7 @@ const books = [
 
 function BooksTable() {
   return (
-    <Table columns="0.8fr 2.2fr 1.2fr 0.5fr 0.6fr 1.5fr 0.2fr">
+    <Table columns="0.7fr 2fr 1.2fr 0.5fr 0.7fr 1.5fr 0.6fr">
       <Table.Header>
         <div></div>
         <div>Name</div>
