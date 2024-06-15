@@ -2,15 +2,13 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { MAIN_LAYOUT } from '~/config';
-import { px1000, px1200 } from '~/styles/GlobalStyles';
-import Header from '~/layouts/Header';
-import Sidebar from '~/layouts/Sidebar';
-import Banner from '~/layouts/Banner';
-import Footer from '~/layouts/Footer';
+import { LayoutUI } from '~/ui';
+import { px1000 } from '~/styles/GlobalStyles';
+import { Banner, Footer, Header, Sidebar } from '~/layouts';
 
 function Layout({ children, type, banner }) {
   return (
-    <StyledLayout>
+    <LayoutUI>
       <Header />
 
       <ContentUI>
@@ -28,23 +26,9 @@ function Layout({ children, type, banner }) {
           <Footer />
         </MainViewUI>
       </ContentUI>
-    </StyledLayout>
+    </LayoutUI>
   );
 }
-
-const StyledLayout = styled.div`
-  max-width: var(--width-main-layout);
-  min-height: 50rem;
-  background-color: var(--color-neutral-100);
-  margin: 8rem auto;
-  box-shadow: var(--shadow-lg);
-
-  @media only screen and (max-width: ${px1200}) {
-    margin: 0;
-    max-width: 100%;
-    width: 100%;
-  }
-`;
 
 const ContentUI = styled.div`
   display: flex;
@@ -66,6 +50,7 @@ const MainViewUI = styled.main`
 const MainViewHeaderUI = styled.div`
   flex: 1;
   background-color: var(--color-neutral-100);
+  position: relative;
 `;
 
 Layout.propTypes = {

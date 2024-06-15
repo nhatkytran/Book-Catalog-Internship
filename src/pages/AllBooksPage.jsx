@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
 function AllBooksPage() {
+  useEffect(() => {
+    console.log('Mount');
+
+    return () => {
+      console.log('Unmount');
+    };
+  }, []);
+
   return (
     <StyledAllBooksPage>
       <BooksHeader />

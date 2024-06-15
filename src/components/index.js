@@ -1,3 +1,4 @@
+export { default as ButtonMain } from '~/components/ButtonMain';
 export { default as DashChar } from '~/components/DashChar';
 export { default as Filter } from '~/components/Filter';
 export { default as LegalText } from '~/components/LegalText';
