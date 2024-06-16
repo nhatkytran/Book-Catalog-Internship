@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /books/{document=**} {
+      allow read: if true;
+      allow write: if isValidBook(request.resource.data);
+      
+      function isValidBook(data) {
+        return isValidName(data.name) &&
+               hasAtLeastOneAuthor(data.authors) &&
+               isValidPublicationYear(data.publication_year) &&
+               isValidRating(data.rating) &&
+               isValidISBN(data.ISBN);
+      }
+      
+      function isValidName(name) {
+        return name is string && name.size() <= 100;
+      }
+
+      function hasAtLeastOneAuthor(authors) {
+        return authors is list && authors.size() > 0;
+      }
+      
+      function isValidPublicationYear(year) {
+        return !(year in data) || (year is int && year > 1800);
+      }
+      
+      function isValidRating(rating) {
+        return !(rating in data) || (rating is int && rating >= 0 && rating <= 10);
+      }
+      
+      function isValidISBN(isbn) {
+        return !(isbn in data) || (isbn is string && isISBN10(isbn) || isISBN13(isbn));
+      }
+
+      function isISBN10(isbn) {
+        return isbn.size() == 10 && isbn.matches('^\\d{9}[\\dX]$');
+      }
+
+      function isISBN13(isbn) {
+        return isbn.size() == 13 && isbn.matches('^\\d{13}$');
+      }
+    }
+  }
+}

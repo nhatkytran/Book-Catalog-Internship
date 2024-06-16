@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { useWindowEventListener } from '~/hooks';
-import { FeatureNotSupported } from '~/components';
+import { FeatureNotSupported, ResetData } from '~/components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
 const checkViewPort800 = () => window.innerWidth >= 800;
@@ -33,6 +33,8 @@ function AllBooksPage() {
         <BooksTable />
         <BooksAddMore />
       </BoxUI>
+
+      <ResetData />
     </StyledAllBooksPage>
   );
 }
