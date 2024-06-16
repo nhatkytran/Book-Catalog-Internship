@@ -1,8 +1,26 @@
+import { useMutation } from '@tanstack/react-query';
 import styled, { css } from 'styled-components';
 import { Loader } from '~/components';
 
+import { resetBooks } from '~/services';
+
 function ResetData() {
-  const loading = true;
+  const mutation = useMutation({
+    mutationFn: resetBooks,
+    onSuccess: data => {
+      console.log('--> Success');
+      console.log(data);
+    },
+    onError: error => {
+      console.error('Error resetting books:', error);
+      console.log(error);
+    },
+  });
+
+  console.log(mutation);
+  const { mutate } = mutation;
+
+  const loading = false;
 
   return (
     <StyledResetData>
@@ -12,7 +30,7 @@ function ResetData() {
         <>
           Feel free to play around with data.
           <ButtonBoxUI>
-            Reset it here 👉 <button>Reset</button>
+            Reset it here 👉 <button onClick={() => mutate()}>Reset</button>
           </ButtonBoxUI>
         </>
       )}

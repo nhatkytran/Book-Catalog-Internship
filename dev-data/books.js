@@ -4,21 +4,21 @@ const books = [
     authors: ['Martin, Robert'],
     publicationYear: 2011,
     rating: 9,
-    isbn: '978-0137081073',
+    isbn: 9780137081073,
   },
   {
     name: '7 Habits Of Highly Effective People',
     authors: ['Covey, Stephen R.'],
     publicationYear: 2004,
     rating: 9,
-    isbn: '978-1863500296',
+    isbn: 9781863500296,
   },
   {
     name: 'The Color of Magic',
     authors: ['Pratchett, Terry'],
     publicationYear: 2013,
     rating: 8,
-    isbn: '978-0062225672',
+    isbn: 9780062225672,
   },
   {
     name: 'Press Reset: Ruin and Recovery in the Video Game Industry',
@@ -31,7 +31,7 @@ const books = [
     authors: ['Cooper, Alan'],
     publicationYear: 2004,
     rating: 8,
-    isbn: '978-0672326141',
+    isbn: 9780672326141,
   },
   {
     name: 'The Three Musketeers',
@@ -42,13 +42,13 @@ const books = [
     authors: ['Robert C. Martin'],
     publicationYear: 2008,
     rating: 9,
-    isbn: '978-0132350884',
+    isbn: 9780132350884,
   },
   {
     name: 'George and the Big Bang',
     authors: ['Hawking', 'Stephen', 'Lucy'],
     publicationYear: 2013,
-    isbn: '978-1442440067',
+    isbn: 9781442440067,
   },
 ];
 
