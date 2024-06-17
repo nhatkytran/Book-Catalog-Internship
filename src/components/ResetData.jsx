@@ -8,7 +8,7 @@ import { resetBooks } from '~/services';
 function ResetData() {
   const { isPending, mutate } = useMutation({
     mutationFn: resetBooks,
-    onSuccess: () => toast.success('Reset data successfully.'),
+    onSuccess: () => toast.success('Reset books successfully.'),
     onError: () => toast.error('Something went wrong!'),
   });
 
@@ -37,7 +37,9 @@ const CommonStyles = css`
 
 const StyledResetData = styled.div`
   ${CommonStyles};
-  min-height: 5rem;
+  flex: 1;
+  max-height: 5rem;
+  margin-top: auto;
   background-color: var(--color-blue-100);
   color: var(--color-neutral-700);
   font-family: var(--font-poppins);

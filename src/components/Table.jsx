@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { TableBodyMessageUI } from '~/ui';
+
 // Context API //////////
 
 const TableContext = createContext();
@@ -27,7 +29,10 @@ function Header({ children }) {
 }
 
 function Body({ data, render }) {
-  if (!data.length) return <EmptyUI>No data to show at the moment</EmptyUI>;
+  if (!data.length)
+    return (
+      <TableBodyMessageUI>No data to show at the moment</TableBodyMessageUI>
+    );
 
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
@@ -73,13 +78,6 @@ const StyledHeader = styled(CommonRow)`
 
 const StyledBody = styled.section`
   margin: 0;
-`;
-
-const EmptyUI = styled.p`
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-align: center;
-  margin: 2.4rem;
 `;
 
 const StyledRow = styled(CommonRow)`

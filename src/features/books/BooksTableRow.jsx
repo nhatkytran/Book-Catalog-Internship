@@ -82,7 +82,7 @@ BooksTableRow.propTypes = {
     authors: PropTypes.arrayOf(PropTypes.string),
     publicationYear: PropTypes.number,
     rating: PropTypes.number,
-    isbn: PropTypes.string,
+    isbn: PropTypes.number,
   }),
 };
 

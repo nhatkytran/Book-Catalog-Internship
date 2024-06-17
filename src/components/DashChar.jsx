@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function DashChar({ priorityValue, UI }) {
-  if (!priorityValue) return <span>&mdash;</span>;
+  if (!priorityValue && priorityValue !== 0) return <span>&mdash;</span>;
 
   return UI ? <UI>{priorityValue}</UI> : <div>{priorityValue}</div>;
 }

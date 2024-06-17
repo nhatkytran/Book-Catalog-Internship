@@ -4,6 +4,14 @@ import { BOOKS_COLLECTION_NAME } from '~/config';
 import firestore from '~/connections/firestore';
 import books from '~/../dev-data/books';
 
+export const getAllBooks = async () => {
+  const booksRef = collection(firestore, BOOKS_COLLECTION_NAME);
+
+  const snapshot = await getDocs(booksRef);
+
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+};
+
 const deleteAllBooks = async () => {
   const booksRef = collection(firestore, BOOKS_COLLECTION_NAME);
   const batch = writeBatch(firestore);

@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function SortBy({ options }) {
+function SortBy({ sortByField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentSortBy = searchParams.get('sortBy') || options[0].value;
+  const currentSortBy = searchParams.get(sortByField) || options[0].value;
 
   const handleChange = event => {
-    const sortByField = 'sortBy';
     const value = event.target.value;
 
     searchParams.set(sortByField, value);
@@ -42,6 +41,7 @@ const StyledSortBy = styled.select`
 `;
 
 SortBy.propTypes = {
+  sortByField: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })
   ).isRequired,

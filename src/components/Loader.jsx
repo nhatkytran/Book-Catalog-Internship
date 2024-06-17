@@ -82,7 +82,7 @@ function Loader({ UI }) {
 const StyledLoader = styled.svg`
   display: block;
   width: 5rem;
-  fill: #000;
+  fill: var(--color-neutral-800);
   ${props => props.$UI}
 `;
 

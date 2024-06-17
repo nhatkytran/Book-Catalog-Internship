@@ -14,17 +14,21 @@ function BooksTableOperations() {
       />
 
       <SortBy
+        sortByField="sortBy"
         options={[
-          { value: 'default', label: 'Default' },
+          { value: 'default', label: 'Default (newest first)' },
           { value: 'name-asc', label: 'Sort by name (A-Z)' },
           { value: 'name-desc', label: 'Sort by name (Z-A)' },
-          { value: 'year-asc', label: 'Sort by publication year (low first)' },
           {
-            value: 'year-desc',
-            label: 'Sort by publication year (high first)',
+            value: 'publicationYear-asc',
+            label: 'Sort by publication year (lowest first)',
           },
-          { value: 'rating-asc', label: 'Sort by rating (low first)' },
-          { value: 'rating-desc', label: 'Sort by rating (high first)' },
+          {
+            value: 'publicationYear-desc',
+            label: 'Sort by publication year (highest first)',
+          },
+          { value: 'rating-asc', label: 'Sort by rating (lowest first)' },
+          { value: 'rating-desc', label: 'Sort by rating (highest first)' },
         ]}
       />
     </StyledBooksTableOperations>
