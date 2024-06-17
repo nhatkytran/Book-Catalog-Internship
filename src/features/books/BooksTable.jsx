@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 
+import { PAGE_SIZE } from '~/config';
 import { TableBodyMessageUI } from '~/ui';
 import { Loader, Table } from '~/components';
-import { BooksTableRow } from '~/features/books';
+import { BooksTablePagination, BooksTableRow } from '~/features/books';
 import { getAllBooks } from '~/services';
 import { useSearchParams } from 'react-router-dom';
 
@@ -25,6 +26,8 @@ function BooksTable() {
 
   if (filter === 'with-year')
     books = books.filter(book => book.publicationYear);
+
+  const totalBooksAfterFilter = books.length; // Be used for pagination
 
   // SORT //////////
 
@@ -62,8 +65,13 @@ function BooksTable() {
       books = books.sort((a, b) => (a.rating - b.rating) * modifier);
   }
 
+  // PAGINATION //////////
+
+  const page = Number(searchParams.get('page')) || 1;
+  books = books.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   return (
-    <Table columns="0.7fr 2fr 1.2fr 0.5fr 0.7fr 1.5fr 0.6fr">
+    <Table columns="0.7fr 2fr 1.2fr 0.5fr 0.7fr 1.5fr 0.4fr">
       <Table.Header>
         <div></div>
         <div>Name</div>
@@ -95,8 +103,7 @@ function BooksTable() {
 
       {!!books.length && (
         <Table.Footer>
-          <div>Page Number</div>
-          <div>Pagination</div>
+          <BooksTablePagination count={totalBooksAfterFilter} />
         </Table.Footer>
       )}
     </Table>

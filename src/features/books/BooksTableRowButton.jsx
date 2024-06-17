@@ -19,6 +19,7 @@ BooksTableRowButton.propTypes = {
 };
 
 const StyledBooksTableRowButton = styled.button`
+  justify-self: flex-end;
   width: 3.2rem;
   height: 3.2rem;
   padding: 0.4rem;

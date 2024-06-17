@@ -13,6 +13,7 @@ function SortBy({ sortByField, options }) {
     searchParams.set(sortByField, value);
 
     if (value === 'default') searchParams.delete(sortByField);
+    searchParams.delete('page');
 
     setSearchParams(searchParams);
   };

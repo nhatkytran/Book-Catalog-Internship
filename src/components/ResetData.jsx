@@ -1,14 +1,25 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import styled, { css } from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { Loader } from '~/components';
 
+import { Loader } from '~/components';
 import { resetBooks } from '~/services';
 
 function ResetData() {
+  const queryClient = useQueryClient();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const { isPending, mutate } = useMutation({
     mutationFn: resetBooks,
-    onSuccess: () => toast.success('Reset books successfully.'),
+    onSuccess: () => {
+      toast.success('Reset books successfully.');
+
+      ['year', 'sortBy', 'page'].forEach(query => searchParams.delete(query));
+      setSearchParams(searchParams);
+
+      queryClient.invalidateQueries({ queryKey: ['books'] });
+    },
     onError: () => toast.error('Something went wrong!'),
   });
 
@@ -38,7 +49,7 @@ const CommonStyles = css`
 const StyledResetData = styled.div`
   ${CommonStyles};
   flex: 1;
-  max-height: 5rem;
+  min-height: 5rem;
   margin-top: auto;
   background-color: var(--color-blue-100);
   color: var(--color-neutral-700);

@@ -90,9 +90,8 @@ const StyledRow = styled(CommonRow)`
 `;
 
 const Footer = styled.footer`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  place-items: center;
   padding: 1.2rem;
 `;
 

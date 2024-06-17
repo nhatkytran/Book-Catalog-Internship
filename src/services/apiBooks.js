@@ -33,7 +33,7 @@ const addBooks = async (data = books) => {
       rating: book.rating || 0,
       // Data generated in Firestore not in a specific order,
       // so we need 'createdAt' for a sorting action later
-      createdAt: new Date(Date.now() + index * 1000),
+      createdAt: new Date(Date.now() + 1000 * index),
     })
   );
 

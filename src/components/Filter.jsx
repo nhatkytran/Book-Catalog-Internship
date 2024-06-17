@@ -11,6 +11,7 @@ function Filter({ filterField, options }) {
     searchParams.set(filterField, value);
 
     if (value === 'all') searchParams.delete(filterField);
+    searchParams.delete('page');
 
     setSearchParams(searchParams);
   };
