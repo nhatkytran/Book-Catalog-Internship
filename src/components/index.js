@@ -9,3 +9,4 @@ export { default as ResetData } from '~/components/ResetData';
 export { default as SortBy } from '~/components/SortBy';
 export { default as Table } from '~/components/Table';
 export { default as TableMenu } from '~/components/TableMenu';
+export { default as Toaster } from '~/components/Toaster';

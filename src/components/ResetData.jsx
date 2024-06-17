@@ -1,32 +1,22 @@
 import { useMutation } from '@tanstack/react-query';
 import styled, { css } from 'styled-components';
+import toast from 'react-hot-toast';
 import { Loader } from '~/components';
 
 import { resetBooks } from '~/services';
 
 function ResetData() {
-  const mutation = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: resetBooks,
-    onSuccess: data => {
-      console.log('--> Success');
-      console.log(data);
-    },
-    onError: error => {
-      console.error('Error resetting books:', error);
-      console.log(error);
-    },
+    onSuccess: () => toast.success('Reset data successfully.'),
+    onError: () => toast.error('Something went wrong!'),
   });
-
-  console.log(mutation);
-  const { mutate } = mutation;
-
-  const loading = false;
 
   return (
     <StyledResetData>
-      {loading && <Loader UI={LoaderUI} />}
+      {isPending && <Loader UI={LoaderUI} />}
 
-      {!loading && (
+      {!isPending && (
         <>
           Feel free to play around with data.
           <ButtonBoxUI>
