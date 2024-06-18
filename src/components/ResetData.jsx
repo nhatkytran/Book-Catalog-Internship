@@ -1,26 +1,13 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import styled, { css } from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
 
 import { Loader } from '~/components';
+import { useResetData } from '~/hooks';
 import { resetBooks } from '~/services';
 
 function ResetData() {
-  const queryClient = useQueryClient();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const { isPending, mutate } = useMutation({
-    mutationFn: resetBooks,
-    onSuccess: () => {
-      toast.success('Reset books successfully.');
-
-      ['year', 'sortBy', 'page'].forEach(query => searchParams.delete(query));
-      setSearchParams(searchParams);
-
-      queryClient.invalidateQueries({ queryKey: ['books'] });
-    },
-    onError: () => toast.error('Something went wrong!'),
+  const { isPending, mutate } = useResetData({
+    resetKey: 'books',
+    resetFn: resetBooks,
   });
 
   return (

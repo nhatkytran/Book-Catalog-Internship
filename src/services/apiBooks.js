@@ -1,11 +1,10 @@
 import { collection, doc, getDocs, writeBatch } from 'firebase/firestore';
 
-import { BOOKS_COLLECTION_NAME } from '~/config';
 import firestore from '~/connections/firestore';
 import books from '~/../dev-data/books';
 
 export const getAllBooks = async () => {
-  const booksRef = collection(firestore, BOOKS_COLLECTION_NAME);
+  const booksRef = collection(firestore, 'books');
 
   const snapshot = await getDocs(booksRef);
 
@@ -13,7 +12,7 @@ export const getAllBooks = async () => {
 };
 
 const deleteAllBooks = async () => {
-  const booksRef = collection(firestore, BOOKS_COLLECTION_NAME);
+  const booksRef = collection(firestore, 'books');
   const batch = writeBatch(firestore);
 
   const snapshots = await getDocs(booksRef);
@@ -24,7 +23,7 @@ const deleteAllBooks = async () => {
 };
 
 const addBooks = async (data = books) => {
-  const booksRef = collection(firestore, BOOKS_COLLECTION_NAME);
+  const booksRef = collection(firestore, 'books');
   const batch = writeBatch(firestore);
 
   data.forEach((book, index) =>

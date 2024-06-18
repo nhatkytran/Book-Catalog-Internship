@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom';
 function BooksTable() {
   const [searchParams] = useSearchParams();
 
-  const { isPending, isError, data } = useQuery({
+  const { isPending, isError, error, data } = useQuery({
     queryKey: ['books'],
     queryFn: getAllBooks,
   });
@@ -89,9 +89,7 @@ function BooksTable() {
       )}
 
       {isError && (
-        <TableBodyMessageUI $color="red">
-          Something went wrong!
-        </TableBodyMessageUI>
+        <TableBodyMessageUI $color="red">{error.message}</TableBodyMessageUI>
       )}
 
       {!isPending && !isError && (
