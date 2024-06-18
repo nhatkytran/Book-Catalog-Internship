@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 
 import { formatISBN13, isValidIsbn13 } from '~/utils';
 import { DashChar, Modal, Table, TableMenu } from '~/components';
-import { BooksTableRowButton, BooksTableRowMenuButton } from '~/features/books';
+
+import {
+  BookDelete,
+  BooksTableRowButton,
+  BooksTableRowMenuButton,
+} from '~/features/books';
 
 function BooksTableRow({ book }) {
   const { id, name, authors, publicationYear, rating, isbn } = book;
@@ -40,12 +45,12 @@ function BooksTableRow({ book }) {
                 { icon: HiPencil, label: 'Edit', value: 'edit' },
                 { icon: HiTrash, label: 'Delete', value: 'delete' },
               ]}
-              renderButton={({ icon, label, value, onClick }) => (
+              renderButton={({ icon, label, value, onCloseModal }) => (
                 <Modal.Open openName={value}>
                   <BooksTableRowMenuButton
                     icon={icon}
                     label={label}
-                    onClick={onClick}
+                    onClick={onCloseModal}
                   />
                 </Modal.Open>
               )}
@@ -57,7 +62,9 @@ function BooksTableRow({ book }) {
             />
             <Modal.Window
               openName="delete"
-              renderWindow={() => <div>Delete modal</div>}
+              renderWindow={({ onCloseModal }) => (
+                <BookDelete bookID={id} onCloseModal={onCloseModal} />
+              )}
             />
           </TableMenu>
         </Modal>

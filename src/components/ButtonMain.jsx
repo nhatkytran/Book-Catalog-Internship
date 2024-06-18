@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function ButtonMain({ children, UI, onClick }) {
+function ButtonMain({ children, UI, onClick, ...props }) {
   return (
-    <StyledButtonMain $UI={UI} onClick={onClick}>
+    <StyledButtonMain $UI={UI} onClick={onClick} {...props}>
       {children}
     </StyledButtonMain>
   );

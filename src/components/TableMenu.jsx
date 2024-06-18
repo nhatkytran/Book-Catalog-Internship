@@ -44,16 +44,12 @@ function Toggle({ id, renderButton }) {
 }
 
 function List({ id, buttons, renderButton }) {
-  const { openID, position } = useContext(TableMenuContext);
+  const { openID } = useContext(TableMenuContext);
 
   if (openID !== id) return null;
 
   return createPortal(
-    <ListOfItems
-      position={position}
-      buttons={buttons}
-      renderButton={renderButton}
-    />,
+    <ListOfItems buttons={buttons} renderButton={renderButton} />,
     document.querySelector('#miscellaneous-item')
   );
 }
@@ -65,10 +61,8 @@ function List({ id, buttons, renderButton }) {
  */
 
 function ListOfItems({ buttons, renderButton }) {
-  const { openID, position, close } = useContext(TableMenuContext);
+  const { position, close } = useContext(TableMenuContext);
   const ref = useOutsideClick({ handler: close, listenCapturing: true });
-
-  console.log('-->', openID);
 
   useWindowEventListener({ eventName: 'resize', handler: close });
   useWindowEventListener({ eventName: 'scroll', handler: close });
@@ -77,7 +71,7 @@ function ListOfItems({ buttons, renderButton }) {
     <StyledList ref={ref} $position={position}>
       {buttons.map(({ icon, label, value }, index) => (
         <li key={index}>
-          {renderButton({ icon, label, value, onClick: close })}
+          {renderButton({ icon, label, value, onCloseModal: close })}
         </li>
       ))}
     </StyledList>

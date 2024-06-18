@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function BooksTableRowMenuButton({ icon: Icon, label, onClick }) {
+// We need a prop 'onClick' here because this component is wrapped by
+// Modal Context Open -> requires 'onClick' to work properly
+function BooksTableRowMenuButton({ icon: Icon, label, onClick: onCloseModal }) {
   return (
-    <StyledBooksTableRowMenuButton onClick={onClick}>
+    <StyledBooksTableRowMenuButton onClick={onCloseModal}>
       {<Icon />}
       <span>{label}</span>
     </StyledBooksTableRowMenuButton>
@@ -17,7 +19,6 @@ const StyledBooksTableRowMenuButton = styled.button`
   width: 100%;
   padding: 1.2rem 2.4rem;
   font-size: 1.4rem;
-  transition: all 0.2s;
 
   &:hover {
     background-color: var(--color-neutral-100);

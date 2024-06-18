@@ -1,19 +1,37 @@
-import { collection, doc, getDocs, writeBatch } from 'firebase/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  writeBatch,
+} from 'firebase/firestore';
 
 import firestore from '~/connections/firestore';
 import books from '~/../dev-data/books';
 
+const getBooksRef = () => collection(firestore, 'books');
+const getBatch = () => writeBatch(firestore);
+
+// GET ALL //////////
+
 export const getAllBooks = async () => {
-  const booksRef = collection(firestore, 'books');
+  const booksRef = getBooksRef();
 
   const snapshot = await getDocs(booksRef);
 
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
 
+// DELETE //////////
+
+export const deleteBook = async bookID =>
+  await deleteDoc(doc(firestore, 'books', bookID));
+
+// RESET //////////
+
 const deleteAllBooks = async () => {
-  const booksRef = collection(firestore, 'books');
-  const batch = writeBatch(firestore);
+  const booksRef = getBooksRef();
+  const batch = getBatch();
 
   const snapshots = await getDocs(booksRef);
 
@@ -23,8 +41,8 @@ const deleteAllBooks = async () => {
 };
 
 const addBooks = async (data = books) => {
-  const booksRef = collection(firestore, 'books');
-  const batch = writeBatch(firestore);
+  const booksRef = getBooksRef();
+  const batch = getBatch();
 
   data.forEach((book, index) =>
     batch.set(doc(booksRef), {

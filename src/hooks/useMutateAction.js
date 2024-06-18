@@ -2,24 +2,27 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-function useResetData({ resetKey, resetFn }) {
+function useMutateAction({ key, actionFn }) {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { isPending, mutate } = useMutation({
-    mutationFn: resetFn,
+    mutationFn: actionFn,
     onSuccess: () => {
-      toast.success('Reset data successfully.');
+      toast.success('Perform action successfully.');
 
       ['year', 'sortBy', 'page'].forEach(query => searchParams.delete(query));
       setSearchParams(searchParams);
 
-      queryClient.invalidateQueries({ queryKey: [resetKey] });
+      queryClient.invalidateQueries({ queryKey: [key] });
     },
-    onError: () => toast.error('Something went wrong!'),
+    onError: error => {
+      if (process.env.NODE_ENV === 'development') console.log(error);
+      toast.error('Something went wrong!');
+    },
   });
 
   return { isPending, mutate };
 }
 
-export default useResetData;
+export default useMutateAction;

@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 
 import { Loader } from '~/components';
-import { useResetData } from '~/hooks';
+import { useMutateAction } from '~/hooks';
 import { resetBooks } from '~/services';
 
 function ResetData() {
-  const { isPending, mutate } = useResetData({
-    resetKey: 'books',
-    resetFn: resetBooks,
+  const { isPending, mutate } = useMutateAction({
+    key: 'books',
+    actionFn: resetBooks,
   });
 
   return (

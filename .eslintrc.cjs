@@ -18,4 +18,5 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-}
+  define: { 'process.env': process.env },
+};

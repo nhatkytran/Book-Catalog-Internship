@@ -20,6 +20,14 @@ const HeadingUI = styled.h1`
       line-height: 1.2;
       margin: 2rem 0 2.4rem;
     `}
+
+    ${props =>
+    props.as === 'h3' &&
+    css`
+      color: var(--color-neutral-700);
+      font-size: 1%.8;
+      font-weight: 500;
+    `}
 `;
 
 export default HeadingUI;
