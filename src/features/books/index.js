@@ -1,5 +1,7 @@
 export { default as BooksAddMore } from '~/features/books/BooksAddMore';
 export { default as BookDelete } from '~/features/books/BookDelete';
+export { default as BooksForm } from '~/features/books/BooksForm';
+export { default as BooksFormRow } from '~/features/books/BooksFormRow';
 export { default as BooksHeader } from '~/features/books/BooksHeader';
 export { default as BooksTable } from '~/features/books/BooksTable';
 export { default as BooksTableOperations } from '~/features/books/BooksTableOperations';

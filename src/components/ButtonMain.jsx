@@ -18,13 +18,18 @@ const StyledButtonMain = styled.button`
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
   transition: all ease 0.2s;
+
+  &:not(:disabled):hover {
+    background-color: var(--color-blue-700);
+  }
+
   ${props => props.$UI};
 `;
 
 ButtonMain.propTypes = {
   children: PropTypes.node.isRequired,
   UI: PropTypes.array, // css``
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default ButtonMain;

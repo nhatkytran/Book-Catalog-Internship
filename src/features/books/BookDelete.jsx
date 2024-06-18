@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { HeadingUI } from '~/ui';
+import { useMutateAction } from '~/hooks';
+import { ButtonMainCancelUI, HeadingUI } from '~/ui';
 import { ButtonMain } from '~/components';
 import { deleteBook } from '~/services';
-import { useMutateAction } from '~/hooks';
 
 function BookDelete({ bookID, onCloseModal }) {
   const { isPending, mutate } = useMutateAction({
@@ -23,7 +23,7 @@ function BookDelete({ bookID, onCloseModal }) {
 
       <div>
         <ButtonMain
-          UI={ButtonMainCancel}
+          UI={ButtonMainCancelUI}
           disabled={isPending}
           onClick={onCloseModal}
         >
@@ -57,16 +57,6 @@ const StyledBookDelete = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 1.2rem;
-  }
-`;
-
-const ButtonMainCancel = css`
-  background-color: var(--color-white);
-  color: var(--color-neutral-600);
-  border: 1px solid var(--color-neutral-300);
-
-  &:not(:disabled):hover {
-    background-color: var(--color-neutral-100);
   }
 `;
 

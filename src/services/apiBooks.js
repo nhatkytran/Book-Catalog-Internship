@@ -1,4 +1,5 @@
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -21,6 +22,10 @@ export const getAllBooks = async () => {
 
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 };
+
+// ADD //////////
+
+export const addBook = async book => await addDoc(getBooksRef(), book);
 
 // DELETE //////////
 

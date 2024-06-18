@@ -9,17 +9,14 @@ function useMutateAction({ key, actionFn }) {
   const { isPending, mutate } = useMutation({
     mutationFn: actionFn,
     onSuccess: () => {
-      toast.success('Perform action successfully.');
+      toast.success('Action performed successfully.');
 
       ['year', 'sortBy', 'page'].forEach(query => searchParams.delete(query));
       setSearchParams(searchParams);
 
       queryClient.invalidateQueries({ queryKey: [key] });
     },
-    onError: error => {
-      if (process.env.NODE_ENV === 'development') console.log(error);
-      toast.error('Something went wrong!');
-    },
+    onError: () => toast.error('Something went wrong!'),
   });
 
   return { isPending, mutate };
