@@ -23,7 +23,7 @@ function BooksTableRow({ book }) {
   if (!isValidIsbn13())
     return (
       <Table.Row>
-        <BookImageUI src="/images/book-cover.jpeg" alt="Saritasa book item" />
+        <BookImageUI src="/images/book.jpeg" alt="Saritasa book item" />
 
         <BookNameUI>{name}</BookNameUI>
         <DashChar priorityValue={authors.join(', ')} UI={BookNameUI} />

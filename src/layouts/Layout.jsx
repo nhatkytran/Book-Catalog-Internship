@@ -49,6 +49,8 @@ const MainViewUI = styled.main`
 
 const MainViewHeaderUI = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-neutral-100);
   position: relative;
 `;

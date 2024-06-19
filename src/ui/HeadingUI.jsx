@@ -9,7 +9,7 @@ const HeadingUI = styled.h1`
       color: var(--color-neutral-600);
       font-size: 2.6rem;
       font-weight: 600;
-    `}
+    `};
 
   ${props =>
     props.as === 'h2' &&
@@ -19,15 +19,25 @@ const HeadingUI = styled.h1`
       font-weight: 500;
       line-height: 1.2;
       margin: 2rem 0 2.4rem;
-    `}
+    `};
 
-    ${props =>
+  ${props =>
     props.as === 'h3' &&
     css`
-      color: var(--color-neutral-700);
-      font-size: 1%.8;
+      color: var(--color-neutral-800);
+      font-size: 2.4rem;
       font-weight: 500;
+    `};
+
+  ${props =>
+    props.as === 'h5' &&
+    css`
+      color: var(--color-neutral-600);
+      font-size: 1.6rem;
+      font-weight: 600;
     `}
+
+  ${props => props.$customStyles};
 `;
 
 export default HeadingUI;
