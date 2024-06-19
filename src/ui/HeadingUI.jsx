@@ -9,6 +9,7 @@ const HeadingUI = styled.h1`
       color: var(--color-neutral-600);
       font-size: 2.6rem;
       font-weight: 600;
+      line-height: 1;
     `};
 
   ${props =>
@@ -35,9 +36,12 @@ const HeadingUI = styled.h1`
       color: var(--color-neutral-600);
       font-size: 1.6rem;
       font-weight: 600;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
     `}
-
-  ${props => props.$customStyles};
 `;
 
 export default HeadingUI;

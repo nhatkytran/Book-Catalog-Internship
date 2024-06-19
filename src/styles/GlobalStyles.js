@@ -2,14 +2,11 @@ import { createGlobalStyle } from 'styled-components';
 
 export const px1200 = '75em';
 export const px1000 = '62.5em';
+export const px800 = '50em';
 export const px700 = '43.75em';
 export const px600 = '37.5em';
 export const px500 = '31.25em';
 export const px400 = '25em';
-/*
-  $bp-large: 68.75em;    // 1100px
-  $bp-medium: 56.25em;   // 900px
-*/
 
 const GlobalStyles = createGlobalStyle`
   :root {

@@ -42,9 +42,10 @@ function BooksTable() {
 
     if (field === 'name')
       books = books.sort((a, b) => {
-        const nameA = a.name[0].toLowerCase();
-        const nameB = b.name[0].toLowerCase();
-        const side = nameA <= nameB ? -1 : 1;
+        // Sort using the first letter
+        const letterA = a.name[0].toLowerCase();
+        const letterB = b.name[0].toLowerCase();
+        const side = letterA <= letterB ? -1 : 1;
 
         return side * modifier;
       });

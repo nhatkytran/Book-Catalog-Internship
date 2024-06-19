@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import books from '~/../dev-data/books';
 import { selectRecommendBook } from '~/utils';
-import { RecommendedBook } from '~/features/home';
+import { AllBooks, RecommendedBook } from '~/features/home';
+
+import books from '~/../dev-data/books';
 
 function HomePage() {
   const recommendBook = selectRecommendBook(books);
@@ -10,6 +11,7 @@ function HomePage() {
   return (
     <StyledHomePage>
       <RecommendedBook book={recommendBook} />
+      <AllBooks />
     </StyledHomePage>
   );
 }

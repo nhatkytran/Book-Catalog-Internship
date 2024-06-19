@@ -1,9 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import toast from 'react-hot-toast';
 
 import { HeadingUI } from '~/ui';
 import { formatISBN13, formatPrice } from '~/utils';
 import { BookSubInfo, ButtonMain } from '~/components';
+import { px700, px800 } from '~/styles/GlobalStyles';
 
 const book = {
   name: 'The Clean Coder: A Code of Conduct for Professional Programmers',
@@ -24,9 +25,7 @@ function RecommendedBook() {
 
   return (
     <StyledRecommendedBook>
-      <HeadingUI as="h1" $customStyles={HeadingStylesUI}>
-        Recommended book
-      </HeadingUI>
+      <HeadingUI as="h1">Recommended book</HeadingUI>
 
       <BoxUI>
         <BookBoxUI>
@@ -47,7 +46,7 @@ function RecommendedBook() {
             ))}
           </SubInfoUI>
 
-          <ButtonMain onClick={() => toast.success('Feature coming soon')}>
+          <ButtonMain onClick={() => toast.success('Page details coming soon')}>
             Check details
           </ButtonMain>
         </InformationBoxUI>
@@ -58,15 +57,18 @@ function RecommendedBook() {
 
 const StyledRecommendedBook = styled.div``;
 
-const HeadingStylesUI = css`
-  line-height: 1;
-`;
-
 const BoxUI = styled.figure`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2.4rem;
-  margin-top: 2.8rem;
+  margin: 2.8rem 0 3.6rem;
+
+  @media only screen and (max-width: ${px800}) {
+    gap: 2rem;
+  }
+  @media only screen and (max-width: ${px700}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BookBoxUI = styled.div`
@@ -89,6 +91,10 @@ const BookImageUI = styled.img`
 const InformationBoxUI = styled.div`
   font-family: var(--font-poppins);
   padding: 2rem 0;
+
+  @media only screen and (max-width: ${px700}) {
+    padding: 0;
+  }
 `;
 
 const AuthorsUI = styled.p`
@@ -103,6 +109,10 @@ const PriceUI = styled.p`
   font-weight: 500;
   letter-spacing: 1px;
   margin: 1.4rem 0;
+
+  @media only screen and (max-width: ${px700}) {
+    margin: 1rem 0;
+  }
 `;
 
 const SubInfoUI = styled.div`
@@ -110,6 +120,10 @@ const SubInfoUI = styled.div`
   flex-direction: column;
   gap: 0.6rem;
   margin-bottom: 2.8rem;
+
+  @media only screen and (max-width: ${px700}) {
+    margin-bottom: 2rem;
+  }
 `;
 
 export default RecommendedBook;
