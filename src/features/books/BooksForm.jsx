@@ -6,7 +6,7 @@ import { ButtonMainCancelUI, HeadingUI } from '~/ui';
 import { BooksFormRow } from '~/features/books';
 import { isValidIsbn13 } from '~/utils';
 import { ButtonMain } from '~/components';
-import { addBook } from '~/services';
+import { addBook, editBook } from '~/services';
 import { useMutateAction } from '~/hooks';
 import { AiFillCheckSquare } from 'react-icons/ai';
 
@@ -14,45 +14,64 @@ function BooksForm({
   type,
   isMultipleTimes,
   onToggleMultipleTimes,
+  bookToEdit,
   onCloseForm,
 }) {
-  const { isPending, mutate } = useMutateAction({
-    key: 'books',
-    actionFn: addBook,
-  });
-
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
     reset: resetForm,
-  } = useForm();
+  } = useForm({ defaultValues: type === 'edit' ? bookToEdit : {} });
+
+  const { isPending: isCreating, mutate: addMutate } = useMutateAction({
+    key: 'books',
+    actionFn: addBook,
+  });
+
+  const { isPending: isEditing, mutate: editMutate } = useMutateAction({
+    key: 'books',
+    actionFn: editBook,
+  });
+
+  const isPending = isCreating || isEditing;
 
   // Make input ID unique when we reuse this component
   const generateInputID = fieldName => `${fieldName}-${type}`;
+
+  const handleResetCloseForm = () => {
+    resetForm();
+    !isMultipleTimes && onCloseForm();
+  };
 
   const onSubmit = ({ name, authors, publicationYear, rating, isbn }) => {
     const book = {
       name: name.trim(),
       authors: authors.map(author => author.trim()),
-      publicationYear: parseInt(publicationYear),
+      publicationYear: parseInt(publicationYear) || null,
       rating: parseInt(rating) || 0,
-      isbn: parseInt(isbn),
-      createdAt: new Date(),
+      isbn: parseInt(isbn) || null,
     };
 
-    mutate(book, {
-      onSuccess: () => {
-        resetForm();
-        if (!isMultipleTimes) onCloseForm();
-      },
-    });
+    type === 'add' &&
+      addMutate(
+        { ...book, createdAt: new Date() },
+        { onSuccess: handleResetCloseForm }
+      );
+
+    if (type === 'edit')
+      editMutate(
+        { id: bookToEdit.id, ...book },
+        { onSuccess: handleResetCloseForm }
+      );
   };
 
   return (
     <StyledBooksForm>
-      <HeadingUI as="h3">{type === 'add' ? 'Add new book' : ''}</HeadingUI>
+      <HeadingUI as="h3">
+        {type === 'add' ? 'Add new book' : 'Edit book'}
+      </HeadingUI>
 
       <FormUI onSubmit={handleSubmit(onSubmit)}>
         {/* Name */}
@@ -119,7 +138,6 @@ function BooksForm({
             id={generateInputID('publicationYear')}
             disabled={isPending}
             {...register('publicationYear', {
-              required: 'Book publication year is required',
               min: { value: 1801, message: 'Year must be greater than 1800' },
               max: {
                 value: new Date().getFullYear(),
@@ -141,7 +159,6 @@ function BooksForm({
             id={generateInputID('rating')}
             disabled={isPending}
             {...register('rating', {
-              required: 'Book rating is required',
               min: { value: 0, message: 'Rating must be at least 0' },
               max: { value: 10, message: 'Rating must be at most 10' },
             })}
@@ -161,9 +178,8 @@ function BooksForm({
             id={generateInputID('isbn')}
             disabled={isPending}
             {...register('isbn', {
-              required: 'Book ISBN is required',
               validate: value =>
-                isValidIsbn13(value) || 'Book ISBN is not valid',
+                !value || isValidIsbn13(value) || 'Book ISBN is not valid',
             })}
           />
         </BooksFormRow>
@@ -186,9 +202,12 @@ function BooksForm({
           )}
 
           <div>
-            <ButtonMain disabled={isPending}>Create new book</ButtonMain>
+            <ButtonMain disabled={isPending}>
+              {type === 'add' ? 'Create new book' : 'Edit book'}
+            </ButtonMain>
 
             <ButtonMain
+              type="button"
               UI={ButtonMainCancelUI}
               disabled={isPending}
               onClick={onCloseForm}
@@ -209,6 +228,8 @@ const CommonFormStyled = css`
 
 const StyledBooksForm = styled.div`
   ${CommonFormStyled};
+  width: 100%;
+  min-width: 68rem;
   gap: 1.2rem;
 `;
 
@@ -270,11 +291,22 @@ const FileInputUI = styled.input.attrs({ type: 'file' })`
   }
 `;
 
+const { oneOf, bool, func, shape, string, arrayOf, number, object } = PropTypes;
+
 BooksForm.propTypes = {
-  type: PropTypes.oneOf(['add', 'edit']).isRequired,
-  isMultipleTimes: PropTypes.bool,
-  onToggleMultipleTimes: PropTypes.func,
-  onCloseForm: PropTypes.func.isRequired,
+  type: oneOf(['add', 'edit']).isRequired,
+  isMultipleTimes: bool,
+  onToggleMultipleTimes: func,
+  bookToEdit: shape({
+    id: string,
+    name: string,
+    authors: arrayOf(string),
+    publicationYear: number,
+    rating: number,
+    isbn: number,
+    createdAt: object,
+  }),
+  onCloseForm: func.isRequired,
 };
 
 export default BooksForm;

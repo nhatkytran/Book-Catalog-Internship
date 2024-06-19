@@ -4,14 +4,16 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  updateDoc,
   writeBatch,
 } from 'firebase/firestore';
 
 import firestore from '~/connections/firestore';
 import books from '~/../dev-data/books';
 
-const getBooksRef = () => collection(firestore, 'books');
 const getBatch = () => writeBatch(firestore);
+const getBooksRef = () => collection(firestore, 'books');
+const getBookRef = bookID => doc(firestore, 'books', bookID);
 
 // GET ALL //////////
 
@@ -29,8 +31,12 @@ export const addBook = async book => await addDoc(getBooksRef(), book);
 
 // DELETE //////////
 
-export const deleteBook = async bookID =>
-  await deleteDoc(doc(firestore, 'books', bookID));
+export const editBook = async ({ id, ...book }) =>
+  await updateDoc(getBookRef(id), book);
+
+// DELETE //////////
+
+export const deleteBook = async bookID => await deleteDoc(getBookRef(bookID));
 
 // RESET //////////
 

@@ -7,6 +7,7 @@ import { DashChar, Modal, Table, TableMenu } from '~/components';
 
 import {
   BookDelete,
+  BooksForm,
   BooksTableRowButton,
   BooksTableRowMenuButton,
 } from '~/features/books';
@@ -58,7 +59,14 @@ function BooksTableRow({ book }) {
 
             <Modal.Window
               openName="edit"
-              renderWindow={() => <div>Edit modal</div>}
+              renderWindow={({ onCloseModal }) => (
+                <BooksForm
+                  type="edit"
+                  isMultipleTimes={false}
+                  bookToEdit={book}
+                  onCloseForm={onCloseModal}
+                />
+              )}
             />
             <Modal.Window
               openName="delete"

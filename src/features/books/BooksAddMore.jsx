@@ -6,7 +6,7 @@ import { BooksForm } from '~/features/books';
 
 function BooksAddMore() {
   const [isAddOpened, setIsAddOpened] = useState(false);
-  const [isMultipleTimes, setIsMultipleTimes] = useState(true);
+  const [isMultipleTimes, setIsMultipleTimes] = useState(false);
 
   const handleToggleMultipleTimes = () => setIsMultipleTimes(prev => !prev);
 
