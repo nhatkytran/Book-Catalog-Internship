@@ -8,8 +8,14 @@ import { isValidIsbn13 } from '~/utils';
 import { ButtonMain } from '~/components';
 import { addBook } from '~/services';
 import { useMutateAction } from '~/hooks';
+import { AiFillCheckSquare } from 'react-icons/ai';
 
-function BooksForm({ type, onCloseForm }) {
+function BooksForm({
+  type,
+  isMultipleTimes,
+  onToggleMultipleTimes,
+  onCloseForm,
+}) {
   const { isPending, mutate } = useMutateAction({
     key: 'books',
     actionFn: addBook,
@@ -20,11 +26,11 @@ function BooksForm({ type, onCloseForm }) {
     control,
     handleSubmit,
     formState: { errors },
-    reset,
+    reset: resetForm,
   } = useForm();
 
   // Make input ID unique when we reuse this component
-  const generateInputID = fieldName => `${fieldName}-${type}-${Date.now()}`;
+  const generateInputID = fieldName => `${fieldName}-${type}`;
 
   const onSubmit = ({ name, authors, publicationYear, rating, isbn }) => {
     const book = {
@@ -36,7 +42,12 @@ function BooksForm({ type, onCloseForm }) {
       createdAt: new Date(),
     };
 
-    mutate(book, { onSuccess: () => reset() });
+    mutate(book, {
+      onSuccess: () => {
+        resetForm();
+        if (!isMultipleTimes) onCloseForm();
+      },
+    });
   };
 
   return (
@@ -83,6 +94,7 @@ function BooksForm({ type, onCloseForm }) {
             render={({ field }) => (
               <InputUI
                 {...field}
+                id={generateInputID('authors')}
                 onChange={e => field.onChange(e.target.value.split(','))}
               />
             )}
@@ -166,15 +178,24 @@ function BooksForm({ type, onCloseForm }) {
         </BooksFormRow>
 
         <BooksFormRow>
-          <ButtonMain
-            UI={ButtonMainCancelUI}
-            disabled={isPending}
-            onClick={onCloseForm}
-          >
-            Cancel
-          </ButtonMain>
+          {type === 'add' && (
+            <label onClick={onToggleMultipleTimes}>
+              <span>{isMultipleTimes && <AiFillCheckSquare />}</span>
+              <p>Create books multiple times</p>
+            </label>
+          )}
 
-          <ButtonMain disabled={isPending}>Create new book</ButtonMain>
+          <div>
+            <ButtonMain disabled={isPending}>Create new book</ButtonMain>
+
+            <ButtonMain
+              UI={ButtonMainCancelUI}
+              disabled={isPending}
+              onClick={onCloseForm}
+            >
+              Close
+            </ButtonMain>
+          </div>
         </BooksFormRow>
       </FormUI>
     </StyledBooksForm>
@@ -251,6 +272,8 @@ const FileInputUI = styled.input.attrs({ type: 'file' })`
 
 BooksForm.propTypes = {
   type: PropTypes.oneOf(['add', 'edit']).isRequired,
+  isMultipleTimes: PropTypes.bool,
+  onToggleMultipleTimes: PropTypes.func,
   onCloseForm: PropTypes.func.isRequired,
 };
 

@@ -5,7 +5,15 @@ import { ButtonMain } from '~/components';
 import { BooksForm } from '~/features/books';
 
 function BooksAddMore() {
-  const [isAddOpened, setIsAddOpened] = useState(true);
+  const [isAddOpened, setIsAddOpened] = useState(false);
+  const [isMultipleTimes, setIsMultipleTimes] = useState(true);
+
+  const handleToggleMultipleTimes = () => setIsMultipleTimes(prev => !prev);
+
+  const handleCloseForm = () => {
+    setIsMultipleTimes(false);
+    setIsAddOpened(false);
+  };
 
   return (
     <StyledBooksAddMore>
@@ -16,7 +24,12 @@ function BooksAddMore() {
       )}
 
       {isAddOpened && (
-        <BooksForm type="add" onCloseForm={() => setIsAddOpened(false)} />
+        <BooksForm
+          type="add"
+          isMultipleTimes={isMultipleTimes}
+          onToggleMultipleTimes={handleToggleMultipleTimes}
+          onCloseForm={handleCloseForm}
+        />
       )}
     </StyledBooksAddMore>
   );

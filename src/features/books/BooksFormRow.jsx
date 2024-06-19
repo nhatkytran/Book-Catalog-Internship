@@ -48,7 +48,50 @@ const StyledBooksFormRow = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 1.2rem;
+
+    &:has(label) {
+      justify-content: space-between;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 400;
+      cursor: pointer;
+
+      span {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        outline: 1px solid var(--color-neutral-300);
+        outline-offset: -2px;
+        box-shadow: var(--shadow-sm);
+
+        svg {
+          display: block;
+          width: 100%;
+          height: 100%;
+          fill: var(--color-blue-600);
+        }
+      }
+
+      p {
+        padding: 0.2rem 0;
+        position: relative;
+        top: 1px;
+      }
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+
+      button:first-child {
+        order: 1;
+      }
+    }
   }
 
   label {

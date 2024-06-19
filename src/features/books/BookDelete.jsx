@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { useMutateAction } from '~/hooks';
+import { useMutateAction, useWindowEventListener } from '~/hooks';
 import { ButtonMainCancelUI, HeadingUI } from '~/ui';
 import { ButtonMain } from '~/components';
 import { deleteBook } from '~/services';
@@ -10,6 +10,11 @@ function BookDelete({ bookID, onCloseModal }) {
   const { isPending, mutate } = useMutateAction({
     key: 'books',
     actionFn: deleteBook,
+  });
+
+  useWindowEventListener({
+    eventName: 'keydown',
+    handler: event => event.key === 'Enter' && !isPending && mutate(bookID),
   });
 
   return (
