@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import toast from 'react-hot-toast';
 
 import { HeadingUI } from '~/ui';
 import { formatISBN13, formatPrice } from '~/utils';
@@ -14,6 +15,12 @@ const book = {
 
 function RecommendedBook() {
   const { name, authors, publicationYear, rating, isbn } = book;
+
+  const subInfos = [
+    `First published in: ${publicationYear ? publicationYear : 'N/A'}`,
+    `ISBN: ${isbn ? formatISBN13(isbn) : 'N/A'}`,
+    `Rating: ${rating ? `${rating}/10 with 1000 votes` : 'No ratings yet'}`,
+  ];
 
   return (
     <StyledRecommendedBook>
@@ -35,20 +42,14 @@ function RecommendedBook() {
           <PriceUI>{formatPrice({ amount: 1000 })}</PriceUI>
 
           <SubInfoUI>
-            {[
-              `First published in: ${
-                publicationYear ? publicationYear : 'N/A'
-              }`,
-              `ISBN: ${isbn ? formatISBN13(isbn) : 'N/A'}`,
-              `Rating: ${
-                rating ? `${rating}/10 with 1000 votes` : 'No ratings yet'
-              }`,
-            ].map((info, index) => (
+            {subInfos.map((info, index) => (
               <BookSubInfo key={index} content={info} />
             ))}
           </SubInfoUI>
 
-          <ButtonMain>Check details</ButtonMain>
+          <ButtonMain onClick={() => toast.success('Feature coming soon')}>
+            Check details
+          </ButtonMain>
         </InformationBoxUI>
       </BoxUI>
     </StyledRecommendedBook>
