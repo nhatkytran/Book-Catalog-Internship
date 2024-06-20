@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { arrayOf, shape, elementType, node, string, func } from 'prop-types';
 
 import { useOutsideClick, useWindowEventListener } from '~/hooks';
 
@@ -96,15 +96,11 @@ TableMenu.List = List;
 
 // PropTypes //////////
 
-const buttonShape = PropTypes.shape({
-  icon: PropTypes.elementType,
-  label: PropTypes.string,
-});
-
-const childrenProp = { children: PropTypes.node.isRequired };
-const idProp = { id: PropTypes.string.isRequired };
-const renderButtonProp = { renderButton: PropTypes.func.isRequired };
-const buttonsProp = { buttons: PropTypes.arrayOf(buttonShape).isRequired };
+const buttonShape = shape({ icon: elementType, label: string });
+const childrenProp = { children: node.isRequired };
+const idProp = { id: string.isRequired };
+const renderButtonProp = { renderButton: func.isRequired };
+const buttonsProp = { buttons: arrayOf(buttonShape).isRequired };
 
 TableMenu.propTypes = { ...childrenProp };
 List.propTypes = { ...idProp, ...buttonsProp, ...renderButtonProp };

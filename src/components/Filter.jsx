@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { arrayOf, shape, string } from 'prop-types';
 
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -63,10 +63,8 @@ const FilterButtonUI = styled.button`
 `;
 
 Filter.propTypes = {
-  filterField: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({ value: PropTypes.string, label: PropTypes.string })
-  ).isRequired,
+  filterField: string.isRequired,
+  options: arrayOf(shape({ value: string, label: string })).isRequired,
 };
 
 export default Filter;

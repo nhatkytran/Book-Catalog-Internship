@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { number } from 'prop-types';
 
 import { PAGE_SIZE } from '~/config';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
@@ -120,6 +120,6 @@ const ButtonUI = styled.button`
   }
 `;
 
-BooksTablePagination.propTypes = { count: PropTypes.number.isRequired };
+BooksTablePagination.propTypes = { count: number.isRequired };
 
 export default BooksTablePagination;

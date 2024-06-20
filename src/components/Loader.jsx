@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { array } from 'prop-types';
 
 function Loader({ UI }) {
   return (
@@ -86,6 +86,6 @@ const StyledLoader = styled.svg`
   ${props => props.$UI}
 `;
 
-Loader.propTypes = { UI: PropTypes.array }; // css``
+Loader.propTypes = { UI: array }; // css``
 
 export default Loader;

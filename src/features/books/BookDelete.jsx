@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import { string, func } from 'prop-types';
 
 import { useMutateAction, useWindowEventListener } from '~/hooks';
 import { ButtonMainCancelUI, HeadingUI } from '~/ui';
@@ -74,8 +74,8 @@ const ButtonMainDelete = css`
 `;
 
 BookDelete.propTypes = {
-  bookID: PropTypes.string.isRequired,
-  onCloseModal: PropTypes.func.isRequired,
+  bookID: string.isRequired,
+  onCloseModal: func.isRequired,
 };
 
 export default BookDelete;

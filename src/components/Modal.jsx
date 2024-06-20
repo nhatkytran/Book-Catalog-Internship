@@ -2,7 +2,7 @@ import { createContext, createElement, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { HiXMark } from 'react-icons/hi2';
-import PropTypes from 'prop-types';
+import { node, string, func } from 'prop-types';
 
 import { useOutsideClick } from '~/hooks';
 import { OverlayUI } from '~/ui';
@@ -102,9 +102,9 @@ Modal.Window = Window;
 
 // PropTypes //////////
 
-const childrenProp = { children: PropTypes.node.isRequired };
-const openNameProp = { openName: PropTypes.string.isRequired };
-const renderWindowProp = { renderWindow: PropTypes.func.isRequired };
+const childrenProp = { children: node.isRequired };
+const openNameProp = { openName: string.isRequired };
+const renderWindowProp = { renderWindow: func.isRequired };
 
 Modal.propTypes = { ...childrenProp };
 Open.propTypes = { ...childrenProp, ...openNameProp };

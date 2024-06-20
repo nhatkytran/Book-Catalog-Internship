@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import { bool, func } from 'prop-types';
 
 function BooksTableRowButton({ active, onClick }) {
   return (
@@ -12,11 +12,6 @@ function BooksTableRowButton({ active, onClick }) {
     </StyledBooksTableRowButton>
   );
 }
-
-BooksTableRowButton.propTypes = {
-  active: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
 
 const StyledBooksTableRowButton = styled.button`
   justify-self: flex-end;
@@ -42,5 +37,10 @@ const StyledBooksTableRowButton = styled.button`
     height: 100%;
   }
 `;
+
+BooksTableRowButton.propTypes = {
+  active: bool.isRequired,
+  onClick: func.isRequired,
+};
 
 export default BooksTableRowButton;

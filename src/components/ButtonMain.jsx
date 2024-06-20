@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { array, node, func } from 'prop-types';
 
 function ButtonMain({ children, UI, onClick, ...props }) {
   return (
@@ -26,10 +26,6 @@ const StyledButtonMain = styled.button`
   ${props => props.$UI};
 `;
 
-ButtonMain.propTypes = {
-  children: PropTypes.node.isRequired,
-  UI: PropTypes.array, // css``
-  onClick: PropTypes.func,
-};
+ButtonMain.propTypes = { children: node.isRequired, UI: array, onClick: func }; // UI -> css``
 
 export default ButtonMain;

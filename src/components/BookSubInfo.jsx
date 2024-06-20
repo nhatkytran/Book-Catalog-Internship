@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { AiFillCaretRight } from 'react-icons/ai';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 
 function BookSubInfo({ content }) {
   return (
@@ -32,6 +32,6 @@ const StyledBookSubInfo = styled.div`
   }
 `;
 
-BookSubInfo.propTypes = { content: PropTypes.string.isRequired };
+BookSubInfo.propTypes = { content: string.isRequired };
 
 export default BookSubInfo;

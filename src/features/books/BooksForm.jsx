@@ -1,6 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import { AiFillCheckSquare } from 'react-icons/ai';
+import { oneOf, bool, func } from 'prop-types';
 
 import { ButtonMainCancelUI, HeadingUI } from '~/ui';
 import { BooksFormRow } from '~/features/books';
@@ -8,7 +9,7 @@ import { isValidIsbn13 } from '~/utils';
 import { ButtonMain } from '~/components';
 import { addBook, editBook } from '~/services';
 import { useMutateAction } from '~/hooks';
-import { AiFillCheckSquare } from 'react-icons/ai';
+import { bookShape } from '~/types';
 
 function BooksForm({
   type,
@@ -291,21 +292,11 @@ const FileInputUI = styled.input.attrs({ type: 'file' })`
   }
 `;
 
-const { oneOf, bool, func, shape, string, arrayOf, number, object } = PropTypes;
-
 BooksForm.propTypes = {
   type: oneOf(['add', 'edit']).isRequired,
   isMultipleTimes: bool,
   onToggleMultipleTimes: func,
-  bookToEdit: shape({
-    id: string,
-    name: string,
-    authors: arrayOf(string),
-    publicationYear: number,
-    rating: number,
-    isbn: number,
-    createdAt: object,
-  }),
+  bookToEdit: bookShape,
   onCloseForm: func.isRequired,
 };
 

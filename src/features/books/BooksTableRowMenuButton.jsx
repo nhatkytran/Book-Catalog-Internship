@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { elementType, string, func } from 'prop-types';
 
 // We need a prop 'onClick' here because this component is wrapped by
 // Modal Context Open -> requires 'onClick' to work properly
@@ -38,9 +38,9 @@ const StyledBooksTableRowMenuButton = styled.button`
 `;
 
 BooksTableRowMenuButton.propTypes = {
-  icon: PropTypes.elementType.isRequired,
-  label: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  icon: elementType.isRequired,
+  label: string.isRequired,
+  onClick: func.isRequired,
 };
 
 export default BooksTableRowMenuButton;

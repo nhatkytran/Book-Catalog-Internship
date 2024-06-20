@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
-import { selectRecommendBook } from '~/utils';
+import { groupBooksByYear, selectRecommendBook } from '~/utils';
 import { AllBooks, RecommendedBook } from '~/features/home';
 
 import books from '~/../dev-data/books';
 
 function HomePage() {
   const recommendBook = selectRecommendBook(books);
+  const groupedBooks = groupBooksByYear(books);
 
   return (
     <StyledHomePage>
       <RecommendedBook book={recommendBook} />
-      <AllBooks />
+      <AllBooks groupedBooks={groupedBooks} />
     </StyledHomePage>
   );
 }

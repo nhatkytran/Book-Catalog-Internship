@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { string, func } from 'prop-types';
 
 function useWindowEventListener({ eventName, handler }) {
   useEffect(() => {
@@ -9,8 +9,8 @@ function useWindowEventListener({ eventName, handler }) {
 }
 
 useWindowEventListener.propTypes = {
-  eventName: PropTypes.string.isRequired,
-  handler: PropTypes.func.isRequired,
+  eventName: string.isRequired,
+  handler: func.isRequired,
 };
 
 export default useWindowEventListener;

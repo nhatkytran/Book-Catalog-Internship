@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
+import { node, string } from 'prop-types';
 
 function BooksFormRow({ children, label, message, link, errorMessage }) {
   return (
@@ -113,14 +113,12 @@ const MessageUI = styled.p`
   }
 `;
 
-const propTypeString = PropTypes.string;
-
 BooksFormRow.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: propTypeString,
-  message: propTypeString,
-  link: PropTypes.string,
-  errorMessage: propTypeString,
+  children: node.isRequired,
+  label: string,
+  message: string,
+  link: string,
+  errorMessage: string,
 };
 
 export default BooksFormRow;

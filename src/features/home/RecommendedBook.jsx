@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 
 import { HeadingUI } from '~/ui';
 import { formatISBN13, formatPrice } from '~/utils';
-import { BookSubInfo, ButtonMain } from '~/components';
+import { BookSubInfo, ButtonMain, HomeBookImage } from '~/components';
 import { px700, px800 } from '~/styles/GlobalStyles';
 
 const book = {
@@ -28,12 +28,7 @@ function RecommendedBook() {
       <HeadingUI as="h1">Recommended book</HeadingUI>
 
       <BoxUI>
-        <BookBoxUI>
-          <BookImageUI
-            src="/images/book.jpeg"
-            alt="Saritasa recommended book"
-          />
-        </BookBoxUI>
+        <HomeBookImage />
 
         <InformationBoxUI>
           <HeadingUI as="h5">{name}</HeadingUI>
@@ -69,23 +64,6 @@ const BoxUI = styled.figure`
   @media only screen and (max-width: ${px700}) {
     grid-template-columns: 1fr;
   }
-`;
-
-const BookBoxUI = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 1 /1;
-  background-color: var(--color-neutral-200);
-  border-radius: var(--border-radius-md);
-  border: 1px solid var(--color-neutral-300);
-  box-shadow: var(--shadow-sm);
-`;
-
-const BookImageUI = styled.img`
-  display: block;
-  width: 64%;
 `;
 
 const InformationBoxUI = styled.div`

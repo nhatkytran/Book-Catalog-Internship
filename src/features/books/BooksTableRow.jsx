@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { HiPencil, HiTrash } from 'react-icons/hi2';
-import PropTypes from 'prop-types';
 
 import { formatISBN13, isValidIsbn13 } from '~/utils';
 import { DashChar, Modal, Table, TableMenu } from '~/components';
+import { bookShape } from '~/types';
 
 import {
   BookDelete,
@@ -97,15 +97,6 @@ const BookNameUI = styled.div`
   overflow: hidden;
 `;
 
-BooksTableRow.propTypes = {
-  book: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    authors: PropTypes.arrayOf(PropTypes.string),
-    publicationYear: PropTypes.number,
-    rating: PropTypes.number,
-    isbn: PropTypes.number,
-  }),
-};
+BooksTableRow.propTypes = { book: bookShape };
 
 export default BooksTableRow;

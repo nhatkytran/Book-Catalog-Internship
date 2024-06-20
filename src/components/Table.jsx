@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { arrayOf, node, string, object, func } from 'prop-types';
 
 import { TableBodyMessageUI } from '~/ui';
 
@@ -104,10 +104,10 @@ Table.Footer = Footer;
 
 // PropTypes //////////
 
-const childrenProp = { children: PropTypes.node.isRequired };
-const columnsProp = { columns: PropTypes.string.isRequired };
-const dataProp = { data: PropTypes.arrayOf(PropTypes.object).isRequired };
-const renderProp = { render: PropTypes.func.isRequired };
+const childrenProp = { children: node.isRequired };
+const columnsProp = { columns: string.isRequired };
+const dataProp = { data: arrayOf(object).isRequired };
+const renderProp = { render: func.isRequired };
 
 Table.propTypes = { ...childrenProp, ...columnsProp };
 Header.propTypes = { ...childrenProp };

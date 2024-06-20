@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 
 import { px400, px500, px600, px700 } from '~/styles/GlobalStyles';
 
@@ -65,8 +65,8 @@ const TextUI = styled.p`
 `;
 
 Banner.propTypes = {
-  url: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  url: string.isRequired,
+  text: string.isRequired,
 };
 
 export default Banner;

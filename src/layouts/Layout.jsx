@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { shape, element, string } from 'prop-types';
 
 import { MAIN_LAYOUT } from '~/config';
 import { LayoutUI } from '~/ui';
@@ -56,12 +56,9 @@ const MainViewHeaderUI = styled.div`
 `;
 
 Layout.propTypes = {
-  children: PropTypes.element.isRequired,
-  type: PropTypes.string.isRequired,
-  banner: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-  }),
+  children: element.isRequired,
+  type: string.isRequired,
+  banner: shape({ url: string.isRequired, text: string.isRequired }),
 };
 
 export default Layout;

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { oneOfType, elementType, string, number } from 'prop-types';
 
 function DashChar({ priorityValue, UI }) {
   if (!priorityValue && priorityValue !== 0) return <span>&mdash;</span>;
@@ -7,8 +7,8 @@ function DashChar({ priorityValue, UI }) {
 }
 
 DashChar.propTypes = {
-  priorityValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  UI: PropTypes.elementType,
+  priorityValue: oneOfType([string, number]),
+  UI: elementType,
 };
 
 export default DashChar;

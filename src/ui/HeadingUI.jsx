@@ -31,6 +31,15 @@ const HeadingUI = styled.h1`
     `};
 
   ${props =>
+    props.as === 'h4' &&
+    css`
+      color: var(--color-neutral-600);
+      font-size: 2.1rem;
+      font-weight: 600;
+      line-height: 1;
+    `};
+
+  ${props =>
     props.as === 'h5' &&
     css`
       color: var(--color-neutral-600);
@@ -42,6 +51,8 @@ const HeadingUI = styled.h1`
       text-overflow: ellipsis;
       overflow: hidden;
     `}
+
+  ${props => props.$customStyles};
 `;
 
 export default HeadingUI;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { array, string } from 'prop-types';
 
 function FeatureNotSupported({ content, UI }) {
   return (
@@ -17,9 +17,6 @@ const StyledFeatureNotSupported = styled.div`
   ${props => props.$UI};
 `;
 
-FeatureNotSupported.propTypes = {
-  content: PropTypes.string.isRequired,
-  UI: PropTypes.array, // css``
-};
+FeatureNotSupported.propTypes = { content: string.isRequired, UI: array }; // css``
 
 export default FeatureNotSupported;

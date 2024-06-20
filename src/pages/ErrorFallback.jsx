@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { any, func } from 'prop-types';
 
 import { ButtonMain } from '~/components';
 
@@ -35,8 +35,8 @@ const StyledErrorFallback = styled(LayoutUI)`
 `;
 
 ErrorFallback.propTypes = {
-  error: PropTypes.any.isRequired,
-  resetErrorBoundary: PropTypes.func.isRequired,
+  error: any.isRequired,
+  resetErrorBoundary: func.isRequired,
 };
 
 export default ErrorFallback;
