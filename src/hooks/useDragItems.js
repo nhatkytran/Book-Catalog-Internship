@@ -1,6 +1,12 @@
 import { useEffect, useRef } from 'react';
 
-function useDragItems({ itemsClassName, itemsLength, itemsGap }) {
+function useDragItems({
+  itemsClassName,
+  itemsLength,
+  itemsGap,
+  lineClassName,
+  lineProgressClassName,
+}) {
   const containerRef = useRef(null);
   const isReadyToDragRef = useRef(false);
   const startClientXRef = useRef(null);
@@ -11,6 +17,30 @@ function useDragItems({ itemsClassName, itemsLength, itemsGap }) {
     const containerNode = containerRef.current;
     const options = { passive: true };
 
+    // Helpers //////////
+
+    const getBookItemWidth = () => {
+      const bookItem = document.querySelector(`.${itemsClassName}`);
+      return bookItem.getBoundingClientRect().width;
+    };
+
+    const getTotalWidth = () => {
+      const totalGap = (itemsLength - 1) * itemsGap;
+      return itemsLength * getBookItemWidth() + totalGap;
+    };
+
+    const booksTranslateX = translateX =>
+      document
+        .querySelectorAll(`.${itemsClassName}`)
+        .forEach(book => (book.style.transform = `translateX(${translateX})`));
+
+    const lineTranslateX = translateX =>
+      (document.querySelector(
+        `.${lineProgressClassName}`
+      ).style.transform = `translateX(${translateX})`);
+
+    // Handlers //////////
+
     const mouseDownHandler = event => {
       isReadyToDragRef.current = true;
       startClientXRef.current = event.clientX ?? event.touches[0].clientX;
@@ -19,25 +49,34 @@ function useDragItems({ itemsClassName, itemsLength, itemsGap }) {
     const mouseMoveHandler = event => {
       if (!isReadyToDragRef.current) return;
 
+      // Handle items //////////
+
       newClientXRef.current = event.clientX ?? event.touches[0].clientX;
 
-      const diff =
+      const translateXTemp =
         translateXRef.current +
         (newClientXRef.current - startClientXRef.current);
 
-      document
-        .querySelectorAll(`.${itemsClassName}`)
-        .forEach(
-          book => (book.style.transform = `translateX(${diff / 10}rem)`)
-        );
+      booksTranslateX(`${translateXTemp / 10}rem`);
+
+      // Handle line //////////
+
+      const line = document.querySelector(`.${lineClassName}`);
+      const lineWidth = line.getBoundingClientRect().width;
+
+      if (translateXTemp > 0) return;
+      if (Math.abs(translateXTemp) > getTotalWidth() - getBookItemWidth())
+        return;
+
+      const lineTranslateXValue =
+        (Math.abs(translateXTemp) / getTotalWidth()) * lineWidth;
+
+      lineTranslateX(`${lineTranslateXValue / 10}rem`);
     };
 
     const adjustTranslateX = () => {
-      const bookItem = document.querySelector(`.${itemsClassName}`);
-      const bookItemWidth = bookItem.getBoundingClientRect().width;
-      const gap = itemsGap;
-      const totalGap = (itemsLength - 1) * gap;
-      const totalWidth = itemsLength * bookItemWidth + totalGap;
+      const bookItemWidth = getBookItemWidth();
+      const totalWidth = getTotalWidth();
 
       if (translateXRef.current > 0) return 0;
 
@@ -45,32 +84,35 @@ function useDragItems({ itemsClassName, itemsLength, itemsGap }) {
         return -totalWidth + bookItemWidth;
 
       const translateXBasedOnOneItem = Math.abs(
-        translateXRef.current % (bookItemWidth + gap)
+        translateXRef.current % (bookItemWidth + itemsGap)
       );
 
       return translateXBasedOnOneItem <= bookItemWidth / 2
         ? translateXRef.current + translateXBasedOnOneItem
         : translateXRef.current -
             (bookItemWidth - translateXBasedOnOneItem) -
-            gap;
+            itemsGap;
     };
 
     const mouseUpHandler = () => {
       if (!isReadyToDragRef.current) return;
 
+      // Handle items //////////
+
       isReadyToDragRef.current = false;
       translateXRef.current += newClientXRef.current - startClientXRef.current;
-
       translateXRef.current = adjustTranslateX();
 
-      document
-        .querySelectorAll(`.${itemsClassName}`)
-        .forEach(
-          book =>
-            (book.style.transform = `translateX(${
-              translateXRef.current / 10
-            }rem)`)
-        );
+      booksTranslateX(`${translateXRef.current / 10}rem`);
+
+      // Handle line //////////
+
+      const lineIndex =
+        (Math.round((Math.abs(translateXRef.current) / getTotalWidth()) * 100) /
+          100) *
+        itemsLength;
+
+      lineTranslateX(`${lineIndex * 100}%`);
     };
 
     containerNode.addEventListener('mousedown', mouseDownHandler);
@@ -92,7 +134,13 @@ function useDragItems({ itemsClassName, itemsLength, itemsGap }) {
       document.removeEventListener('mouseup', mouseUpHandler);
       document.removeEventListener('touchend', mouseUpHandler, options);
     };
-  }, [itemsClassName, itemsLength, itemsGap]);
+  }, [
+    itemsClassName,
+    itemsLength,
+    itemsGap,
+    lineClassName,
+    lineProgressClassName,
+  ]);
 
   return { containerRef };
 }

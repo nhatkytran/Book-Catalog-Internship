@@ -5,7 +5,7 @@ import { any } from 'prop-types';
 import { HeadingUI } from '~/ui';
 import { Filter } from '~/components';
 import { useWindowEventListener } from '~/hooks';
-import { px500, px600 } from '~/styles/GlobalStyles';
+import { px600 } from '~/styles/GlobalStyles';
 import { SortedBooksDesktop, SortedBooksMobile } from '~/features/home';
 
 // There are two components for displaying books based on a device's width
@@ -106,7 +106,7 @@ const HeaderUI = styled.div`
   justify-content: space-between;
   margin-top: 0.8rem;
 
-  @media only screen and (max-width: ${px500}) {
+  @media only screen and (max-width: ${px600}) {
     align-items: flex-start;
     flex-direction: column;
     gap: 1.2rem;
