@@ -107,6 +107,8 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     line-height: 1.5;
     transition: color 0.3s, background-color 0.3s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   *:disabled {

@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { arrayOf, oneOfType, string, number } from 'prop-types';
 
-import { bookShape } from '~/types';
+import { sortedBooksTypes } from '~/types';
 import { HeadingUI } from '~/ui';
-import { px500, px600, px800 } from '~/styles/GlobalStyles';
+import { px600, px800 } from '~/styles/GlobalStyles';
 import { Book } from '~/features/home';
 
 function SortedBooksDesktop({ category, books }) {
@@ -24,10 +23,6 @@ const StyledSortedBooksDesktop = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  @media only screen and (max-width: ${px500}) {
-    display: none;
-  }
 `;
 
 const BodyUI = styled.div`
@@ -43,9 +38,6 @@ const BodyUI = styled.div`
   }
 `;
 
-SortedBooksDesktop.propTypes = {
-  category: oneOfType([string, number]).isRequired,
-  books: arrayOf(bookShape),
-};
+SortedBooksDesktop.propTypes = sortedBooksTypes;
 
 export default SortedBooksDesktop;

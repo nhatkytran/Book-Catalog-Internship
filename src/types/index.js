@@ -1,4 +1,4 @@
-import { shape, arrayOf, string, number, object } from 'prop-types';
+import { oneOfType, shape, arrayOf, string, number, object } from 'prop-types';
 
 export const bookShape = shape({
   id: string.isRequired,
@@ -9,3 +9,8 @@ export const bookShape = shape({
   isbn: number,
   createdAt: object,
 });
+
+export const sortedBooksTypes = {
+  category: oneOfType([string, number]).isRequired,
+  books: arrayOf(bookShape),
+};

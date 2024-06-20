@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { any } from 'prop-types';
 
 import { HeadingUI } from '~/ui';
 import { Filter } from '~/components';
+import { useWindowEventListener } from '~/hooks';
 import { px500, px600 } from '~/styles/GlobalStyles';
-import { SortedBooksDesktop } from '~/features/home';
+import { SortedBooksDesktop, SortedBooksMobile } from '~/features/home';
+
+// There are two components for displaying books based on a device's width
+// We use state here instead of using CSS display none to support useEffect in the component for mobile version
+const checkViewPort600 = () => window.innerWidth <= 600;
 
 function AllBooks({ groupedBooks }) {
   console.log(groupedBooks);
@@ -42,6 +48,13 @@ function AllBooks({ groupedBooks }) {
     ],
   };
 
+  const [isResponsiveWidth, setIsResponsiveWidth] = useState(checkViewPort600);
+
+  useWindowEventListener({
+    eventName: 'resize',
+    handler: () => setIsResponsiveWidth(checkViewPort600),
+  });
+
   return (
     <StyledAllBooks>
       <HeaderUI>
@@ -61,8 +74,21 @@ function AllBooks({ groupedBooks }) {
       </HeaderUI>
 
       <BodyUI>
-        <SortedBooksDesktop category={book1.year} books={book1.books} />
-        <SortedBooksDesktop category={book1.year} books={book1.books} />
+        {/* Large device */}
+        {!isResponsiveWidth && (
+          <>
+            <SortedBooksDesktop category={book1.year} books={book1.books} />
+            <SortedBooksDesktop category={book1.year} books={book1.books} />
+          </>
+        )}
+
+        {/* Small device */}
+        {isResponsiveWidth && (
+          <>
+            <SortedBooksMobile category={book1.year} books={book1.books} />
+            <SortedBooksMobile category={book1.year} books={book1.books} />
+          </>
+        )}
       </BodyUI>
     </StyledAllBooks>
   );

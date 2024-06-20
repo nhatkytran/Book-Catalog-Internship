@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { bookShape } from '~/types';
 import { HeadingUI } from '~/ui';
@@ -8,7 +7,7 @@ import { px600 } from '~/styles/GlobalStyles';
 
 function Book({ book }) {
   return (
-    <Link key={book.id}>
+    <StyledBook key={book.id}>
       <HomeBookImage />
 
       <InformationBoxUI>
@@ -17,9 +16,13 @@ function Book({ book }) {
         </HeadingUI>
         <AuthorsUI>By: {book.authors.join(', ')}</AuthorsUI>
       </InformationBoxUI>
-    </Link>
+    </StyledBook>
   );
 }
+
+const StyledBook = styled.figure`
+  cursor: pointer;
+`;
 
 const InformationBoxUI = styled.div`
   font-family: var(--font-poppins);

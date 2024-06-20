@@ -4,7 +4,7 @@ import { string } from 'prop-types';
 function HomeBookImage({ src = '/images/book.jpeg', alt = 'Saritasa book' }) {
   return (
     <StyledHomeBookImage>
-      <ImageUI src={src} alt={alt} />
+      <ImageUI src={src} alt={alt} draggable={false} />
     </StyledHomeBookImage>
   );
 }

@@ -20,6 +20,7 @@ function HomePage() {
 const StyledHomePage = styled.div`
   flex: 1;
   padding: 3.2rem 2rem;
+  overflow: hidden;
 `;
 
 export default HomePage;
