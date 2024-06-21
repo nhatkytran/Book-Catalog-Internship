@@ -1,84 +1,33 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { any } from 'prop-types';
+import { useSearchParams } from 'react-router-dom';
+import { arrayOf } from 'prop-types';
 
 import { HeadingUI } from '~/ui';
 import { Filter } from '~/components';
+import { groupBooksByYear } from '~/utils';
 import { useWindowEventListener } from '~/hooks';
 import { px400, px600 } from '~/styles/GlobalStyles';
 import { SortedBooksDesktop, SortedBooksMobile } from '~/features/home';
+import { bookShape } from '~/types';
 
 // There are two components for displaying books based on a device's width
 // We use state here instead of using CSS display none to support useEffect in the component for mobile version
 const checkViewPort600 = () => window.innerWidth <= 600;
 
-function AllBooks({ groupedBooks }) {
-  console.log(groupedBooks);
-  const book1 = {
-    year: 2021,
-    books: [
-      {
-        id: '1',
-        name: 'The Inmates Are Running the Asylum',
-        authors: ['Cooper, Alan'],
-        publicationYear: 2004,
-        rating: 8,
-        isbn: 9780672326141,
-      },
-      {
-        id: '2',
-        name: 'The Three Musketeers',
-        authors: ['Alexandre Dumas'],
-      },
-      {
-        id: '3',
-        name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
-        authors: ['Robert C. Martin'],
-        publicationYear: 2008,
-        rating: 9,
-        isbn: 9780132350884,
-      },
-      {
-        id: '4',
-        name: 'George and the Big Bang',
-        authors: ['Hawking', 'Stephen', 'Lucy'],
-        publicationYear: 2013,
-        isbn: 9781442440067,
-      },
-      {
-        id: '5',
-        name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
-        authors: ['Robert C. Martin'],
-        publicationYear: 2008,
-        rating: 9,
-        isbn: 9780132350884,
-      },
-      {
-        id: '6',
-        name: 'George and the Big Bang',
-        authors: ['Hawking', 'Stephen', 'Lucy'],
-        publicationYear: 2013,
-        isbn: 9781442440067,
-      },
-      {
-        id: '7',
-        name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
-        authors: ['Robert C. Martin'],
-        publicationYear: 2008,
-        rating: 9,
-        isbn: 9780132350884,
-      },
-      {
-        id: '8',
-        name: 'George and the Big Bang',
-        authors: ['Hawking', 'Stephen', 'Lucy'],
-        publicationYear: 2013,
-        isbn: 9781442440067,
-      },
-    ],
-  };
-
+function AllBooks({ books }) {
+  const [searchParams] = useSearchParams();
   const [isResponsiveWidth, setIsResponsiveWidth] = useState(checkViewPort600);
+
+  const filter = searchParams.get('filter') || 'year';
+
+  let filteredBooks = books;
+
+  if (filter === 'year') filteredBooks = groupBooksByYear(filteredBooks);
+
+  console.log(filter, filteredBooks);
+
+  const isDesktop = !isResponsiveWidth;
 
   useWindowEventListener({
     eventName: 'resize',
@@ -104,22 +53,16 @@ function AllBooks({ groupedBooks }) {
       </HeaderUI>
 
       <BodyUI>
-        {/* Large device */}
-        {!isResponsiveWidth && (
-          <>
-            <SortedBooksDesktop category={book1.year} books={book1.books} />
-            <SortedBooksDesktop category={book1.year} books={book1.books} />
-          </>
-        )}
+        {filteredBooks.map(book => {
+          const category = book[filter];
+          const props = { category, books: book.books };
 
-        {/* Small device */}
-        {isResponsiveWidth && (
-          <>
-            <SortedBooksMobile category={book1.year} books={book1.books} />
-            <SortedBooksMobile category={book1.year} books={book1.books} />
-            <SortedBooksMobile category={book1.year} books={book1.books} />
-          </>
-        )}
+          return isDesktop ? (
+            <SortedBooksDesktop key={category} {...props} />
+          ) : (
+            <SortedBooksMobile key={category} {...props} />
+          );
+        })}
       </BodyUI>
     </StyledAllBooks>
   );
@@ -173,6 +116,6 @@ const BodyUI = styled.div`
   }
 `;
 
-AllBooks.propTypes = { groupedBooks: any };
+AllBooks.propTypes = { books: arrayOf(bookShape).isRequired };
 
 export default AllBooks;

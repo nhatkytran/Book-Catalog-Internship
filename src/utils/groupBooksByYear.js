@@ -15,20 +15,13 @@ const groupBooksByYear = books => {
     return b - a;
   });
 
-  const sortedGroupedBooks = sortedKeys.reduce((acc, year) => {
-    const sortedGroupBooksAlphabet = groupedBooks[year].sort((a, b) => {
-      // Sort using the first letter
-      const letterA = a.name[0].toLowerCase();
-      const letterB = b.name[0].toLowerCase();
+  return sortedKeys.reduce((acc, year) => {
+    const sortedbooks = groupedBooks[year].sort((a, b) =>
+      a.name <= b.name ? -1 : 1
+    );
 
-      return letterA <= letterB ? -1 : 1;
-    });
-
-    acc.push({ year, books: sortedGroupBooksAlphabet });
-    return acc;
+    return [...acc, { year, books: sortedbooks }];
   }, []);
-
-  return sortedGroupedBooks;
 };
 
 export default groupBooksByYear;

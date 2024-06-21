@@ -1,21 +1,21 @@
 const books = [
   {
     name: 'The Clean Coder: A Code of Conduct for Professional Programmers',
-    authors: ['Martin, Robert'],
+    authors: ['Martin', 'Robert'],
     publicationYear: 2011,
     rating: 9,
     isbn: 9780137081073,
   },
   {
     name: '7 Habits Of Highly Effective People',
-    authors: ['Covey, Stephen R.'],
+    authors: ['Covey', 'Stephen R.'],
     publicationYear: 2004,
     rating: 9,
     isbn: 9781863500296,
   },
   {
     name: 'The Color of Magic',
-    authors: ['Pratchett, Terry'],
+    authors: ['Pratchett', 'Terry'],
     publicationYear: 2013,
     rating: 8,
     isbn: 9780062225672,
@@ -28,7 +28,7 @@ const books = [
   },
   {
     name: 'The Inmates Are Running the Asylum',
-    authors: ['Cooper, Alan'],
+    authors: ['Cooper', 'Alan'],
     publicationYear: 2004,
     rating: 8,
     isbn: 9780672326141,

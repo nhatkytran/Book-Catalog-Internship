@@ -1,20 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 
 import { PAGE_SIZE } from '~/config';
+import { useAllBooks } from '~/hooks';
 import { TableBodyMessageUI } from '~/ui';
 import { Loader, Table } from '~/components';
 import { BooksTablePagination, BooksTableRow } from '~/features/books';
-import { getAllBooks } from '~/services';
 import { useSearchParams } from 'react-router-dom';
 
 function BooksTable() {
   const [searchParams] = useSearchParams();
 
-  const { isPending, isError, error, data } = useQuery({
-    queryKey: ['books'],
-    queryFn: getAllBooks,
-  });
+  const { isPending, isError, error, data } = useAllBooks();
 
   let books = data || [];
 
@@ -41,14 +37,7 @@ function BooksTable() {
     const modifier = direction === 'asc' ? 1 : -1;
 
     if (field === 'name')
-      books = books.sort((a, b) => {
-        // Sort using the first letter
-        const letterA = a.name[0].toLowerCase();
-        const letterB = b.name[0].toLowerCase();
-        const side = letterA <= letterB ? -1 : 1;
-
-        return side * modifier;
-      });
+      books = books.sort((a, b) => (a.name <= b.name ? -1 : 1) * modifier);
 
     if (field === 'publicationYear')
       books = books.sort((a, b) => {

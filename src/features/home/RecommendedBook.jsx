@@ -1,21 +1,16 @@
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
+import { arrayOf } from 'prop-types';
 
 import { HeadingUI } from '~/ui';
-import { formatISBN13, formatPrice } from '~/utils';
+import { formatISBN13, formatPrice, selectRecommendBook } from '~/utils';
 import { BookSubInfo, ButtonMain, HomeBookImage } from '~/components';
 import { px700, px800 } from '~/styles/GlobalStyles';
+import { bookShape } from '~/types';
 
-const book = {
-  name: 'The Clean Coder: A Code of Conduct for Professional Programmers',
-  authors: ['Martin', 'Robert'],
-  publicationYear: 2011,
-  rating: 9,
-  isbn: 9780137081073,
-};
-
-function RecommendedBook() {
-  const { name, authors, publicationYear, rating, isbn } = book;
+function RecommendedBook({ books }) {
+  const { name, authors, publicationYear, rating, isbn } =
+    selectRecommendBook(books);
 
   const subInfos = [
     `First published in: ${publicationYear ? publicationYear : 'N/A'}`,
@@ -103,5 +98,7 @@ const SubInfoUI = styled.div`
     margin-bottom: 2rem;
   }
 `;
+
+RecommendedBook.propTypes = { books: arrayOf(bookShape).isRequired };
 
 export default RecommendedBook;

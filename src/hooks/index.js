@@ -1,3 +1,4 @@
+export { default as useAllBooks } from '~/hooks/useAllBooks';
 export { default as useDragItems } from '~/hooks/useDragItems';
 export { default as useMutateAction } from '~/hooks/useMutateAction';
 export { default as useOutsideClick } from '~/hooks/useOutsideClick';

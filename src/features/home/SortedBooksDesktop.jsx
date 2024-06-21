@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 
 import { sortedBooksTypes } from '~/types';
 import { HeadingUI } from '~/ui';
@@ -6,9 +7,18 @@ import { px600, px800 } from '~/styles/GlobalStyles';
 import { Book } from '~/features/home';
 
 function SortedBooksDesktop({ category, books }) {
+  const [searchParams] = useSearchParams();
+
+  const filter = searchParams.get('filter') || 'year';
+
+  let heading = '';
+
+  if (filter === 'year')
+    heading = Number(category) ? `First published in ${category}` : category;
+
   return (
     <StyledSortedBooksDesktop>
-      <HeadingUI as="h4">First published in {category}</HeadingUI>
+      <HeadingUI as="h4">{heading}</HeadingUI>
 
       <BodyUI>
         {books.map(book => (
