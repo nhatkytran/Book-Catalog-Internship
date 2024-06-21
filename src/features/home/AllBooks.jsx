@@ -5,7 +5,7 @@ import { any } from 'prop-types';
 import { HeadingUI } from '~/ui';
 import { Filter } from '~/components';
 import { useWindowEventListener } from '~/hooks';
-import { px600 } from '~/styles/GlobalStyles';
+import { px400, px600 } from '~/styles/GlobalStyles';
 import { SortedBooksDesktop, SortedBooksMobile } from '~/features/home';
 
 // There are two components for displaying books based on a device's width
@@ -40,6 +40,36 @@ function AllBooks({ groupedBooks }) {
       },
       {
         id: '4',
+        name: 'George and the Big Bang',
+        authors: ['Hawking', 'Stephen', 'Lucy'],
+        publicationYear: 2013,
+        isbn: 9781442440067,
+      },
+      {
+        id: '5',
+        name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
+        authors: ['Robert C. Martin'],
+        publicationYear: 2008,
+        rating: 9,
+        isbn: 9780132350884,
+      },
+      {
+        id: '6',
+        name: 'George and the Big Bang',
+        authors: ['Hawking', 'Stephen', 'Lucy'],
+        publicationYear: 2013,
+        isbn: 9781442440067,
+      },
+      {
+        id: '7',
+        name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
+        authors: ['Robert C. Martin'],
+        publicationYear: 2008,
+        rating: 9,
+        isbn: 9780132350884,
+      },
+      {
+        id: '8',
         name: 'George and the Big Bang',
         authors: ['Hawking', 'Stephen', 'Lucy'],
         publicationYear: 2013,
@@ -87,6 +117,7 @@ function AllBooks({ groupedBooks }) {
           <>
             <SortedBooksMobile category={book1.year} books={book1.books} />
             <SortedBooksMobile category={book1.year} books={book1.books} />
+            <SortedBooksMobile category={book1.year} books={book1.books} />
           </>
         )}
       </BodyUI>
@@ -95,6 +126,7 @@ function AllBooks({ groupedBooks }) {
 }
 
 const StyledAllBooks = styled.div`
+  width: 100%;
   font-family: var(--font-poppins);
   padding-top: 2rem;
   border-top: 1px solid var(--color-neutral-300);
@@ -119,6 +151,10 @@ const FilterBoxUI = styled.div`
   justify-content: space-between;
   gap: 1rem;
 
+  @media only screen and (max-width: ${px400}) {
+    gap: 0.8rem;
+  }
+
   p {
     font-size: 1.4rem;
     font-weight: 500;
@@ -129,6 +165,7 @@ const BodyUI = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.6rem;
+  width: 100%;
   margin-top: 2rem;
 
   @media only screen and (max-width: ${px600}) {

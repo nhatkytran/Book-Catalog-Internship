@@ -21,6 +21,7 @@ function Book({ book }) {
 }
 
 const StyledBook = styled.figure`
+  width: 100%;
   cursor: pointer;
 `;
 

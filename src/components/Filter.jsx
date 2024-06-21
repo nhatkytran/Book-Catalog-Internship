@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 import { arrayOf, shape, string } from 'prop-types';
 
+import { px400 } from '~/styles/GlobalStyles';
+
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -40,6 +42,10 @@ const StyledFilter = styled.div`
   border: 1px solid var(--color-neutral-200);
   box-shadow: var(--shadow-sm);
   border-radius: var(--border-radius-sm);
+
+  @media only screen and (max-width: ${px400}) {
+    gap: 0.2rem;
+  }
 `;
 
 const CommonButtonEffect = css`

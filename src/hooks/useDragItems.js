@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import useWindowEventListener from './useWindowEventListener';
 
 function useDragItems({
   itemsClassName,
@@ -12,6 +13,31 @@ function useDragItems({
   const startClientXRef = useRef(null);
   const newClientXRef = useRef(null);
   const translateXRef = useRef(0);
+  const lineIndexRef = useRef(0);
+
+  const getBookItemWidth = useCallback(() => {
+    const bookItem = document.querySelector(`.${itemsClassName}`);
+    return bookItem.getBoundingClientRect().width;
+  }, [itemsClassName]);
+
+  const booksTranslateX = useCallback(
+    translateX =>
+      document
+        .querySelectorAll(`.${itemsClassName}`)
+        .forEach(book => (book.style.transform = `translateX(${translateX})`)),
+    [itemsClassName]
+  );
+
+  // We call SortedBooksMobile more than one times based on the number of books
+  // so sometimes we can see many resize handlers run
+  // distinguish using itemsClassName
+  useWindowEventListener({
+    eventName: 'resize',
+    handler: () => {
+      const translateX = -(getBookItemWidth() + itemsGap);
+      booksTranslateX(`${(lineIndexRef.current * translateX) / 10}rem`);
+    },
+  });
 
   useEffect(() => {
     const containerNode = containerRef.current;
@@ -19,20 +45,10 @@ function useDragItems({
 
     // Helpers //////////
 
-    const getBookItemWidth = () => {
-      const bookItem = document.querySelector(`.${itemsClassName}`);
-      return bookItem.getBoundingClientRect().width;
-    };
-
     const getTotalWidth = () => {
       const totalGap = (itemsLength - 1) * itemsGap;
       return itemsLength * getBookItemWidth() + totalGap;
     };
-
-    const booksTranslateX = translateX =>
-      document
-        .querySelectorAll(`.${itemsClassName}`)
-        .forEach(book => (book.style.transform = `translateX(${translateX})`));
 
     const lineTranslateX = translateX =>
       (document.querySelector(
@@ -112,7 +128,9 @@ function useDragItems({
           100) *
         itemsLength;
 
-      lineTranslateX(`${lineIndex * 100}%`);
+      lineIndexRef.current = Math.round(lineIndex);
+
+      lineTranslateX(`${lineIndex.current * 100}%`);
     };
 
     containerNode.addEventListener('mousedown', mouseDownHandler);
@@ -140,6 +158,8 @@ function useDragItems({
     itemsGap,
     lineClassName,
     lineProgressClassName,
+    getBookItemWidth,
+    booksTranslateX,
   ]);
 
   return { containerRef };

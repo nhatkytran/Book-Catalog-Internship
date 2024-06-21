@@ -95,9 +95,11 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     font-size: 62.5%;
+    overflow-x: hidden;
   }
 
   body {
+    width: 100%;
     min-height: 100vh;
     background-image: linear-gradient(to right bottom, var(--color-orange-500), var(--color-blue-600));
     background-size: cover;
@@ -107,6 +109,7 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.6rem;
     line-height: 1.5;
     transition: color 0.3s, background-color 0.3s;
+    overflow-x: hidden;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
   }

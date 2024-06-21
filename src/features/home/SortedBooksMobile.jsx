@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
+import { useDragItems } from '~/hooks';
 import { sortedBooksTypes } from '~/types';
 import { HeadingUI } from '~/ui';
-import { Book } from '.';
-import useDragItems from '~/hooks/useDragItems';
+import { Book } from '~/features/home';
 
 function SortedBooksMobile({ category, books }) {
   // Make sure class name are different when this component is reused
@@ -50,19 +50,15 @@ const StyledSortedBooksMobile = styled.div`
 `;
 
 const BodyUI = styled.div`
-  display: flex;
-  gap: 1.2rem;
-  width: calc(100% + 4rem);
-  padding: 0 2rem;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 100%;
+  grid-auto-columns: 100%;
+  grid-gap: 1.2rem;
 `;
 
 const BookBoxUI = styled.div`
-  flex-shrink: 0;
-  width: 95%;
+  min-width: 95%;
   transition: all ease 0.2s;
 `;
 
@@ -73,7 +69,6 @@ const LineUI = styled.div`
 `;
 
 const LineProgressUI = styled.div`
-  width: 100%;
   height: 0.2rem;
   background-color: var(--color-neutral-600);
   width: ${props => (1 / props.$numItems) * 100}%;
