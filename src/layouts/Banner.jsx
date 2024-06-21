@@ -43,6 +43,7 @@ const TextBoxUI = styled.div`
 `;
 
 const TextUI = styled.p`
+  background-color: var(--color-orange-600);
   background-image: linear-gradient(
     135deg,
     var(--color-orange-600) 50%,

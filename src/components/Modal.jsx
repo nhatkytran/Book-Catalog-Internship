@@ -1,4 +1,11 @@
-import { createContext, createElement, useContext, useState } from 'react';
+import {
+  createContext,
+  createElement,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import { HiXMark } from 'react-icons/hi2';
@@ -42,22 +49,35 @@ function Open({ children, openName }) {
 }
 
 function Window({ openName: windowName, renderWindow }) {
-  const { openName, close } = useContext(ModalContext);
-  const ref = useOutsideClick({ handler: close, listenCapturing: true });
+  const { openName } = useContext(ModalContext);
 
   if (windowName !== openName) return null;
 
   return createPortal(
     <OverlayUI>
-      <StyledModal ref={ref}>
-        <ButtonUI onClick={close}>
-          <HiXMark />
-        </ButtonUI>
-
-        <div>{renderWindow({ onCloseModal: close })}</div>
-      </StyledModal>
+      <ModalPortal renderWindow={renderWindow} />
     </OverlayUI>,
     document.querySelector('#modal')
+  );
+}
+
+function ModalPortal({ renderWindow }) {
+  const { close } = useContext(ModalContext);
+  const ref = useOutsideClick({ handler: close, listenCapturing: true });
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => (document.body.style.overflow = 'unset');
+  }, []);
+
+  return (
+    <StyledModal ref={ref}>
+      <ButtonUI onClick={close}>
+        <HiXMark />
+      </ButtonUI>
+
+      <div>{renderWindow({ onCloseModal: close })}</div>
+    </StyledModal>
   );
 }
 
@@ -109,5 +129,6 @@ const renderWindowProp = { renderWindow: func.isRequired };
 Modal.propTypes = { ...childrenProp };
 Open.propTypes = { ...childrenProp, ...openNameProp };
 Window.propTypes = { ...openNameProp, ...renderWindowProp };
+ModalPortal.propTypes = { ...renderWindowProp };
 
 export default Modal;

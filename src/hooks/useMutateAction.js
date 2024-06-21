@@ -16,7 +16,10 @@ function useMutateAction({ key, actionFn }) {
 
       queryClient.invalidateQueries({ queryKey: [key] });
     },
-    onError: () => toast.error('Something went wrong!'),
+    onError: error => {
+      if (process.env.NODE_ENV === 'development') console.error(error);
+      toast.error('Something went wrong!');
+    },
   });
 
   return { isPending, mutate };
