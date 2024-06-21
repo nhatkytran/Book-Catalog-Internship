@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillProduct } from 'react-icons/ai';
+import { FaUser } from 'react-icons/fa';
 
-import { px1000 } from '~/styles/GlobalStyles';
+import { px1000, px400 } from '~/styles/GlobalStyles';
 import { LegalText } from '~/components';
 
 const navItems = [
   { link: '/', icon: AiFillHome, content: 'Home' },
-  { link: '/books', icon: AiFillProduct, content: 'All books' },
+  { link: '/books', icon: AiFillProduct, content: 'Books' },
+  { link: '/auth', icon: FaUser, content: 'Auth' },
 ];
 
 function Sidebar() {
@@ -82,6 +84,9 @@ const NavLinkUI = styled(NavLink)`
       justify-content: center;
       padding: 1.5rem;
     }
+    @media only screen and (max-width: ${px400}) {
+      padding: 1.5rem 1rem;
+    }
 
     &:hover::before,
     &.active::before {
@@ -104,10 +109,15 @@ const NavLinkUI = styled(NavLink)`
     }
 
     svg {
+      display: block;
       width: 1.75rem;
       height: 1.75rem;
       margin-right: 1.6rem;
       fill: currentColor;
+
+      @media only screen and (max-width: ${px400}) {
+        margin-right: 0.8rem;
+      }
     }
   }
 `;

@@ -22,7 +22,10 @@ function NotFoundPage() {
           {"We can't find what you're looking for."}
         </HeadingUI>
 
-        <ButtonMain UI={ButtonErrorUI} onClick={() => navigate('/')}>
+        <ButtonMain
+          UI={ButtonErrorUI}
+          onClick={() => navigate('/', { replace: true })}
+        >
           Go Home
         </ButtonMain>
       </ErrorContainerUI>

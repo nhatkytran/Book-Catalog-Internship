@@ -8,7 +8,7 @@ import {
   writeBatch,
 } from 'firebase/firestore';
 
-import firestore from '~/connections/firestore';
+import { firestore } from '~/connections/firestore';
 import books from '~/../dev-data/books';
 
 const getBatch = () => writeBatch(firestore);
