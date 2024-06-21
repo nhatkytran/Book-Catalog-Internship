@@ -16,7 +16,7 @@ function Toaster() {
           fontFamily: 'var(--font-poppins)',
           fontWeight: '500',
           fontSize: '1.4rem',
-          maxWidth: '50rem',
+          maxWidth: '30rem',
           padding: '1.2rem 2rem',
         },
       }}

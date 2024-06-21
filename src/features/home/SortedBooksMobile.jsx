@@ -1,11 +1,16 @@
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 
 import { useDragItems } from '~/hooks';
 import { sortedBooksTypes } from '~/types';
 import { HeadingUI } from '~/ui';
 import { Book } from '~/features/home';
+import { sortedBooksHeading } from '~/utils';
 
 function SortedBooksMobile({ category, books }) {
+  const [searchParams] = useSearchParams();
+  const filter = searchParams.get('filter') || 'year';
+
   // Make sure class name are different when this component is reused
   const uniquePart = `${Math.random().toString().slice(2)}-${Date.now()}`;
   const bookClassName = `book-mobile-${uniquePart}`;
@@ -22,7 +27,7 @@ function SortedBooksMobile({ category, books }) {
 
   return (
     <StyledSortedBooksMobile>
-      <HeadingUI as="h4">First published in {category}</HeadingUI>
+      <HeadingUI as="h4">{sortedBooksHeading({ filter, category })}</HeadingUI>
 
       <BodyUI ref={containerRef}>
         {books.map(book => (

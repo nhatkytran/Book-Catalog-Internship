@@ -3,7 +3,7 @@ import { px1200 } from '~/styles/GlobalStyles';
 
 const LayoutUI = styled.div`
   max-width: var(--width-main-layout);
-  min-height: 50rem;
+  min-height: var(--width-sub-layout);
   background-color: var(--color-neutral-100);
   margin: 8rem auto;
   box-shadow: var(--shadow-lg);

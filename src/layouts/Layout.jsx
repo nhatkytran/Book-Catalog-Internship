@@ -44,7 +44,7 @@ const MainViewUI = styled.main`
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--color-white);
-  min-height: 50rem;
+  min-height: var(--width-sub-layout);
 `;
 
 const MainViewHeaderUI = styled.div`

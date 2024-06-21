@@ -130,7 +130,7 @@ function useDragItems({
 
       lineIndexRef.current = Math.round(lineIndex);
 
-      lineTranslateX(`${lineIndex.current * 100}%`);
+      lineTranslateX(`${lineIndexRef.current * 100}%`);
     };
 
     containerNode.addEventListener('mousedown', mouseDownHandler);

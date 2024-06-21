@@ -2,18 +2,36 @@ import styled from 'styled-components';
 
 import { useAllBooks } from '~/hooks';
 import { AllBooks, RecommendedBook } from '~/features/home';
+import { TableBodyMessageUI } from '~/ui';
+import { Loader } from '~/components';
 
 function HomePage() {
-  const { isPending, isError, data: books } = useAllBooks();
-
-  // No books to display when books is []
-
-  if (isPending || isError) return null;
+  const { isPending, isError, error, data: books = [] } = useAllBooks();
 
   return (
     <StyledHomePage>
-      <RecommendedBook books={books} />
-      <AllBooks books={books} />
+      {isPending && <Loader />}
+
+      {isError && (
+        <TableBodyMessageUI $noMargin={true} $color="red">
+          {error.message}
+        </TableBodyMessageUI>
+      )}
+
+      {!isPending && !isError && (
+        <>
+          {!books.length ? (
+            <TableBodyMessageUI $noMargin={true}>
+              No data to show at the moment.
+            </TableBodyMessageUI>
+          ) : (
+            <>
+              <RecommendedBook books={books} />
+              <AllBooks books={books} />
+            </>
+          )}
+        </>
+      )}
     </StyledHomePage>
   );
 }

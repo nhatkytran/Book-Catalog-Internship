@@ -5,7 +5,11 @@ import { arrayOf } from 'prop-types';
 
 import { HeadingUI } from '~/ui';
 import { Filter } from '~/components';
-import { groupBooksByYear } from '~/utils';
+import {
+  groupBooksByAuthor,
+  groupBooksByRating,
+  groupBooksByYear,
+} from '~/utils';
 import { useWindowEventListener } from '~/hooks';
 import { px400, px600 } from '~/styles/GlobalStyles';
 import { SortedBooksDesktop, SortedBooksMobile } from '~/features/home';
@@ -24,10 +28,8 @@ function AllBooks({ books }) {
   let filteredBooks = books;
 
   if (filter === 'year') filteredBooks = groupBooksByYear(filteredBooks);
-
-  console.log(filter, filteredBooks);
-
-  const isDesktop = !isResponsiveWidth;
+  if (filter === 'author') filteredBooks = groupBooksByAuthor(filteredBooks);
+  if (filter === 'rating') filteredBooks = groupBooksByRating(filteredBooks);
 
   useWindowEventListener({
     eventName: 'resize',
@@ -57,7 +59,7 @@ function AllBooks({ books }) {
           const category = book[filter];
           const props = { category, books: book.books };
 
-          return isDesktop ? (
+          return !isResponsiveWidth ? (
             <SortedBooksDesktop key={category} {...props} />
           ) : (
             <SortedBooksMobile key={category} {...props} />

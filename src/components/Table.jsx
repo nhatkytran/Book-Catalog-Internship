@@ -31,7 +31,7 @@ function Header({ children }) {
 function Body({ data, render }) {
   if (!data.length)
     return (
-      <TableBodyMessageUI>No data to show at the moment</TableBodyMessageUI>
+      <TableBodyMessageUI>No data to show at the moment.</TableBodyMessageUI>
     );
 
   return <StyledBody>{data.map(render)}</StyledBody>;

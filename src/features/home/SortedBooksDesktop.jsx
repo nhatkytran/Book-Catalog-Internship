@@ -5,20 +5,15 @@ import { sortedBooksTypes } from '~/types';
 import { HeadingUI } from '~/ui';
 import { px600, px800 } from '~/styles/GlobalStyles';
 import { Book } from '~/features/home';
+import { sortedBooksHeading } from '~/utils';
 
 function SortedBooksDesktop({ category, books }) {
   const [searchParams] = useSearchParams();
-
   const filter = searchParams.get('filter') || 'year';
-
-  let heading = '';
-
-  if (filter === 'year')
-    heading = Number(category) ? `First published in ${category}` : category;
 
   return (
     <StyledSortedBooksDesktop>
-      <HeadingUI as="h4">{heading}</HeadingUI>
+      <HeadingUI as="h4">{sortedBooksHeading({ filter, category })}</HeadingUI>
 
       <BodyUI>
         {books.map(book => (
