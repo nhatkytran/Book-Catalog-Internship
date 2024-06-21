@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Layout } from '~/layouts';
-import { publicRoutes } from '~/routes';
+import routes from '~/routes';
 import { ScrollToTopButton, Toaster } from './components';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          {publicRoutes.map(
+          {routes.map(
             ({ path, component: Component, layout, banner }, index) => (
               <Route
                 key={index}

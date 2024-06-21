@@ -1,3 +1,5 @@
+export { default as AuthErrorMessage } from '~/components/AuthErrorMessage';
+export { default as AuthLoader } from '~/components/AuthLoader';
 export { default as BookSubInfo } from '~/components/BookSubInfo';
 export { default as ButtonMain } from '~/components/ButtonMain';
 export { default as DashChar } from '~/components/DashChar';

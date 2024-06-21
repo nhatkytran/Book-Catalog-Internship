@@ -2,10 +2,10 @@ import { auth } from '~/connections/firestore';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 export const authStateChange = () =>
-  new Promise(resolve => {
-    const unsub = auth.onAuthStateChanged(user => {
+  new Promise((resolve, reject) => {
+    const unsub = auth.onAuthStateChanged((user, error) => {
       unsub();
-      resolve(user);
+      error ? reject(error) : resolve(user);
     });
   });
 

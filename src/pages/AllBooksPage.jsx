@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
+import { Navigate } from 'react-router-dom';
 
-import { useWindowEventListener } from '~/hooks';
-import { FeatureNotSupported, ResetData } from '~/components';
+import {
+  AuthErrorMessage,
+  AuthLoader,
+  FeatureNotSupported,
+  ResetData,
+} from '~/components';
+
+import { useUser, useWindowEventListener } from '~/hooks';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
 const checkViewPort800 = () => window.innerWidth >= 800;
@@ -10,6 +17,8 @@ const checkViewPort800 = () => window.innerWidth >= 800;
 function AllBooksPage() {
   const [isViewportSupported, setIsViewportSupported] =
     useState(checkViewPort800);
+
+  const { isPending, isError, error, data: user } = useUser();
 
   useWindowEventListener({
     eventName: 'resize',
@@ -27,14 +36,23 @@ function AllBooksPage() {
 
   return (
     <StyledAllBooksPage>
-      <BooksHeader />
+      {isPending && <AuthLoader />}
+      {isError && <AuthErrorMessage errorMessage={error.message} />}
 
-      <BoxUI>
-        <BooksTable />
-        <BooksAddMore />
-      </BoxUI>
+      {!isPending && !isError && user ? (
+        <>
+          <BooksHeader />
 
-      <ResetData />
+          <BoxUI>
+            <BooksTable />
+            <BooksAddMore />
+          </BoxUI>
+
+          <ResetData />
+        </>
+      ) : (
+        <Navigate to="/auth" replace={true} />
+      )}
     </StyledAllBooksPage>
   );
 }
