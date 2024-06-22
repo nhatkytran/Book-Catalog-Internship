@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { func, bool, any } from 'prop-types';
 
 import { useWindowEventListener } from '~/hooks';
-import { FeatureNotSupported, ResetData } from '~/components';
+import { FeatureNotSupported, LoginRedirect, ResetData } from '~/components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
 const checkViewPort800 = () => window.innerWidth >= 800;
@@ -46,7 +45,7 @@ function AllBooksPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
               <ResetData />
             </>
           ) : (
-            <Navigate to="/auth" replace={true} />
+            <LoginRedirect />
           )}
         </>
       )}

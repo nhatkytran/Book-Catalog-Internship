@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { func, bool, any } from 'prop-types';
 
-import { AuthLoginForm } from '~/features/auth';
-import { AuthUser } from '~/features/auth';
+import { AuthLoginForm, AuthUser } from '~/features/auth';
 
 function AuthPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
   return (
@@ -19,6 +18,7 @@ function AuthPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
 
 const StyledAuthPage = styled.div`
   flex: 1;
+  display: grid;
   width: 100%;
   height: 100%;
   font-family: var(--font-poppins);

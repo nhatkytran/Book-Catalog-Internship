@@ -9,6 +9,7 @@ export { default as HomeBookImage } from '~/components/HomeBookImage';
 export { default as LegalText } from '~/components/LegalText';
 export { default as Loader } from '~/components/Loader';
 export { default as LoaderFullPage } from '~/components/LoaderFullPage';
+export { default as LoginRedirect } from '~/components/LoginRedirect';
 export { default as Modal } from '~/components/Modal';
 export { default as Protect } from '~/components/Protect';
 export { default as ResetData } from '~/components/ResetData';

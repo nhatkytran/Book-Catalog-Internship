@@ -14,7 +14,7 @@ const useLogout = () => {
     onSuccess: ({ user }) => {
       toast.success('Log in successfully.');
       queryClient.setQueryData(['user'], user);
-      navigate('/', { replace: true });
+      navigate(window.innerWidth >= 800 ? '/books' : '/', { replace: true });
     },
     onError: handleMutateError,
   });
