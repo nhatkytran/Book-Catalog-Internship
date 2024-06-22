@@ -6,7 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import App from '~/App';
 import GlobalStyles from '~/styles/GlobalStyles';
-import { ErrorFallback } from './pages';
+import { ErrorFallback } from '~/pages';
 
 const queryClient = new QueryClient();
 

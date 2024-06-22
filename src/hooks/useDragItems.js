@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import useWindowEventListener from './useWindowEventListener';
+import { useWindowEventListener } from '~/hooks';
 
 function useDragItems({
   itemsClassName,
