@@ -17,7 +17,8 @@ function Protect({ children }) {
     ...children.props,
     ProtectLoader,
     ProtectError,
-    user: !isPending && !isError && user ? user : null,
+    isAuthReady: !isPending && !isError,
+    user,
   });
 }
 

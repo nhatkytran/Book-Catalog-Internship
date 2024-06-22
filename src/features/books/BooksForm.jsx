@@ -286,7 +286,7 @@ const FileInputUI = styled.input.attrs({ type: 'file' })`
     transition: color 0.2s, background-color 0.2s;
     cursor: pointer;
 
-    &:hover {
+    &:disabled:hover {
       background-color: var(--color-blue-700);
     }
   }

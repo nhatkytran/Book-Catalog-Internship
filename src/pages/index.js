@@ -1,5 +1,10 @@
-export { default as AllBooksPage } from '~/pages/AllBooksPage';
-export { default as AuthPage } from '~/pages/AuthPage';
-export { default as ErrorFallback } from '~/pages/ErrorFallback';
-export { default as HomePage } from '~/pages/HomePage';
-export { default as NotFoundPage } from '~/pages/NotFoundPage';
+import { lazy } from 'react';
+
+import ErrorFallback from '~/pages/ErrorFallback';
+import NotFoundPage from '~/pages/NotFoundPage';
+import AllBooksPage from '~/pages/AllBooksPage';
+import AuthPage from '~/pages/AuthPage';
+
+const HomePage = lazy(() => import('~/pages/HomePage'));
+
+export { AllBooksPage, AuthPage, ErrorFallback, HomePage, NotFoundPage };

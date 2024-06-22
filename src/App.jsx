@@ -1,8 +1,15 @@
+import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import {
+  LoaderFullPage,
+  Protect,
+  ScrollToTopButton,
+  Toaster,
+} from '~/components';
 
 import { Layout } from '~/layouts';
 import routes from '~/routes';
-import { Protect, ScrollToTopButton, Toaster } from '~/components';
 
 function App() {
   return (
@@ -11,30 +18,32 @@ function App() {
       <ScrollToTopButton />
 
       <BrowserRouter>
-        <Routes>
-          {routes.map(
-            (
-              { path, component: Component, layout, banner, isProtected },
-              index
-            ) => (
-              <Route
-                key={index}
-                path={path}
-                element={
-                  <Layout type={layout} banner={banner}>
-                    {isProtected ? (
-                      <Protect>
+        <Suspense fallback={<LoaderFullPage />}>
+          <Routes>
+            {routes.map(
+              (
+                { path, component: Component, layout, banner, isProtected },
+                index
+              ) => (
+                <Route
+                  key={index}
+                  path={path}
+                  element={
+                    <Layout type={layout} banner={banner}>
+                      {isProtected ? (
+                        <Protect>
+                          <Component />
+                        </Protect>
+                      ) : (
                         <Component />
-                      </Protect>
-                    ) : (
-                      <Component />
-                    )}
-                  </Layout>
-                }
-              />
-            )
-          )}
-        </Routes>
+                      )}
+                    </Layout>
+                  }
+                />
+              )
+            )}
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );

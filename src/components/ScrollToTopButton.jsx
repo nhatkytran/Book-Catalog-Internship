@@ -30,7 +30,7 @@ const StyledScrollToTopButton = styled.div`
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  outline: 1px solid var(--color-neutral-950);
+  outline: 1px solid var(--color-neutral-700);
   outline-offset: -3px;
   z-index: 100000;
   border-radius: var(--border-radius-tiny);

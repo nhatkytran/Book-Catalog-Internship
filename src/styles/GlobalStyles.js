@@ -100,6 +100,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     width: 100%;
     min-height: 100vh;
+    background-color: var(--color-orange-500);
     background-image: linear-gradient(to right bottom, var(--color-orange-500), var(--color-blue-600));
     background-size: cover;
     background-repeat: no-repeat;

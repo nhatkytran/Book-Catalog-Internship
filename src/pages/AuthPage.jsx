@@ -1,15 +1,18 @@
 import styled from 'styled-components';
-import { func, any } from 'prop-types';
+import { func, bool, any } from 'prop-types';
 
 import { AuthLoginForm } from '~/features/auth';
 import { AuthUser } from '~/features/auth';
 
-function AuthPage({ ProtectLoader, ProtectError, user }) {
+function AuthPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
   return (
     <StyledAuthPage>
       <ProtectLoader />
       <ProtectError />
-      {user ? <AuthUser email={user.email} /> : <AuthLoginForm />}
+
+      {isAuthReady && (
+        <>{user ? <AuthUser email={user.email} /> : <AuthLoginForm />}</>
+      )}
     </StyledAuthPage>
   );
 }
@@ -22,6 +25,11 @@ const StyledAuthPage = styled.div`
   padding: 2rem 2.4rem;
 `;
 
-AuthPage.propTypes = { ProtectLoader: func, ProtectError: func, user: any };
+AuthPage.propTypes = {
+  ProtectLoader: func,
+  ProtectError: func,
+  isAuthReady: bool,
+  user: any,
+};
 
 export default AuthPage;
