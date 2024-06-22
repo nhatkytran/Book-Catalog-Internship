@@ -1,10 +1,25 @@
-# Book Catalog
+# Saritasa Book Catalog Internship
 
-# React + Vite
+The Book Catalog SPA (Single Page Application) is designed to manage a collection of books using React and Firestore. This application provides users with an intuitive interface to view, add, delete, and get recommendations for books based on certain criteria. It demonstrates the integration of modern front-end technologies with a cloud-based NoSQL database, offering a seamless and interactive user experience.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Check the website here: [Book Catalog Internship](https://book-catalog-internship.web.app/)
 
-Currently, two official plugins are available:
+## Technologies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Firebase
+
+- Firestore for storing data
+- Firestore SDK for connecting to the client
+- Firestore rules configuration
+- Firestore hosting with GitHub Actions
+
+### JavaScript libraries and tech stacks
+
+- ReactJS, React Query, React Hook Form, React Router, Styled Components, and more.
+
+## Reference resources
+
+- [Figma to HTML Online E-Book Store Design on Behance](https://www.behance.net/gallery/198940151/Figma-to-HTML-Online-E-Book-Store-Design?tracking_source=search_projects%7Cbook+store&log_shim_removal=1)
+- [YouTube video on building web apps with React and Firebase](https://www.youtube.com/watch?v=P0x0LmiknJc)
+- [Udemy course on building web apps with React and Firebase](https://www.udemy.com/course/build-web-apps-with-react-firebase)
+- [Udemy course on The Ultimate React Course](https://www.udemy.com/course/the-ultimate-react-course)
