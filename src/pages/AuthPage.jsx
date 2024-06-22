@@ -18,7 +18,8 @@ function AuthPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
 
 const StyledAuthPage = styled.div`
   flex: 1;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   font-family: var(--font-poppins);
