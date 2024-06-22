@@ -35,7 +35,7 @@ const CommonStyles = css`
 
 const StyledResetData = styled.div`
   ${CommonStyles};
-  flex: 1;
+  flex: 0;
   min-height: 5rem;
   margin-top: auto;
   background-color: var(--color-blue-100);

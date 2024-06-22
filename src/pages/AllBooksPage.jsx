@@ -59,6 +59,7 @@ const CommonDisplay = css`
 `;
 
 const StyledAllBooksPage = styled.div`
+  flex: 1;
   ${CommonDisplay};
   gap: 2.8rem;
   width: 100%;
