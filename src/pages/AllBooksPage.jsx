@@ -1,24 +1,17 @@
+import { any, func } from 'prop-types';
 import { useState } from 'react';
-import styled, { css } from 'styled-components';
 import { Navigate } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 
-import {
-  AuthErrorMessage,
-  AuthLoader,
-  FeatureNotSupported,
-  ResetData,
-} from '~/components';
-
-import { useUser, useWindowEventListener } from '~/hooks';
+import { useWindowEventListener } from '~/hooks';
+import { FeatureNotSupported, ResetData } from '~/components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
 const checkViewPort800 = () => window.innerWidth >= 800;
 
-function AllBooksPage() {
+function AllBooksPage({ ProtectLoader, ProtectError, user }) {
   const [isViewportSupported, setIsViewportSupported] =
     useState(checkViewPort800);
-
-  const { isPending, isError, error, data: user } = useUser();
 
   useWindowEventListener({
     eventName: 'resize',
@@ -36,10 +29,10 @@ function AllBooksPage() {
 
   return (
     <StyledAllBooksPage>
-      {isPending && <AuthLoader />}
-      {isError && <AuthErrorMessage errorMessage={error.message} />}
+      <ProtectLoader />
+      <ProtectError />
 
-      {!isPending && !isError && user ? (
+      {user ? (
         <>
           <BooksHeader />
 
@@ -78,5 +71,7 @@ const BoxUI = styled.div`
 const NotSupportedUI = css`
   padding: 2rem;
 `;
+
+AllBooksPage.propTypes = { ProtectLoader: func, ProtectError: func, user: any };
 
 export default AllBooksPage;

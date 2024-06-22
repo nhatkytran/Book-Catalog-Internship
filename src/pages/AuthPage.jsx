@@ -1,18 +1,15 @@
 import styled from 'styled-components';
+import { func, any } from 'prop-types';
 
-import { useUser } from '~/hooks';
-import { AuthErrorMessage, AuthLoader } from '~/components';
 import { AuthLoginForm } from '~/features/auth';
 import { AuthUser } from '~/features/auth';
 
-function AuthPage() {
-  const { isPending, isError, error, data: user } = useUser();
-
+function AuthPage({ ProtectLoader, ProtectError, user }) {
   return (
     <StyledAuthPage>
-      {isPending && <AuthLoader />}
-      {isError && <AuthErrorMessage errorMessage={error.message} />}
-      {!isPending && !isError && user ? <AuthUser /> : <AuthLoginForm />}
+      <ProtectLoader />
+      <ProtectError />
+      {user ? <AuthUser email={user.email} /> : <AuthLoginForm />}
     </StyledAuthPage>
   );
 }
@@ -24,5 +21,7 @@ const StyledAuthPage = styled.div`
   font-family: var(--font-poppins);
   padding: 2rem 2.4rem;
 `;
+
+AuthPage.propTypes = { ProtectLoader: func, ProtectError: func, user: any };
 
 export default AuthPage;

@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
+import { handleMutateError } from '~/utils';
+
 function useMutateAction({ key, actionFn }) {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,10 +18,7 @@ function useMutateAction({ key, actionFn }) {
 
       queryClient.invalidateQueries({ queryKey: [key] });
     },
-    onError: error => {
-      if (process.env.NODE_ENV === 'development') console.error(error);
-      toast.error(error.message);
-    },
+    onError: handleMutateError,
   });
 
   return { isPending, mutate };

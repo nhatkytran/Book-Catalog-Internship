@@ -8,8 +8,18 @@ const routes = [
     layout: MAIN_LAYOUT,
     banner: { url: '/images/banner.jpeg', text: 'Find your favorite books' },
   },
-  { path: '/books', component: AllBooksPage, layout: NONE_LAYOUT },
-  { path: '/auth', component: AuthPage, layout: NONE_LAYOUT },
+  {
+    path: '/books',
+    component: AllBooksPage,
+    layout: NONE_LAYOUT,
+    isProtected: true,
+  },
+  {
+    path: '/auth',
+    component: AuthPage,
+    layout: NONE_LAYOUT,
+    isProtected: true,
+  },
   { path: '/*', component: NotFoundPage, layout: NONE_LAYOUT },
 ];
 

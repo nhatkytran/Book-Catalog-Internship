@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Layout } from '~/layouts';
 import routes from '~/routes';
-import { ScrollToTopButton, Toaster } from './components';
+import { Protect, ScrollToTopButton, Toaster } from '~/components';
 
 function App() {
   return (
@@ -13,13 +13,22 @@ function App() {
       <BrowserRouter>
         <Routes>
           {routes.map(
-            ({ path, component: Component, layout, banner }, index) => (
+            (
+              { path, component: Component, layout, banner, isProtected },
+              index
+            ) => (
               <Route
                 key={index}
                 path={path}
                 element={
                   <Layout type={layout} banner={banner}>
-                    <Component />
+                    {isProtected ? (
+                      <Protect>
+                        <Component />
+                      </Protect>
+                    ) : (
+                      <Component />
+                    )}
                   </Layout>
                 }
               />
