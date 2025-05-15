@@ -2,23 +2,14 @@ import styled from 'styled-components';
 import { any, func } from 'prop-types';
 
 import { ButtonMain } from '~/components';
-
-import {
-  ButtonErrorUI,
-  ErrorContainerUI,
-  ErrorMessageUI,
-  HeadingUI,
-  LayoutUI,
-} from '~/ui';
+import { ButtonErrorUI, ErrorContainerUI, ErrorMessageUI, HeadingUI, LayoutUI } from '~/ui';
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <StyledErrorFallback>
       <ErrorContainerUI>
         <ErrorMessageUI>{error.message}</ErrorMessageUI>
-
         <HeadingUI as="h2">Something went wrong!</HeadingUI>
-
         <ButtonMain UI={ButtonErrorUI} onClick={resetErrorBoundary}>
           Go Home
         </ButtonMain>

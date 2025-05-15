@@ -13,17 +13,9 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <GlobalStyles />
-
-    <ErrorBoundary
-      FallbackComponent={ErrorFallback}
-      onReset={() => window.location.replace('/')}
-    >
+    <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => window.location.replace('/')}>
       <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools
-          initialIsOpen={false}
-          buttonPosition="bottom-left"
-        />
-
+        <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
         <App />
       </QueryClientProvider>
     </ErrorBoundary>

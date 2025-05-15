@@ -110,8 +110,8 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     transition: color 0.3s, background-color 0.3s;
     overflow-x: hidden;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    /* user-select: none; */
+    /* -webkit-tap-highlight-color: transparent; */
   }
 
   *:disabled {
@@ -134,8 +134,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
   }
 
   ul {
