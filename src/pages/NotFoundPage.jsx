@@ -1,14 +1,8 @@
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { ButtonMain } from '~/components';
-
-import {
-  ButtonErrorUI,
-  ErrorContainerUI,
-  ErrorMessageUI,
-  HeadingUI,
-} from '~/ui';
+import { ButtonErrorUI, ErrorContainerUI, ErrorMessageUI, HeadingUI } from '~/ui';
 
 function NotFoundPage() {
   const navigate = useNavigate();
@@ -17,11 +11,9 @@ function NotFoundPage() {
     <StyledPageNotFound>
       <ErrorContainerUI>
         <ErrorMessageUI>Error 404</ErrorMessageUI>
-
         <HeadingUI as="h2">
-          {"We can't find what you're looking for."}
+          {"Oops! We couldn't find what you're looking for."}
         </HeadingUI>
-
         <ButtonMain
           UI={ButtonErrorUI}
           onClick={() => navigate('/', { replace: true })}

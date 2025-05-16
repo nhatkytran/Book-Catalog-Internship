@@ -10,19 +10,13 @@ function Layout({ children, type, banner }) {
   return (
     <LayoutUI>
       <Header />
-
       <ContentUI>
         <Sidebar />
-
         <MainViewUI>
           <MainViewHeaderUI>
-            {type === MAIN_LAYOUT && (
-              <Banner url={banner.url} text={banner.text} />
-            )}
-
+            {type === MAIN_LAYOUT && <Banner url={banner.url} text={banner.text} />}
             {children}
           </MainViewHeaderUI>
-
           <Footer />
         </MainViewUI>
       </ContentUI>

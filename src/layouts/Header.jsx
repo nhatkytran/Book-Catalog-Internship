@@ -10,7 +10,6 @@ function Header() {
         <LogoDesktopUI src="/images/logo-desktop.svg" alt="Saritasa logo" />
         <LogoMobileUI src="/images/logo-mobile.svg" alt="Saritasa logo" />
       </LinkUI>
-
       <QuoteUI>
         A <span>Book</span> a day keeps <span>Reality</span> away.
       </QuoteUI>

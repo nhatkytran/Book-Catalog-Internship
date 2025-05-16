@@ -1,5 +1,5 @@
-import { auth } from '~/connections/firestore';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '~/connections/firestore';
 
 export const authStateChange = () =>
   new Promise((resolve, reject) => {

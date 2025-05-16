@@ -16,20 +16,15 @@ function Sidebar() {
   return (
     <StyledSidebar>
       <ListUI>
-        {navItems.map((navItem, index) => {
-          const { link, icon: Icon, content } = navItem;
-
-          return (
-            <ItemUI key={index}>
-              <NavLinkUI to={link}>
-                <Icon />
-                <p>{content}</p>
-              </NavLinkUI>
-            </ItemUI>
-          );
-        })}
+        {navItems.map(({ link, content, icon: Icon }, index) => (
+          <ItemUI key={index}>
+            <NavLinkUI to={link}>
+              <Icon />
+              <p>{content}</p>
+            </NavLinkUI>
+          </ItemUI>
+        ))}
       </ListUI>
-
       <LegalText UI={LegalTextUI} />
     </StyledSidebar>
   );
@@ -103,8 +98,7 @@ const NavLinkUI = styled(NavLink)`
       height: 100%;
       background-color: var(--color-orange-500);
       transform: scaleY(0);
-      transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
-        background-color 0.1s;
+      transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s, background-color 0.1s;
       z-index: -1;
     }
 

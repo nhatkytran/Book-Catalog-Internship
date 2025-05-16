@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 import { px1000, px600, px700 } from '~/styles/GlobalStyles';
 import { LegalText } from '~/components';
 
-const linkContents = {
-  links: ['/cookie-preferences', '/terms-conditions', '/privacy-policy'],
-  contents: ['Cookie preferences', 'Terms & Conditions', 'Privacy Policy'],
-};
+const links = [
+  { link: '/cookie-preferences', content: 'Cookie preferences' },
+  { link: '/terms-conditions', content: 'Terms & Conditions' },
+  { link: '/privacy-policy', content: 'Privacy Policy' },
+];
 
 function Footer() {
   return (
     <StyledFooter>
       <LegalText UI={LegalTextUI} />
-
       <ListUI>
-        {linkContents.contents.map((linkContent, index) => (
+        {links.map(({ link, content }, index) => (
           <ItemUI key={index}>
-            <LinkUI to={linkContents.links[index]}>{linkContent}</LinkUI>
+            <LinkUI to={link}>{content}</LinkUI>
           </ItemUI>
         ))}
       </ListUI>

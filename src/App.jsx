@@ -16,16 +16,12 @@ function App() {
             {routes.map(({ path, component: Component, layout, banner, isProtected }, index) => (
               <Route key={index} path={path} element={
                 <Layout type={layout} banner={banner}>
-                  {isProtected ? (
-                    <Protect>
-                      <Component />
-                    </Protect>
-                  ) : (
+                  <Protect isProtected={isProtected}>
                     <Component />
-                  )}
-                </Layout>}
-              />)
-            )}
+                  </Protect>
+                </Layout>
+              } />
+            ))}
           </Routes>
         </Suspense>
       </BrowserRouter>
