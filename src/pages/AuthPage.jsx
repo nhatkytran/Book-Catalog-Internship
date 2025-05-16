@@ -8,10 +8,7 @@ function AuthPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
     <StyledAuthPage>
       <ProtectLoader />
       <ProtectError />
-
-      {isAuthReady && (
-        <>{user ? <AuthUser email={user.email} /> : <AuthLoginForm />}</>
-      )}
+      {isAuthReady && (user ? <AuthUser email={user.email} /> : <AuthLoginForm />)}
     </StyledAuthPage>
   );
 }

@@ -6,23 +6,26 @@ import { useWindowEventListener } from '~/hooks';
 import { FeatureNotSupported, LoginRedirect, ResetData } from '~/components';
 import { BooksAddMore, BooksHeader, BooksTable } from '~/features/books';
 
-const checkViewPort800 = () => window.innerWidth >= 800;
+const VIEWPORT_WIDTH_THRESHOLD = 800;
+const checkViewportSupport = () => window.innerWidth >= VIEWPORT_WIDTH_THRESHOLD;
 
 function AllBooksPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
-  const [isViewportSupported, setIsViewportSupported] =
-    useState(checkViewPort800);
+  const [isViewportSupported, setIsViewportSupported] = useState(checkViewportSupport);
 
   useWindowEventListener({
     eventName: 'resize',
-    handler: () => setIsViewportSupported(checkViewPort800),
+    handler: () => setIsViewportSupported(checkViewportSupport),
   });
 
   if (!isViewportSupported)
     return (
       <FeatureNotSupported
         UI={NotSupportedUI}
-        content="This feature is available only on devices with a viewport width of 800px
-        or larger."
+        content={
+          `This feature is available only on devices with a viewport width of
+          ${VIEWPORT_WIDTH_THRESHOLD}px or larger. Please adjust your browser
+          window size or use a larger screen.`
+        }
       />
     );
 
@@ -30,25 +33,16 @@ function AllBooksPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
     <StyledAllBooksPage>
       <ProtectLoader />
       <ProtectError />
-
-      {isAuthReady && (
+      {isAuthReady && (user ? (
         <>
-          {user ? (
-            <>
-              <BooksHeader />
-
-              <BoxUI>
-                <BooksTable />
-                <BooksAddMore />
-              </BoxUI>
-
-              <ResetData />
-            </>
-          ) : (
-            <LoginRedirect />
-          )}
+          <BooksHeader />
+          <BoxUI>
+            <BooksTable />
+            <BooksAddMore />
+          </BoxUI>
+          <ResetData />
         </>
-      )}
+      ) : <LoginRedirect />)}
     </StyledAllBooksPage>
   );
 }
