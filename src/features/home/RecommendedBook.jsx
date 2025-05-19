@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import toast from 'react-hot-toast';
+import styled from 'styled-components';
 import { arrayOf } from 'prop-types';
 
 import { HeadingUI } from '~/ui';
@@ -9,8 +9,7 @@ import { px700, px800 } from '~/styles/GlobalStyles';
 import { bookShape } from '~/types';
 
 function RecommendedBook({ books }) {
-  const { name, authors, publicationYear, rating, isbn } =
-    selectRecommendBook(books);
+  const { name, authors, publicationYear, rating, isbn } = selectRecommendBook(books);
 
   const subInfos = [
     `First published in: ${publicationYear ? publicationYear : 'N/A'}`,
@@ -21,21 +20,17 @@ function RecommendedBook({ books }) {
   return (
     <StyledRecommendedBook>
       <HeadingUI as="h1">Recommended book</HeadingUI>
-
       <BoxUI>
         <HomeBookImage />
-
         <InformationBoxUI>
           <HeadingUI as="h5">{name}</HeadingUI>
           <AuthorsUI>By: {authors.join(', ')}</AuthorsUI>
           <PriceUI>{formatPrice({ amount: 1000 })}</PriceUI>
-
           <SubInfoUI>
             {subInfos.map((info, index) => (
               <BookSubInfo key={index} content={info} />
             ))}
           </SubInfoUI>
-
           <ButtonMain onClick={() => toast.success('Page details coming soon')}>
             Check details
           </ButtonMain>
