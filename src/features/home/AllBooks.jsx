@@ -19,10 +19,14 @@ const FILTER_BY_AUTHOR = 'author';
 const FILTER_BY_RATING = 'rating';
 const VIEWPORT_WIDTH_THRESHOLD = 600;
 
-// There are two components for displaying books based on a device's width
-// We use state here instead of using CSS display none to support useEffect in the component for mobile version
+// There are two components for displaying books based on a device's width.
+// We use state here instead of using CSS display none to support useEffect in the component for mobile version.
 const checkViewportSupport = () => window.innerWidth <= VIEWPORT_WIDTH_THRESHOLD;
 
+/**
+ * Renders a list of books that can be filtered and grouped by different criteria.
+ * The component is responsive and will display differently on mobile and desktop views.
+ */
 function AllBooks({ books }) {
   const [searchParams] = useSearchParams();
   const [isResponsiveWidth, setIsResponsiveWidth] = useState(checkViewportSupport);
