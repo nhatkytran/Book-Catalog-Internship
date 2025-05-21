@@ -7,3 +7,4 @@ export { default as handleMutateError } from '~/utils/handleMutateError';
 export { default as isValidIsbn13 } from '~/utils/isValidIsbn13';
 export { default as selectRecommendBook } from '~/utils/selectRecommendBook';
 export { default as sortedBooksHeading } from '~/utils/sortedBooksHeading';
+export { capitalize } from '~/utils/string';
