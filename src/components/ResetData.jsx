@@ -4,6 +4,7 @@ import { Loader } from '~/components';
 import { useMutateAction } from '~/hooks';
 import { resetBooks } from '~/services';
 
+/** A component that provides a reset button to restore books data to its initial state. */
 function ResetData() {
   const { isPending, mutate } = useMutateAction({
     key: 'books',
