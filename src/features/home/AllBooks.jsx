@@ -23,6 +23,13 @@ const VIEWPORT_WIDTH_THRESHOLD = 600;
 // We use state here instead of using CSS display none to support useEffect in the component for mobile version.
 const checkViewportSupport = () => window.innerWidth <= VIEWPORT_WIDTH_THRESHOLD;
 
+const ALL_BOOKS_FILTER_FIELD = 'filter';
+const ALL_BOOKS_FILTER_OPTIONS = [
+  { value: 'all', label: capitalize(FILTER_BY_YEAR) },
+  { value: 'author', label: capitalize(FILTER_BY_AUTHOR) },
+  { value: 'rating', label: capitalize(FILTER_BY_RATING) },
+];
+
 /**
  * Renders a list of books that can be filtered and grouped by different criteria.
  * The component is responsive and will display differently on mobile and desktop views.
@@ -48,14 +55,7 @@ function AllBooks({ books }) {
         <HeadingUI as="h1">All books</HeadingUI>
         <FilterBoxUI>
           <p>Group by:</p>
-          <Filter
-            filterField="filter"
-            options={[
-              { value: 'all', label: capitalize(FILTER_BY_YEAR) },
-              { value: 'author', label: capitalize(FILTER_BY_AUTHOR) },
-              { value: 'rating', label: capitalize(FILTER_BY_RATING) },
-            ]}
-          />
+          <Filter filterField={ALL_BOOKS_FILTER_FIELD} options={ALL_BOOKS_FILTER_OPTIONS} />
         </FilterBoxUI>
       </HeaderUI>
       <BodyUI>

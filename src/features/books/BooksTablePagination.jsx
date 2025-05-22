@@ -108,15 +108,20 @@ const ButtonUI = styled.button`
     fill: var(--color-neutral-700);
   }
 
-  & svg {
-    height: 1.4rem;
-    width: 1.4rem;
-    fill: #000;
-  }
-
   &:hover:not(:disabled) {
     background-color: var(--color-blue-600);
     color: var(--color-neutral-50);
+
+    svg {
+      fill: var(--color-neutral-50);
+    }
+  }
+
+  svg {
+    height: 1.4rem;
+    width: 1.4rem;
+    fill: #000;
+    transition: all ease 0.2s;
   }
 `;
 
