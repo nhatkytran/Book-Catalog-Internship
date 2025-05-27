@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 import { bool, func } from 'prop-types';
 
+/**
+ * A button component for table row actions, typically used as a menu trigger.
+ * @param {Object} props - The component props.
+ * @param {boolean} props.active - Controls the active state of the button.
+ * @param {Function} props.onClick - Callback function triggered on button click.
+ */
 function BooksTableRowButton({ active, onClick }) {
   return (
     <StyledBooksTableRowButton $active={active} onClick={onClick}>
@@ -20,12 +26,11 @@ const StyledBooksTableRowButton = styled.button`
   padding: 0.4rem;
   border-radius: var(--border-radius-sm);
   transition: all ease 0.2s;
-  ${props =>
-    props.$active &&
-    css`
-      outline: 2px solid var(--color-blue-600);
-      outline-offset: -1px;
-    `};
+
+  ${props => props.$active && css`
+    outline: 2px solid var(--color-blue-600);
+    outline-offset: -1px;
+  `};
 
   &:hover {
     background-color: var(--color-neutral-200);
