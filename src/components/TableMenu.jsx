@@ -5,10 +5,18 @@ import { arrayOf, shape, elementType, node, string, func } from 'prop-types';
 
 import { useOutsideClick, useWindowEventListener } from '~/hooks';
 
-// Context API //////////
-
 const TableMenuContext = createContext();
 
+/**
+ * A compound component that provides a context menu for table rows.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - Child components (Toggle and List).
+ * @example
+ * <TableMenu>
+ *   <TableMenu.Toggle id="menu-1" renderButton={renderButton} />
+ *   <TableMenu.List id="menu-1" buttons={menuItems} renderButton={renderButton} />
+ * </TableMenu>
+ */
 function TableMenu({ children }) {
   const [openID, setOpenID] = useState('');
   const [position, setPosition] = useState(null);
@@ -24,8 +32,6 @@ function TableMenu({ children }) {
     </TableMenuContext.Provider>
   );
 }
-
-// Components //////////
 
 function Toggle({ id, renderButton }) {
   const { openID, open, close, setPosition } = useContext(TableMenuContext);
@@ -50,16 +56,15 @@ function List({ id, buttons, renderButton }) {
 
   return createPortal(
     <ListOfItems buttons={buttons} renderButton={renderButton} />,
-    document.querySelector('#miscellaneous-item')
+    document.querySelector('#miscellaneous-item'),
   );
 }
 
-// Need to separate a ListOfItems component for performance
 /**
- * If we use useEffect in a List component, it will run inmediately.
- * But in this case, we only would like to run useEffect when a list is mounted to the DOM
+ * Separate list of items component for performance.
+ * If we use useEffect in a List component, it will run immediately.
+ * But in this case, we only would like to run useEffect when a list is mounted to the DOM.
  */
-
 function ListOfItems({ buttons, renderButton }) {
   const { position, close } = useContext(TableMenuContext);
   const ref = useOutsideClick({ handler: close, listenCapturing: true });
@@ -78,8 +83,6 @@ function ListOfItems({ buttons, renderButton }) {
   );
 }
 
-// Styles //////////
-
 const StyledList = styled.ul`
   position: fixed;
   right: ${props => props.$position.x}px;
@@ -89,12 +92,8 @@ const StyledList = styled.ul`
   border-radius: var(--border-radius-md);
 `;
 
-// Compound Components //////////
-
 TableMenu.Toggle = Toggle;
 TableMenu.List = List;
-
-// PropTypes //////////
 
 const buttonShape = shape({ icon: elementType, label: string });
 const childrenProp = { children: node.isRequired };
