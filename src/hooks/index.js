@@ -4,5 +4,6 @@ export { default as useLogin } from '~/hooks/useLogin';
 export { default as useLogout } from '~/hooks/useLogout';
 export { default as useMutateAction } from '~/hooks/useMutateAction';
 export { default as useOutsideClick } from '~/hooks/useOutsideClick';
+export { default as useSearchParamsBooks } from '~/hooks/useSearchParamsBooks';
 export { default as useUser } from '~/hooks/useUser';
 export { default as useWindowEventListener } from '~/hooks/useWindowEventListener';

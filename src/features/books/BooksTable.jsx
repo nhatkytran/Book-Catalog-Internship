@@ -1,64 +1,14 @@
 import styled from 'styled-components';
 
-import { PAGE_SIZE } from '~/config';
-import { useAllBooks } from '~/hooks';
+import { useAllBooks, useSearchParamsBooks } from '~/hooks';
 import { TableBodyMessageUI } from '~/ui';
 import { Loader, Table } from '~/components';
 import { BooksTablePagination, BooksTableRow } from '~/features/books';
-import { useSearchParams } from 'react-router-dom';
 
+/** A table component that displays a list of books with loading, error, and empty states. */
 function BooksTable() {
-  const [searchParams] = useSearchParams();
-
   const { isPending, isError, error, data } = useAllBooks();
-
-  let books = data || [];
-
-  // FILTER //////////
-
-  const filter = searchParams.get('year');
-
-  if (filter === 'no-year') books = books.filter(book => !book.publicationYear);
-
-  if (filter === 'with-year')
-    books = books.filter(book => book.publicationYear);
-
-  const totalBooksAfterFilter = books.length; // Be used for pagination
-
-  // SORT //////////
-
-  const sortBy = searchParams.get('sortBy');
-
-  // By default, newest created book comes first
-  books = books.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds);
-
-  if (sortBy) {
-    const [field, direction] = sortBy.split('-');
-    const modifier = direction === 'asc' ? 1 : -1;
-
-    if (field === 'name')
-      books = books.sort((a, b) => (a.name <= b.name ? -1 : 1) * modifier);
-
-    if (field === 'publicationYear')
-      books = books.sort((a, b) => {
-        let side;
-
-        if (a.publicationYear && b.publicationYear)
-          side = a.publicationYear - b.publicationYear;
-        if (!a.publicationYear && b.publicationYear) side = -1;
-        if (a.publicationYear && !b.publicationYear) side = 1;
-
-        return side * modifier;
-      });
-
-    if (field === 'rating')
-      books = books.sort((a, b) => (a.rating - b.rating) * modifier);
-  }
-
-  // PAGINATION //////////
-
-  const page = Number(searchParams.get('page')) || 1;
-  books = books.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const { books, totalBooks } = useSearchParamsBooks(data);
 
   return (
     <Table columns="0.7fr 2fr 1.2fr 0.5fr 0.7fr 1.5fr 0.4fr">
@@ -91,7 +41,7 @@ function BooksTable() {
 
       {!!books.length && (
         <Table.Footer>
-          <BooksTablePagination count={totalBooksAfterFilter} />
+          <BooksTablePagination count={totalBooks} />
         </Table.Footer>
       )}
     </Table>
