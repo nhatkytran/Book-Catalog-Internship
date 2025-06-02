@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import { array, node, func } from 'prop-types';
 
+/**
+ * A reusable primary button component with customizable styling.
+ * @param {Object} props - Component props.
+ * @param {ReactNode} props.children - The content to be displayed inside the button.
+ * @param {Array} [props.UI] - Array of styled-components CSS template literals for custom styling.
+ * @param {Function} [props.onClick] - Click event handler function.
+ * @param {Object} [props.rest] - Additional HTML button props.
+ */
+
 function ButtonMain({ children, UI, onClick, ...props }) {
   return (
     <StyledButtonMain $UI={UI} onClick={onClick} {...props}>
