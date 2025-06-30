@@ -1,6 +1,7 @@
 import { MAIN_LAYOUT, NONE_LAYOUT } from '~/config';
 import { AllBooksPage, AuthPage, HomePage, NotFoundPage } from '~/pages';
 
+/** Routes configuration. */
 const routes = [
   {
     path: '/',

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { ButtonMain } from '~/components';
 import { ButtonErrorUI, ErrorContainerUI, ErrorMessageUI, HeadingUI } from '~/ui';
 
+/** * Not found page component. */
 function NotFoundPage() {
   const navigate = useNavigate();
 
