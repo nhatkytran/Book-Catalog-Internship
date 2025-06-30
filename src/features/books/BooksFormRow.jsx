@@ -1,6 +1,16 @@
 import styled, { css } from 'styled-components';
 import { node, string } from 'prop-types';
 
+/**
+ * A reusable form row component that provides a consistent layout for form elements.
+ * It includes support for labels, form controls, help messages, and error messages.
+ * @param {Object} props - The component props.
+ * @param {ReactNode} props.children - The form control element to be rendered.
+ * @param {string} [props.label] - Optional label text for the form control.
+ * @param {string} [props.message] - Help or informative message to display below the control.
+ * @param {string} [props.link] - Optional URL to make the message clickable.
+ * @param {string} [props.errorMessage] - Error message to display when validation fails.
+ */
 function BooksFormRow({ children, label, message, link, errorMessage }) {
   return (
     <StyledBooksFormRow>
@@ -102,11 +112,10 @@ const StyledBooksFormRow = styled.div`
 const MessageUI = styled.p`
   font-size: 1.3rem;
   letter-spacing: 1px;
-  ${props =>
-    props.$type === 'error' &&
-    css`
-      color: var(--color-red-500);
-    `};
+
+  ${props => props.$type === 'error' && css`
+    color: var(--color-red-500);
+  `};
 
   a {
     text-decoration: underline;

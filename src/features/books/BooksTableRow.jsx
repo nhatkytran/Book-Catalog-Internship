@@ -6,6 +6,11 @@ import { DashChar, Modal, Table, TableMenu } from '~/components';
 import { bookShape } from '~/types';
 import { BookDelete, BooksForm, BooksTableRowButton, BooksTableRowMenuButton } from '~/features/books';
 
+/**
+ * A table row component that displays book information and provides actions (edit/delete).
+ * @param {Object} props - Component props.
+ * @param {Object} props.book - The book object to display.
+ */
 function BooksTableRow({ book }) {
   const { id, name, authors, publicationYear, rating, isbn } = book;
   if (isbn && !isValidIsbn13(isbn)) throw new Error('Invalid ISBN!');
