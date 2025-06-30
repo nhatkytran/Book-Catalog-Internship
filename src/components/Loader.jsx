@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { array } from 'prop-types';
 
+/**
+ * Loader component.
+ * @param {Object} props - Component props.
+ * @param {Array} props.UI - Array of styled-components CSS template literals for custom styling.
+ */
 function Loader({ UI }) {
   return (
     <StyledLoader $UI={UI} viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" aria-label="Loader Icon">

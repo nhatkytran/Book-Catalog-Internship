@@ -7,6 +7,12 @@ import { HeadingUI } from '~/ui';
 import { Book } from '~/features/home';
 import { sortedBooksHeading } from '~/utils';
 
+/**
+ * A component that displays a sorted list of books in a mobile layout.
+ * @param {Object} props - Component props.
+ * @param {string} props.category - The category of the books.
+ * @param {Book[]} props.books - The array of books to display.
+ */
 function SortedBooksMobile({ category, books }) {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get('filter') || 'year';

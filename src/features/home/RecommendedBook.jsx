@@ -8,6 +8,11 @@ import { BookSubInfo, ButtonMain, HomeBookImage } from '~/components';
 import { px700, px800 } from '~/styles/GlobalStyles';
 import { bookShape } from '~/types';
 
+/**
+ * A component that displays a recommended book with its image and information.
+ * @param {Object} props - Component props.
+ * @param {Book[]} props.books - The array of books to select from.
+ */
 function RecommendedBook({ books }) {
   const { name, authors, publicationYear, rating, isbn } = selectRecommendBook(books);
 

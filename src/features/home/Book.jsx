@@ -5,6 +5,11 @@ import { HeadingUI } from '~/ui';
 import { HomeBookImage } from '~/components';
 import { px600 } from '~/styles/GlobalStyles';
 
+/**
+ * A component that displays a book with its image and information.
+ * @param {Object} props - Component props.
+ * @param {Book} props.book - The book object to be displayed.
+ */
 function Book({ book }) {
   return (
     <StyledBook key={book.id}>

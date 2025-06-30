@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Loader } from '.';
 
+/** Loader full page component. */
 function LoaderFullPage() {
   return (
     <StyledLoaderFullPage>

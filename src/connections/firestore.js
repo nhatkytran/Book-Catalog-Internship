@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
+/** Initialize Firebase. */
 initializeApp({
   apiKey: 'AIzaSyCpiPbB6xXj_upEcN_k39gFCe2eoJ1KoKw',
   authDomain: 'book-catalog-internship.firebaseapp.com',

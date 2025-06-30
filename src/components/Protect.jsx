@@ -4,6 +4,12 @@ import { node, bool } from 'prop-types';
 import { useUser } from '~/hooks';
 import { AuthErrorMessage, AuthLoader } from '~/components';
 
+/**
+ * Protect component.
+ * @param {Object} props - Component props.
+ * @param {ReactNode} props.children - The content to be protected.
+ * @param {boolean} props.isProtected - Whether the content is protected.
+ */
 function Protect({ children, isProtected }) {
   const { isPending, isError, error, data: user } = useUser();
 

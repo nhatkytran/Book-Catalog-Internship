@@ -5,6 +5,11 @@ import { number } from 'prop-types';
 import { PAGE_SIZE } from '~/config';
 import { usePagination } from '~/hooks';
 
+/**
+ * A component that displays pagination controls for a table of books.
+ * @param {Object} props - Component props.
+ * @param {number} props.count - The total number of books.
+ */
 function BooksTablePagination({ count }) {
   const { currentPage, pageCount, nextPage, prevPage } = usePagination(count);
 

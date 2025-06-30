@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { AiFillCaretRight } from 'react-icons/ai';
 import { string } from 'prop-types';
 
+/**
+ * Book sub info component.
+ * @param {Object} props - Component props.
+ * @param {string} props.content - Content of the book sub info.
+ */
 function BookSubInfo({ content }) {
   return (
     <StyledBookSubInfo>

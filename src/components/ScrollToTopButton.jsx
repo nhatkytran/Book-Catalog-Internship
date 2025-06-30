@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
 import { AiFillUpSquare } from 'react-icons/ai';
+import styled from 'styled-components';
 
 import { px700 } from '~/styles/GlobalStyles';
 import { useWindowEventListener } from '~/hooks';
 
+/** Scroll to top button component. */
 function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
