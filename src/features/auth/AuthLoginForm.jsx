@@ -7,8 +7,12 @@ import { ButtonMain, Loader } from '~/components';
 import { px500 } from '~/styles/GlobalStyles';
 import { useLogin } from '~/hooks';
 
+const TESTING_EMAIL = 'nhatky.tran.2002@saritasa.com';
+const TESTING_PASSWORD = '123123123aa';
+
+/** Authentication login form component. */
 function AuthLoginForm() {
-  const { isPending, mutate } = useLogin();
+  const { isPending, mutate: login } = useLogin();
 
   const {
     register,
@@ -16,13 +20,13 @@ function AuthLoginForm() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      email: 'nhatky.tran.2002@saritasa.com',
-      password: '123123123aa',
+      email: TESTING_EMAIL,
+      password: TESTING_PASSWORD,
     },
   });
 
   return (
-    <StyledAuthLoginForm onSubmit={handleSubmit(mutate)}>
+    <StyledAuthLoginForm onSubmit={handleSubmit(login)}>
       <HeadingUI as="h1">Log in to your account</HeadingUI>
 
       <FormUI onSubmit={() => {}}>

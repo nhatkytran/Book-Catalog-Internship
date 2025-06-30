@@ -3,6 +3,14 @@ import { func, bool, any } from 'prop-types';
 
 import { AuthLoginForm, AuthUser } from '~/features/auth';
 
+/**
+ * Authentication page component.
+ * @param {Object} props - Component props.
+ * @param {Function} props.ProtectLoader - Loader component for authentication protection.
+ * @param {Function} props.ProtectError - Error component for authentication protection.
+ * @param {boolean} props.isAuthReady - Whether authentication is ready.
+ * @param {Object} props.user - User object.
+ */
 function AuthPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
   return (
     <StyledAuthPage>

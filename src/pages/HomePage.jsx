@@ -5,6 +5,7 @@ import { AllBooks, RecommendedBook } from '~/features/home';
 import { TableBodyMessageUI } from '~/ui';
 import { Loader } from '~/components';
 
+/** The main page component that displays the home page. */
 function HomePage() {
   const { isPending, isError, error, data: books = [] } = useAllBooks();
 
