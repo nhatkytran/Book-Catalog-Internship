@@ -16,6 +16,11 @@ const FEATURE_NOT_SUPPORTED_CONTENT = `
 /**
  * Main page component that displays the book catalog and related functionality.
  * Includes viewport size checking and authentication handling.
+ * @param {Object} props - Component props.
+ * @param {Function} props.ProtectLoader - Loader component for authentication protection.
+ * @param {Function} props.ProtectError - Error component for authentication protection.
+ * @param {boolean} props.isAuthReady - Whether authentication is ready.
+ * @param {Object} props.user - User object.
  */
 function AllBooksPage({ ProtectLoader, ProtectError, isAuthReady, user }) {
   const [isViewportSupported, setIsViewportSupported] = useState(checkViewportSupport);
