@@ -12,6 +12,7 @@ const navItems = [
   { link: '/auth', icon: FaUser, content: 'Auth' },
 ];
 
+/** A sidebar component that provides navigation links and legal text. */
 function Sidebar() {
   return (
     <StyledSidebar>

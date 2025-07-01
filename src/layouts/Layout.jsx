@@ -6,6 +6,13 @@ import { LayoutUI } from '~/ui';
 import { px1000 } from '~/styles/GlobalStyles';
 import { Banner, Footer, Header, Sidebar } from '~/layouts';
 
+/**
+ * A layout component that provides a consistent structure for pages.
+ * @param {Object} props - The component props.
+ * @param {ReactNode} props.children - The content to be displayed within the layout.
+ * @param {string} props.type - The type of layout, either 'main' or 'sub'.
+ * @param {Object} props.banner - The banner object containing the URL and text for the banner.
+ */
 function Layout({ children, type, banner }) {
   return (
     <LayoutUI>

@@ -10,6 +10,7 @@ const links = [
   { link: '/privacy-policy', content: 'Privacy Policy' },
 ];
 
+/** Renders the application footer with legal text and navigation links. */
 function Footer() {
   return (
     <StyledFooter>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { px1000, px400 } from '~/styles/GlobalStyles';
 
+/** Renders the application header with a logo and quote. */
 function Header() {
   return (
     <StyledHeader>
