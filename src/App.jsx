@@ -12,7 +12,7 @@ function App() {
     <UtilityWrapper>
       <Toaster />
       <ScrollToTopButton />
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Suspense fallback={<LoaderFullPage />}>
           <Routes>
             {routes.map(({ path, component: Component, layout, banner, isProtected }, index) => (
