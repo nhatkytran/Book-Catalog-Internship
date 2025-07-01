@@ -1,14 +1,15 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { LoaderFullPage, Protect, ScrollToTopButton, Toaster } from '~/components';
+import { LoaderFullPage, Protect, ScrollToTopButton, Toaster, UtilityWrapper } from '~/components';
 import { Layout } from '~/layouts';
 import routes from '~/routes';
+
 
 /** The main application component. */
 function App() {
   return (
-    <>
+    <UtilityWrapper>
       <Toaster />
       <ScrollToTopButton />
       <BrowserRouter>
@@ -26,7 +27,7 @@ function App() {
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </>
+    </UtilityWrapper>
   );
 }
 

@@ -18,3 +18,4 @@ export { default as SortBy } from '~/components/SortBy';
 export { default as Table } from '~/components/Table';
 export { default as TableMenu } from '~/components/TableMenu';
 export { default as Toaster } from '~/components/Toaster';
+export { default as UtilityWrapper } from '~/components/UtilityWrapper';
