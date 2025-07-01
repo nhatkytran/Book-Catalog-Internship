@@ -1,6 +1,7 @@
 import { Toaster as ReactHotToaster } from 'react-hot-toast';
 // https://react-hot-toast.com/
 
+/** Toaster component. */
 function Toaster() {
   return (
     <ReactHotToaster

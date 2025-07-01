@@ -1,33 +1,36 @@
-import styled, { css } from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
+import styled, { css } from 'styled-components';
 import { arrayOf, shape, string } from 'prop-types';
 
 import { px400 } from '~/styles/GlobalStyles';
 
+/**
+ * A reusable filter component that renders a list of filter buttons and manages URL search parameters.
+ * Automatically updates the URL when a filter is selected and removes pagination parameters.
+ * @param {string} filterField - The URL parameter key to use for this filter.
+ * @param {Array<{value: string, label: string}>} options - Array of filter options.
+ */
 function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const currentFilter = searchParams.get(filterField) || options[0].value;
 
   const handleClick = value => {
     searchParams.set(filterField, value);
-
-    if (value === 'all') searchParams.delete(filterField);
     searchParams.delete('page');
-
+    if (value === 'all') searchParams.delete(filterField);
     setSearchParams(searchParams);
   };
 
   return (
     <StyledFilter>
-      {options.map((option, index) => (
+      {options.map(({ value, label }, index) => (
         <FilterButtonUI
           key={index}
-          onClick={() => handleClick(option.value)}
-          $active={option.value === currentFilter}
-          disabled={option.value === currentFilter}
+          $active={value === currentFilter}
+          disabled={value === currentFilter}
+          onClick={() => handleClick(value)}
         >
-          {option.label}
+          {label}
         </FilterButtonUI>
       ))}
     </StyledFilter>

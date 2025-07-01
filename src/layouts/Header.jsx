@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { px1000, px400 } from '~/styles/GlobalStyles';
 
+/** Renders the application header with a logo and quote. */
 function Header() {
   return (
     <StyledHeader>
@@ -10,7 +11,6 @@ function Header() {
         <LogoDesktopUI src="/images/logo-desktop.svg" alt="Saritasa logo" />
         <LogoMobileUI src="/images/logo-mobile.svg" alt="Saritasa logo" />
       </LinkUI>
-
       <QuoteUI>
         A <span>Book</span> a day keeps <span>Reality</span> away.
       </QuoteUI>

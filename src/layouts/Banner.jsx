@@ -3,6 +3,13 @@ import { string } from 'prop-types';
 
 import { px400, px500, px600, px700 } from '~/styles/GlobalStyles';
 
+/**
+ * A reusable banner component that displays text over a background image or color.
+ * The banner has a fixed height and responsive text styling.
+ * @param {Object} props - The component props.
+ * @param {string} props.url - The URL of the background image.
+ * @param {string} props.text - The text to display in the banner.
+ */
 function Banner({ url, text }) {
   return (
     <StyledBanner $url={url}>

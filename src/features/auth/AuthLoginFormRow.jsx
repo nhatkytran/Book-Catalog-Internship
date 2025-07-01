@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import { node, string } from 'prop-types';
 
+/**
+ * Authentication login form row component.
+ * @param {Object} props - Component props.
+ * @param {ReactNode} props.children - The form control element to be rendered.
+ * @param {string} [props.label] - Optional label text for the form control.
+ * @param {string} [props.errorMessage] - Error message to display when validation fails.
+ */
 function AuthLoginFormRow({ children, label, errorMessage }) {
   return (
     <StyledAuthLoginFormRow>

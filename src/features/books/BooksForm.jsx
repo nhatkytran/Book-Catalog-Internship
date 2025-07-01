@@ -11,6 +11,15 @@ import { addBook, editBook } from '~/services';
 import { useMutateAction } from '~/hooks';
 import { bookShape } from '~/types';
 
+/**
+ * A form component for adding or editing a book.
+ * @param {Object} props - Component props.
+ * @param {string} props.type - The type of form ('add' or 'edit').
+ * @param {boolean} props.isMultipleTimes - Whether to allow creating multiple books.
+ * @param {Function} props.onToggleMultipleTimes - Function to toggle multiple times option.
+ * @param {Object} props.bookToEdit - The book object to edit (for edit form).
+ * @param {Function} props.onCloseForm - Function to close the form.
+ */
 function BooksForm({
   type,
   isMultipleTimes,
@@ -38,7 +47,7 @@ function BooksForm({
 
   const isPending = isCreating || isEditing;
 
-  // Make input ID unique when we reuse this component
+  // Generate input unique ID.
   const generateInputID = fieldName => `${fieldName}-${type}`;
 
   const handleResetCloseForm = () => {
@@ -55,17 +64,15 @@ function BooksForm({
       isbn: parseInt(isbn) || null,
     };
 
-    type === 'add' &&
-      addMutate(
-        { ...book, createdAt: new Date() },
-        { onSuccess: handleResetCloseForm }
-      );
+    type === 'add' && addMutate(
+      { ...book, createdAt: new Date() },
+      { onSuccess: handleResetCloseForm }
+    );
 
-    if (type === 'edit')
-      editMutate(
-        { id: bookToEdit.id, ...book },
-        { onSuccess: handleResetCloseForm }
-      );
+    type === 'edit' && editMutate(
+      { id: bookToEdit.id, ...book },
+      { onSuccess: handleResetCloseForm }
+    );
   };
 
   return (

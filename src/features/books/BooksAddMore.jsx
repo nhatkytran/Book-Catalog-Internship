@@ -4,11 +4,10 @@ import styled, { css } from 'styled-components';
 import { ButtonMain } from '~/components';
 import { BooksForm } from '~/features/books';
 
+/** A component that allows adding new books with the option to add multiple books. */
 function BooksAddMore() {
   const [isAddOpened, setIsAddOpened] = useState(false);
   const [isMultipleTimes, setIsMultipleTimes] = useState(false);
-
-  const handleToggleMultipleTimes = () => setIsMultipleTimes(prev => !prev);
 
   const handleCloseForm = () => {
     setIsMultipleTimes(false);
@@ -27,7 +26,7 @@ function BooksAddMore() {
         <BooksForm
           type="add"
           isMultipleTimes={isMultipleTimes}
-          onToggleMultipleTimes={handleToggleMultipleTimes}
+          onToggleMultipleTimes={() => setIsMultipleTimes(prev => !prev)}
           onCloseForm={handleCloseForm}
         />
       )}

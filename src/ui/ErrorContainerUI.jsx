@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+/** A styled component that represents an error container. */
 const ErrorContainerUI = styled.div`
   display: flex;
   flex-direction: column;

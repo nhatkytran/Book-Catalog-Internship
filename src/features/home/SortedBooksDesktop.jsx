@@ -7,6 +7,12 @@ import { px600, px800 } from '~/styles/GlobalStyles';
 import { Book } from '~/features/home';
 import { sortedBooksHeading } from '~/utils';
 
+/**
+ * A component that displays a sorted list of books in a desktop layout.
+ * @param {Object} props - Component props.
+ * @param {string} props.category - The category of the books.
+ * @param {Book[]} props.books - The array of books to display.
+ */
 function SortedBooksDesktop({ category, books }) {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get('filter') || 'year';

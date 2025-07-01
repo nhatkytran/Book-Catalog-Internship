@@ -1,31 +1,17 @@
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import styled from 'styled-components';
-import { useSearchParams } from 'react-router-dom';
 import { number } from 'prop-types';
 
 import { PAGE_SIZE } from '~/config';
-import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
+import { usePagination } from '~/hooks';
 
+/**
+ * A component that displays pagination controls for a table of books.
+ * @param {Object} props - Component props.
+ * @param {number} props.count - The total number of books.
+ */
 function BooksTablePagination({ count }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentPage = Number(searchParams.get('page')) || 1;
-  const pageCount = Math.ceil(count / PAGE_SIZE);
-
-  function nextPage() {
-    const next = currentPage === pageCount ? currentPage : currentPage + 1;
-
-    searchParams.set('page', next);
-    setSearchParams(searchParams);
-  }
-
-  function prevPage() {
-    const prev = currentPage === 1 ? currentPage : currentPage - 1;
-
-    if (prev !== 1) searchParams.set('page', prev);
-    else searchParams.delete('page');
-
-    setSearchParams(searchParams);
-  }
+  const { currentPage, pageCount, nextPage, prevPage } = usePagination(count);
 
   return (
     <StyledBooksTablePagination>
@@ -108,15 +94,20 @@ const ButtonUI = styled.button`
     fill: var(--color-neutral-700);
   }
 
-  & svg {
-    height: 1.4rem;
-    width: 1.4rem;
-    fill: #000;
-  }
-
   &:hover:not(:disabled) {
     background-color: var(--color-blue-600);
     color: var(--color-neutral-50);
+
+    svg {
+      fill: var(--color-neutral-50);
+    }
+  }
+
+  svg {
+    height: 1.4rem;
+    width: 1.4rem;
+    fill: #000;
+    transition: all ease 0.2s;
   }
 `;
 

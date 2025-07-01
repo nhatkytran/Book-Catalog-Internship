@@ -1,3 +1,13 @@
+/**
+ * @typedef {Object} Book
+ * @property {string} name - The title of the book (required).
+ * @property {string[]} authors - Array of author names (required).
+ * @property {number|null} [publicationYear] - The year the book was published, or null if not available.
+ * @property {number|null} [rating] - The book's rating (0-10 scale), or null if not available.
+ * @property {number|null} [isbn] - The book's ISBN-13 number (without hyphens), or null if not available.
+ */
+
+/** @type {Book[]} */
 const books = [
   {
     name: 'The Clean Coder: A Code of Conduct for Professional Programmers',
@@ -25,6 +35,7 @@ const books = [
     authors: ['Jason Schreier'],
     publicationYear: 2021,
     rating: 10,
+    isbn: null,
   },
   {
     name: 'The Inmates Are Running the Asylum',
@@ -36,6 +47,9 @@ const books = [
   {
     name: 'The Three Musketeers',
     authors: ['Alexandre Dumas'],
+    publicationYear: null,
+    rating: null,
+    isbn: null,
   },
   {
     name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
@@ -48,6 +62,7 @@ const books = [
     name: 'George and the Big Bang',
     authors: ['Hawking', 'Stephen', 'Lucy'],
     publicationYear: 2013,
+    rating: null,
     isbn: 9781442440067,
   },
 ];

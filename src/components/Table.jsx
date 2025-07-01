@@ -4,10 +4,30 @@ import { arrayOf, node, string, object, func } from 'prop-types';
 
 import { TableBodyMessageUI } from '~/ui';
 
-// Context API //////////
-
 const TableContext = createContext();
 
+/**
+ * A reusable and accessible table component with compound components pattern.
+ * @example
+ * <Table columns="1fr 2fr 1fr">
+ *   <Table.Header>
+ *     <div>Header 1</div>
+ *     <div>Header 2</div>
+ *     <div>Header 3</div>
+ *   </Table.Header>
+ *   <Table.Body
+ *     data={items}
+ *     render={item => (
+ *       <Table.Row key={item.id}>
+ *         <div>{item.field1}</div>
+ *         <div>{item.field2}</div>
+ *         <div>{item.field3}</div>
+ *       </Table.Row>
+ *     )}
+ *   />
+ *   <Table.Footer>Pagination controls here</Table.Footer>
+ * </Table>
+ */
 function Table({ children, columns }) {
   return (
     <TableContext.Provider value={{ columns }}>
@@ -15,8 +35,6 @@ function Table({ children, columns }) {
     </TableContext.Provider>
   );
 }
-
-// Components //////////
 
 function Header({ children }) {
   const { columns } = useContext(TableContext);
@@ -47,7 +65,11 @@ function Row({ children }) {
   );
 }
 
-// Styles //////////
+const Footer = styled.footer`
+  display: grid;
+  place-items: center;
+  padding: 1.2rem;
+`;
 
 const StyledTable = styled.div`
   background-color: var(--color-neutral-100);
@@ -89,20 +111,10 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
-const Footer = styled.footer`
-  display: grid;
-  place-items: center;
-  padding: 1.2rem;
-`;
-
-// Compound Components //////////
-
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;
 Table.Footer = Footer;
-
-// PropTypes //////////
 
 const childrenProp = { children: node.isRequired };
 const columnsProp = { columns: string.isRequired };

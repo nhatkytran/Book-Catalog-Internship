@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import { elementType, string, func } from 'prop-types';
 
-// We need a prop 'onClick' here because this component is wrapped by
-// Modal Context Open -> requires 'onClick' to work properly
+/**
+ * A menu button component designed for table row actions, displaying an icon and label.
+ * @param {Object} props - The component props.
+ * @param {React.ComponentType} props.icon - The icon component to display.
+ * @param {string} props.label - The text label for the button.
+ * @param {Function} props.onClick - Callback function triggered when the button is clicked.
+ */
 function BooksTableRowMenuButton({ icon: Icon, label, onClick: onCloseModal }) {
   return (
     <StyledBooksTableRowMenuButton onClick={onCloseModal}>

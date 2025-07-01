@@ -1,28 +1,30 @@
-import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { arrayOf, shape, string } from 'prop-types';
 
+/**
+ * A reusable sort component that renders a dropdown for sorting options and manages URL search parameters.
+ * Updates the URL when a sort option is selected and resets pagination.
+ * @param {string} sortByField - The URL parameter key for the sort field.
+ * @param {Array<{value: string, label: string}>} options - Array of sort options.
+ */
 function SortBy({ sortByField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const currentSortBy = searchParams.get(sortByField) || options[0].value;
 
   const handleChange = event => {
     const value = event.target.value;
-
     searchParams.set(sortByField, value);
-
-    if (value === 'default') searchParams.delete(sortByField);
     searchParams.delete('page');
-
+    if (value === 'default') searchParams.delete(sortByField);
     setSearchParams(searchParams);
   };
 
   return (
     <StyledSortBy value={currentSortBy} onChange={handleChange}>
-      {options.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
+      {options.map(({ value, label }, index) => (
+        <option key={index} value={value}>
+          {label}
         </option>
       ))}
     </StyledSortBy>
@@ -39,6 +41,7 @@ const StyledSortBy = styled.select`
   border: 1px solid var(--color-neutral-200);
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
+  cursor: pointer;
 `;
 
 SortBy.propTypes = {

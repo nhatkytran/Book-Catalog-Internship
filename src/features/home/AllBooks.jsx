@@ -1,69 +1,68 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { arrayOf } from 'prop-types';
 
 import { HeadingUI } from '~/ui';
 import { Filter } from '~/components';
-import {
-  groupBooksByAuthor,
-  groupBooksByRating,
-  groupBooksByYear,
-} from '~/utils';
+import { groupBooksByAuthor, groupBooksByRating, groupBooksByYear } from '~/utils';
 import { useWindowEventListener } from '~/hooks';
 import { px400, px600 } from '~/styles/GlobalStyles';
 import { SortedBooksDesktop, SortedBooksMobile } from '~/features/home';
 import { bookShape } from '~/types';
+import { capitalize } from '~/utils';
 
-// There are two components for displaying books based on a device's width
-// We use state here instead of using CSS display none to support useEffect in the component for mobile version
-const checkViewPort600 = () => window.innerWidth <= 600;
+const SEARCH_PARAMS_KEY = 'filter';
+const DEFAULT_SEARCH_PARAMS_VALUE = 'year';
+const FILTER_BY_YEAR = 'year';
+const FILTER_BY_AUTHOR = 'author';
+const FILTER_BY_RATING = 'rating';
+const VIEWPORT_WIDTH_THRESHOLD = 600;
 
+// There are two components for displaying books based on a device's width.
+// We use state here instead of using CSS display none to support useEffect in the component for mobile version.
+const checkViewportSupport = () => window.innerWidth <= VIEWPORT_WIDTH_THRESHOLD;
+
+const ALL_BOOKS_FILTER_FIELD = 'filter';
+const ALL_BOOKS_FILTER_OPTIONS = [
+  { value: 'all', label: capitalize(FILTER_BY_YEAR) },
+  { value: 'author', label: capitalize(FILTER_BY_AUTHOR) },
+  { value: 'rating', label: capitalize(FILTER_BY_RATING) },
+];
+
+/**
+ * Renders a list of books that can be filtered and grouped by different criteria.
+ * The component is responsive and will display differently on mobile and desktop views.
+ */
 function AllBooks({ books }) {
   const [searchParams] = useSearchParams();
-  const [isResponsiveWidth, setIsResponsiveWidth] = useState(checkViewPort600);
-
-  const filter = searchParams.get('filter') || 'year';
+  const [isResponsiveWidth, setIsResponsiveWidth] = useState(checkViewportSupport);
+  const filter = searchParams.get(SEARCH_PARAMS_KEY) || DEFAULT_SEARCH_PARAMS_VALUE;
 
   let filteredBooks = books;
-
-  if (filter === 'year') filteredBooks = groupBooksByYear(filteredBooks);
-  if (filter === 'author') filteredBooks = groupBooksByAuthor(filteredBooks);
-  if (filter === 'rating') filteredBooks = groupBooksByRating(filteredBooks);
+  if (filter === FILTER_BY_YEAR) filteredBooks = groupBooksByYear(filteredBooks);
+  if (filter === FILTER_BY_AUTHOR) filteredBooks = groupBooksByAuthor(filteredBooks);
+  if (filter === FILTER_BY_RATING) filteredBooks = groupBooksByRating(filteredBooks);
 
   useWindowEventListener({
     eventName: 'resize',
-    handler: () => setIsResponsiveWidth(checkViewPort600),
+    handler: () => setIsResponsiveWidth(checkViewportSupport),
   });
 
   return (
     <StyledAllBooks>
       <HeaderUI>
         <HeadingUI as="h1">All books</HeadingUI>
-
         <FilterBoxUI>
           <p>Group by:</p>
-          <Filter
-            filterField="filter"
-            options={[
-              { value: 'all', label: 'Year' },
-              { value: 'author', label: 'Author' },
-              { value: 'rating', label: 'Rating' },
-            ]}
-          />
+          <Filter filterField={ALL_BOOKS_FILTER_FIELD} options={ALL_BOOKS_FILTER_OPTIONS} />
         </FilterBoxUI>
       </HeaderUI>
-
       <BodyUI>
         {filteredBooks.map(book => {
           const category = book[filter];
-          const props = { category, books: book.books };
-
-          return !isResponsiveWidth ? (
-            <SortedBooksDesktop key={category} {...props} />
-          ) : (
-            <SortedBooksMobile key={category} {...props} />
-          );
+          const SortedBooksComponent = isResponsiveWidth ? SortedBooksMobile : SortedBooksDesktop;
+          return <SortedBooksComponent key={category} category={category} books={book.books} />;
         })}
       </BodyUI>
     </StyledAllBooks>

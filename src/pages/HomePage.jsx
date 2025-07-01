@@ -5,33 +5,24 @@ import { AllBooks, RecommendedBook } from '~/features/home';
 import { TableBodyMessageUI } from '~/ui';
 import { Loader } from '~/components';
 
+/** The main page component that displays the home page. */
 function HomePage() {
   const { isPending, isError, error, data: books = [] } = useAllBooks();
 
   return (
     <StyledHomePage>
       {isPending && <Loader />}
-
-      {isError && (
-        <TableBodyMessageUI $noMargin={true} $color="red">
-          {error.message}
-        </TableBodyMessageUI>
-      )}
-
-      {!isPending && !isError && (
+      {isError && <TableBodyMessageUI $noMargin={true} $color="red">{error.message}</TableBodyMessageUI>}
+      {!isPending && !isError && (books.length ? (
         <>
-          {!books.length ? (
-            <TableBodyMessageUI $noMargin={true}>
-              No data to show at the moment.
-            </TableBodyMessageUI>
-          ) : (
-            <>
-              <RecommendedBook books={books} />
-              <AllBooks books={books} />
-            </>
-          )}
+          <RecommendedBook books={books} />
+          <AllBooks books={books} />
         </>
-      )}
+      ) : (
+        <TableBodyMessageUI $noMargin={true}>
+          No data to show at the moment.
+        </TableBodyMessageUI>
+      ))}
     </StyledHomePage>
   );
 }

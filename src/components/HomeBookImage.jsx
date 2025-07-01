@@ -1,7 +1,19 @@
 import styled from 'styled-components';
 import { string } from 'prop-types';
 
-function HomeBookImage({ src = '/images/book.jpeg', alt = 'Saritasa book' }) {
+// Default url for the book image component.
+const DEFAULT_BOOK_IMAGE = '/images/book.jpeg';
+
+// Default alt text for the book image component.
+const DEFAULT_ALT_TEXT = 'Saritasa book';
+
+/**
+ * Home book image component.
+ * @param {Object} props - Component props.
+ * @param {string} props.src - URL of the book image.
+ * @param {string} props.alt - Alt text for the book image.
+ */
+function HomeBookImage({ src = DEFAULT_BOOK_IMAGE, alt = DEFAULT_ALT_TEXT }) {
   return (
     <StyledHomeBookImage>
       <ImageUI src={src} alt={alt} draggable={false} />

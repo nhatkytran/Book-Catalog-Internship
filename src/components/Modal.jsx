@@ -1,23 +1,26 @@
-import {
-  createContext,
-  createElement,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
-
+import { createContext, createElement, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
 import { HiXMark } from 'react-icons/hi2';
+import styled from 'styled-components';
 import { node, string, func } from 'prop-types';
 
 import { useOutsideClick } from '~/hooks';
 import { OverlayUI } from '~/ui';
 
-// Context API //////////
-
 const ModalContext = createContext();
 
+/**
+ * Provides context and state management for creating accessible modal dialogs.
+ * @example
+ * <Modal>
+ *   <Modal.Open openName="example">
+ *     <button>Open Modal</button>
+ *   </Modal.Open>
+ *   <Modal.Window openName="example" renderWindow={({ onCloseModal }) => (
+ *     <div>Modal Content</div>
+ *   )} />
+ * </Modal>
+ */
 function Modal({ children }) {
   const [openName, setOpenName] = useState('');
 
@@ -31,13 +34,10 @@ function Modal({ children }) {
   );
 }
 
-// Components //////////
-
 function Open({ children, openName }) {
   const { open } = useContext(ModalContext);
 
   const handleOpen = () => {
-    // In case the children already have onClick function -> avoid overriding
     children.props.onClick?.();
     open(openName);
   };
@@ -57,7 +57,7 @@ function Window({ openName: windowName, renderWindow }) {
     <OverlayUI>
       <ModalPortal renderWindow={renderWindow} />
     </OverlayUI>,
-    document.querySelector('#modal')
+    document.querySelector('#modal'),
   );
 }
 
@@ -80,8 +80,6 @@ function ModalPortal({ renderWindow }) {
     </StyledModal>
   );
 }
-
-// Styles //////////
 
 const StyledModal = styled.div`
   position: fixed;
@@ -115,12 +113,8 @@ const ButtonUI = styled.button`
   }
 `;
 
-// Compound Components //////////
-
 Modal.Open = Open;
 Modal.Window = Window;
-
-// PropTypes //////////
 
 const childrenProp = { children: node.isRequired };
 const openNameProp = { openName: string.isRequired };

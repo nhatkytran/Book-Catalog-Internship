@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Loader } from '.';
 
+/** Authentication loader component. */
 function AuthLoader() {
   return (
     <StyledAuthLoader>

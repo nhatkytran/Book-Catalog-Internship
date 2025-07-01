@@ -6,28 +6,32 @@ import { ButtonMain } from '~/components';
 import { px400 } from '~/styles/GlobalStyles';
 import { useLogout } from '~/hooks';
 
-function AuthUser({
-  name = 'Nhat Ky Tran',
-  email = 'nhatky.tran.2002@saratasa.com',
-}) {
-  const { isPending, mutate } = useLogout();
+const PLACEHOLDER_NAME = 'Nhat Ky Tran';
+const PLACEHOLDER_EMAIL = 'nhatky.tran.2002@saratasa.com';
+
+/**
+ * Authentication user component.
+ * @param {Object} props - Component props.
+ * @param {string} props.name - User name.
+ * @param {string} props.email - User email.
+ */
+function AuthUser({ name = PLACEHOLDER_NAME, email = PLACEHOLDER_EMAIL }) {
+  const { isPending, mutate: logout } = useLogout();
 
   return (
     <StyledAuthUser>
       <UserUI>
         <img src="/images/user.png" alt="Saritasa user" />
-
         <div>
           <p>{name}</p>
           <p>{email}</p>
         </div>
       </UserUI>
-
       <div>
         <ButtonMain
           UI={ButtonMainUI}
           disabled={isPending}
-          onClick={() => mutate()}
+          onClick={() => logout()}
         >
           <p>Logout</p> <MdLogout />
         </ButtonMain>

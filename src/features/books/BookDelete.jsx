@@ -6,6 +6,12 @@ import { ButtonMainCancelUI, HeadingUI } from '~/ui';
 import { ButtonMain } from '~/components';
 import { deleteBook } from '~/services';
 
+/**
+ * A confirmation dialog component for deleting a book.
+ * @param {Object} props - Component props.
+ * @param {string} props.bookID - The unique identifier of the book to be deleted.
+ * @param {Function} props.onCloseModal - Callback function to close the modal.
+ */
 function BookDelete({ bookID, onCloseModal }) {
   const { isPending, mutate } = useMutateAction({
     key: 'books',
@@ -20,12 +26,7 @@ function BookDelete({ bookID, onCloseModal }) {
   return (
     <StyledBookDelete>
       <HeadingUI as="h3">Delete book</HeadingUI>
-
-      <p>
-        Do you really want to delete this book forever? This action cannot be
-        reversed.
-      </p>
-
+      <p>Do you really want to delete this book forever? This action cannot be reversed.</p>
       <div>
         <ButtonMain
           UI={ButtonMainCancelUI}
@@ -34,7 +35,6 @@ function BookDelete({ bookID, onCloseModal }) {
         >
           Cancel
         </ButtonMain>
-
         <ButtonMain
           UI={ButtonMainDelete}
           onClick={() => mutate(bookID)}

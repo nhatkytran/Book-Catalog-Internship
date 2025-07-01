@@ -1,6 +1,15 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useWindowEventListener } from '~/hooks';
 
+/**
+ * A custom hook that handles drag and drop functionality for a list of items.
+ * @param {Object} props - Component props.
+ * @param {string} props.itemsClassName - The class name of the items.
+ * @param {number} props.itemsLength - The number of items.
+ * @param {number} props.itemsGap - The gap between items.
+ * @param {string} props.lineClassName - The class name of the line.
+ * @param {string} props.lineProgressClassName - The class name of the line progress.
+ */
 function useDragItems({
   itemsClassName,
   itemsLength,
