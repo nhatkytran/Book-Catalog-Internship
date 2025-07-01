@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { px1200 } from '~/styles/GlobalStyles';
 
+/** A styled component that represents a layout. */
 const LayoutUI = styled.div`
   max-width: var(--width-main-layout);
   min-height: var(--width-sub-layout);

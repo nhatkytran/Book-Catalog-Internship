@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+/** A styled component that represents a heading. */
 const HeadingUI = styled.h1`
   font-family: var(--font-poppins);
 

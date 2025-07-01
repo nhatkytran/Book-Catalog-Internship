@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+/** A styled component that represents a table body message. */
 const TableBodyMessageUI = styled.p`
   font-size: 1.4rem;
   font-weight: 600;

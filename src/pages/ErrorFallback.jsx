@@ -4,6 +4,12 @@ import { any, func } from 'prop-types';
 import { ButtonMain } from '~/components';
 import { ButtonErrorUI, ErrorContainerUI, ErrorMessageUI, HeadingUI, LayoutUI } from '~/ui';
 
+/**
+ * A fallback UI component that displays when an error occurs in the application.
+ * @param {Object} props - The component props
+ * @param {Error} props.error - The error object containing the error message
+ * @param {Function} props.resetErrorBoundary - Callback function to reset the error boundary
+ */
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <StyledErrorFallback>

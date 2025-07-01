@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 
+/** A styled component that represents a button with a cancel style. */
 const ButtonMainCancelUI = css`
   background-color: var(--color-white);
   color: var(--color-neutral-600);

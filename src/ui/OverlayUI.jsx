@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+/** A styled component that represents an overlay. */
 const OverlayUI = styled.div`
   position: fixed;
   top: 0;

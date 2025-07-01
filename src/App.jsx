@@ -5,6 +5,7 @@ import { LoaderFullPage, Protect, ScrollToTopButton, Toaster } from '~/component
 import { Layout } from '~/layouts';
 import routes from '~/routes';
 
+/** The main application component. */
 function App() {
   return (
     <>

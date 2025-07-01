@@ -8,8 +8,10 @@ import App from '~/App';
 import GlobalStyles from '~/styles/GlobalStyles';
 import { ErrorFallback } from '~/pages';
 
+/** The query client for React Query. */
 const queryClient = new QueryClient();
 
+/** The main entry point of the application. */
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <GlobalStyles />
